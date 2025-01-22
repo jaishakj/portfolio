@@ -4,64 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaishak's Portfolio</title>
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        /* CSS Reset for Consistency */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            box-sizing: border-box;
+        }
+
+        /* CSS Variables for Theming */
+        :root {
+            --primary-bg: #f4f4f4;
+            --primary-color: #333;
+            --secondary-bg: #fff;
+            --secondary-color: #444;
+            --highlight-color: #333;
+            --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--primary-color);
             line-height: 1.6;
         }
+
         header {
-            background: #333;
-            color: #fff;
-            padding: 1rem 0;
+            background: var(--primary-color);
+            color: var(--secondary-bg);
+            padding: 2.5rem 0;
             text-align: center;
         }
+
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 3.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: linear-gradient(45deg, #fff 30%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
+
+        header p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
         .container {
             width: 80%;
             margin: auto;
             overflow: hidden;
             padding: 2rem 0;
         }
+
         section {
             margin-bottom: 2rem;
-            padding: 1rem;
-            background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            background: var(--secondary-bg);
+            border-radius: 8px;
+            box-shadow: var(--box-shadow);
         }
+
         h2 {
-            color: #444;
-            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.75rem;
+            letter-spacing: -0.3px;
         }
+
         ul {
             list-style: none;
             padding: 0;
         }
+
         ul li {
             background: #f9f9f9;
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            border-left: 5px solid #333;
+            margin: 0.75rem 0;
+            padding: 0.75rem 1rem;
+            border-left: 5px solid var(--highlight-color);
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
         }
+
+        strong {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
         a {
-            color: #333;
+            color: var(--primary-color);
             text-decoration: none;
+            transition: color 0.2s ease;
         }
+
         a:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            color: #666;
+        }
+
+        section p {
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Jaishak J</h1>
+        <h1>Jaishak</h1>
         <p>Flexible and Enthusiastic Student | AI & ML Developer</p>
     </header>
 
@@ -135,7 +194,7 @@
             <h2>Contact</h2>
             <p>
                 <strong>Phone:</strong> +91 9345589347<br>
-                <strong>Email:</strong> <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a><br>
+                <strong>Email:</strong> <a href="mailto:jaishak1219@gmail.com?subject=Inquiry&body=Hello Jaishak,">jaishak1219@gmail.com</a><br>
                 <strong>Location:</strong> Poothurai, Vilavancode, Kanniyakumari, 629176<br>
                 <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jaishakj" target="_blank">linkedin.com/in/jaishakj</a>
             </p>
