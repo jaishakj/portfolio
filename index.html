@@ -4,201 +4,290 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jaishak's Portfolio</title>
-    <!-- Add Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS Reset for Consistency */
-        *, *::before, *::after {
+        :root {
+            --bg-primary: #13151a;
+            --bg-secondary: #1a1d23;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1a1;
+            --accent: #ff6b6b;
+            --gradient-start: #ff6b6b;
+            --gradient-end: #ffd93d;
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* CSS Variables for Theming */
-        :root {
-            --primary-bg: #f4f4f4;
-            --primary-color: #333;
-            --secondary-bg: #fff;
-            --secondary-color: #444;
-            --highlight-color: #333;
-            --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
         body {
-            font-family: 'Inter', Arial, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--primary-color);
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
         }
 
-        header {
-            background: var(--primary-color);
-            color: var(--secondary-bg);
-            padding: 2.5rem 0;
-            text-align: center;
+        .nav-bar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 80px;
+            background: var(--bg-secondary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 0;
+            z-index: 100;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 3.5rem;
-            font-family: 'Montserrat', sans-serif;
+        .nav-bar a {
+            color: var(--text-secondary);
+            margin: 1rem 0;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .nav-bar a:hover {
+            color: var(--accent);
+        }
+
+        .main-content {
+            margin-left: 80px;
+            padding: 2rem 4rem;
+        }
+
+        .header {
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header h1 {
+            font-size: 4rem;
             font-weight: 700;
-            letter-spacing: -0.5px;
-            background: linear-gradient(45deg, #fff 30%, #f0f0f0 100%);
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-
-        header p {
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-            opacity: 0.9;
-        }
-
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 2rem 0;
-        }
-
-        section {
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: var(--secondary-bg);
-            border-radius: 8px;
-            box-shadow: var(--box-shadow);
-        }
-
-        h2 {
-            color: var(--secondary-color);
             margin-bottom: 1rem;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.75rem;
-            letter-spacing: -0.3px;
         }
 
-        ul {
+        .section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section h2 {
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .experience-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .experience-item h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item p {
+            color: var(--text-secondary);
+        }
+
+        .experience-item ul {
             list-style: none;
-            padding: 0;
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
         }
 
-        ul li {
-            background: #f9f9f9;
-            margin: 0.75rem 0;
-            padding: 0.75rem 1rem;
-            border-left: 5px solid var(--highlight-color);
-            border-radius: 0 4px 4px 0;
-            font-size: 1rem;
+        .experience-item ul li {
+            margin-left: 1rem;
+            position: relative;
+            padding: 0.25rem 0;
         }
 
-        strong {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
+        .experience-item ul li::before {
+            content: "•";
+            color: var(--accent);
+            position: absolute;
+            left: -1rem;
         }
 
-        a {
-            color: var(--primary-color);
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .contact-item span {
+            font-size: 1.5rem;
+        }
+
+        .contact-item a {
+            color: var(--text-primary);
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: color 0.3s;
         }
 
-        a:hover {
-            text-decoration: none;
-            color: #666;
+        .contact-item a:hover {
+            color: var(--accent);
         }
 
-        section p {
-            font-size: 1.1rem;
-            line-height: 1.7;
+        .contact-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-bar {
+                width: 60px;
+            }
+            .main-content {
+                margin-left: 60px;
+                padding: 2rem;
+            }
+            .header h1 {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Jaishak J</h1>
-        <p>Flexible and Enthusiastic Student | AI & ML Developer</p>
-    </header>
+    <nav class="nav-bar">
+        <a href="#home">🏠</a>
+        <a href="#skills">💡</a>
+        <a href="#experience">💼</a>
+        <a href="#education">🎓</a>
+        <a href="#contact">📧</a>
+    </nav>
 
-    <div class="container">
-        <section>
-            <h2>Profile</h2>
-            <p>I am a flexible and enthusiastic student with a keen interest in AI and ML model development. My strong computer literacy allows me to navigate complex technical tasks with ease. I am highly motivated to dedicate significant time and effort to my work, with a strong aptitude for problem-solving.</p>
+    <main class="main-content">
+        <header class="header" id="home">
+            <h1>Jaishak</h1>
+            <p>Flexible and Enthusiastic Student | AI & ML Developer</p>
+        </header>
+
+        <section class="section" id="skills">
+            <h2>✨ Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Python, Java, SQL, C++</div>
+                <div class="skill-item">AI & ML Model Development</div>
+                <div class="skill-item">Problem-Solving</div>
+                <div class="skill-item">Linux</div>
+                <div class="skill-item">Content Writing</div>
+                <div class="skill-item">Affiliate Marketing</div>
+            </div>
         </section>
 
-        <section>
-            <h2>Skills</h2>
-            <ul>
-                <li>Python, Java, SQL, C++</li>
-                <li>AI & ML Model Development</li>
-                <li>Problem-Solving</li>
-                <li>Linux</li>
-                <li>Content Writing</li>
-                <li>Affiliate Marketing</li>
-            </ul>
+        <section class="section" id="experience">
+            <h2>💼 Experience</h2>
+            <div class="experience-item">
+                <h3>Accenture - The Forage</h3>
+                <p>Data Analytics and Visualization Virtual Experience Program</p>
+                <ul>
+                    <li>Data Preprocessing</li>
+                    <li>Data Modeling</li>
+                    <li>Model Presentation</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Retech Solution Pvt Ltd</h3>
+                <p>Machine Learning Intern</p>
+                <ul>
+                    <li>Foundations of Machine Learning</li>
+                    <li>Supervised and Unsupervised Learning</li>
+                    <li>Neural Networks</li>
+                    <li>Advanced Topics in ML</li>
+                </ul>
+            </div>
         </section>
 
-        <section>
-            <h2>Experience</h2>
-            <ul>
-                <li>
-                    <strong>Accenture - The Forage (June 2023)</strong><br>
-                    Data Analytics and Visualization Virtual Experience Program<br>
-                    - Data Preprocessing<br>
-                    - Data Modeling<br>
-                    - Model Presentation
-                </li>
-                <li>
-                    <strong>Retech Solution Pvt Ltd - Offline Internship (June-July 2023)</strong><br>
-                    Machine Learning Intern<br>
-                    - Foundations of Machine Learning<br>
-                    - Supervised and Unsupervised Learning<br>
-                    - Neural Networks<br>
-                    - Advanced Topics in ML
-                </li>
-            </ul>
+        <section class="section" id="education">
+            <h2>🎓 Education</h2>
+            <div class="experience-item">
+                <h3>Bachelor of Technology (2021-2025)</h3>
+                <p>Jeppiaar Institute of Technology, Artificial Intelligence and Data Science</p>
+            </div>
+            <div class="experience-item">
+                <h3>Higher Secondary School (2020-2021)</h3>
+                <p>Pius XI HSC, Thoothoor - 71% scored</p>
+            </div>
+            <div class="experience-item">
+                <h3>Secondary School (2018-2019)</h3>
+                <p>St. Joseph High School, Karunyapuram - 68% scored</p>
+            </div>
         </section>
 
-        <section>
-            <h2>Education</h2>
-            <ul>
-                <li>
-                    <strong>Bachelor of Technology (2021-2025)</strong><br>
-                    Jeppiaar Institute of Technology, Artificial Intelligence and Data Science
-                </li>
-                <li>
-                    <strong>Higher Secondary School (2020-2021)</strong><br>
-                    Pius XI HSC, Thoothoor - 71% scored
-                </li>
-                <li>
-                    <strong>Secondary School (2018-2019)</strong><br>
-                    St. Joseph High School, Karunyapuram - 68% scored
-                </li>
-            </ul>
+        <section class="section" id="contact">
+            <h2>📧 Contact</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span>📱</span>
+                    <a href="tel:+919345589347">+91 9345589347</a>
+                </div>
+                <div class="contact-item">
+                    <span>📧</span>
+                    <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <p>Poothurai, Vilavancode, Kanniyakumari, 629176</p>
+                </div>
+                <div class="contact-item">
+                    <span>💼</span>
+                    <a href="https://www.linkedin.com/in/jaishakj" target="_blank">linkedin.com/in/jaishakj</a>
+                </div>
+            </div>
         </section>
-
-        <section>
-            <h2>Courses Completed</h2>
-            <ul>
-                <li>Joy of Computing with Python (NPTEL)</li>
-                <li>MS Office (Naan Mudhalvan)</li>
-                <li>Network Essentials (Naan Mudhalvan)</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Contact</h2>
-            <p>
-                <strong>Phone:</strong> +91 9345589347<br>
-                <strong>Email:</strong> <a href="mailto:jaishak1219@gmail.com?subject=Inquiry&body=Hello Jaishak,">jaishak1219@gmail.com</a><br>
-                <strong>Location:</strong> Poothurai, Vilavancode, Kanniyakumari, 629176<br>
-                <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/jaishakj" target="_blank">linkedin.com/in/jaishakj</a>
-            </p>
-        </section>
-    </div>
+    </main>
 </body>
 </html>
