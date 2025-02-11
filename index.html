@@ -16,12 +16,25 @@
             --gradient-end: #FBE4D8;
         }
 
-        /* Previous CSS remains same until header section */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            background: var(--bg-secondary);
+        }
 
         .header {
-            padding: 2rem 0;
+            text-align: center;
+            padding: 4rem 0;
             position: relative;
-            overflow: hidden;
         }
 
         .clock-container {
@@ -41,12 +54,22 @@
             color: var(--text-primary);
         }
 
-        /* Rest of previous CSS remains same */
+        .section {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+        }
     </style>
 </head>
 <body>
     <nav class="nav-bar">
-        <!-- Previous nav content remains same -->
+        <div>Logo</div>
+        <div>Menu</div>
     </nav>
 
     <main class="main-content">
@@ -58,7 +81,25 @@
             <p>Adaptable and Passionate Learner | AI & ML Developer | Data Scientist</p>
         </header>
 
-        <!-- Rest of previous sections remain same -->
+        <section class="section" id="about">
+            <h2>About Me</h2>
+            <p>Enthusiastic AI and ML developer with a strong passion for innovation.</p>
+        </section>
+
+        <section class="section" id="projects">
+            <h2>Projects</h2>
+            <p>Details of my AI and ML projects will be displayed here.</p>
+        </section>
+
+        <section class="section" id="contact">
+            <h2>Contact</h2>
+            <p>Reach out to me at: jaishak@example.com</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Jaishak. All rights reserved.</p>
+    </footer>
 
     <script>
         function updateClock() {
@@ -82,7 +123,6 @@
             `;
         }
 
-        // Update clock immediately and every second
         updateClock();
         setInterval(updateClock, 1000);
     </script>
