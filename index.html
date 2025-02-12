@@ -322,20 +322,26 @@
 
     <script>
         function updateClock() {
+            const now = new Date();
             const options = {
                 timeZone: 'Asia/Kolkata',
                 hour12: true,
                 hour: 'numeric',
                 minute: '2-digit',
                 second: '2-digit',
-                weekday: 'long',
+                weekday: 'short',
                 day: 'numeric',
-                month: 'long'
+                month: 'short'
             };
             
             const formatter = new Intl.DateTimeFormat('en-IN', options);
-            const dateTime = formatter.format(new Date()).split(', ');
+            const parts = formatter.formatToParts(now);
             
+            const timeParts = {};
+            parts.forEach(part => {
+                timeParts[part.type] = part.value;
+            });
+
             document.getElementById('live-clock').innerHTML = `
                 ${timeParts.weekday}<br>
                 ${timeParts.day} ${timeParts.month}<br>
