@@ -337,8 +337,10 @@
             const dateTime = formatter.format(new Date()).split(', ');
             
             document.getElementById('live-clock').innerHTML = `
-                <div>${dateTime[0]} ${dateTime[1]}</div>
-                <div>${dateTime[2]} IST</div>
+                ${timeParts.weekday}<br>
+                ${timeParts.day} ${timeParts.month}<br>
+                ${timeParts.hour}:${timeParts.minute}:${timeParts.second}<br>
+                ${timeParts.dayPeriod} IST
             `;
         }
 
