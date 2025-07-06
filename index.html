@@ -45,6 +45,7 @@
       margin: 1rem 0;
       font-size: 1.5rem;
       transition: color 0.3s;
+      text-decoration: none;
     }
     .nav-bar a:hover {
       color: var(--accent);
@@ -55,7 +56,13 @@
     }
     .header {
       padding: 2rem 0;
-      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .header-content {
+      flex: 1;
     }
     .header h1 {
       font-size: 4rem;
@@ -65,16 +72,19 @@
       -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
     }
+    .header p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
     .clock-container {
-      position: absolute;
-      top: 20px;
-      right: 40px;
       background: rgba(255, 255, 255, 0.1);
       padding: 1.5rem 2.5rem;
       border-radius: 20px;
       backdrop-filter: blur(10px);
       border: 2px solid rgba(255, 255, 255, 0.15);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
     }
     #live-clock {
       font-size: 1.4rem;
@@ -93,6 +103,7 @@
     .section h2 {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
+      color: var(--text-secondary);
     }
     .skills-grid {
       display: grid;
@@ -104,12 +115,42 @@
       padding: 1rem;
       border-radius: 12px;
       text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .skill-item:hover {
+      transform: translateY(-3px);
     }
     .experience-item, .project-item {
       background: rgba(255, 255, 255, 0.05);
       padding: 1.5rem;
       border-radius: 12px;
       margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .experience-item h3, .project-item h3 {
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .experience-item p, .project-item p {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    .experience-item ul {
+      list-style: none;
+      margin-top: 0.5rem;
+    }
+    .experience-item ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .experience-item ul li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
     }
     .contact-info {
       display: grid;
@@ -123,24 +164,152 @@
       display: flex;
       align-items: center;
       gap: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .contact-item:hover {
+      transform: translateY(-3px);
     }
     .contact-item a {
       color: var(--text-primary);
       text-decoration: none;
+      transition: color 0.3s ease;
     }
+    .contact-item a:hover {
+      color: var(--accent);
+    }
+    
+    /* Mobile Responsive Design */
     @media (max-width: 768px) {
       .nav-bar {
         width: 60px;
+        padding: 1rem 0;
+      }
+      .nav-bar a {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
       }
       .main-content {
         margin-left: 60px;
+        padding: 1rem 1.5rem;
+      }
+      .header {
+        padding: 1rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .header-content {
+        width: 100%;
       }
       .header h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+      }
+      .header p {
+        font-size: 1rem;
       }
       .clock-container {
-        right: 20px;
-        padding: 1rem 2rem;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        max-width: 250px;
+        align-self: flex-end;
+      }
+      #live-clock {
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+      .section {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+      }
+      .section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 0.75rem;
+      }
+      .skill-item {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .experience-item, .project-item {
+        padding: 1rem;
+      }
+      .experience-item h3, .project-item h3 {
+        font-size: 1.1rem;
+      }
+      .experience-item p, .project-item p {
+        font-size: 0.9rem;
+      }
+      .contact-info {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+      .contact-item {
+        padding: 0.75rem;
+      }
+    }
+    
+    /* Extra Small Mobile Devices */
+    @media (max-width: 480px) {
+      .nav-bar {
+        width: 50px;
+      }
+      .nav-bar a {
+        font-size: 1rem;
+      }
+      .main-content {
+        margin-left: 50px;
+        padding: 1rem;
+      }
+      .header {
+        gap: 0.75rem;
+      }
+      .header h1 {
+        font-size: 2rem;
+      }
+      .header p {
+        font-size: 0.9rem;
+      }
+      .clock-container {
+        padding: 0.75rem 1rem;
+        max-width: 200px;
+      }
+      #live-clock {
+        font-size: 1rem;
+      }
+      .section {
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      .section h2 {
+        font-size: 1.3rem;
+      }
+      .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 0.5rem;
+      }
+      .skill-item {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
+      .experience-item, .project-item {
+        padding: 0.75rem;
+      }
+      .experience-item h3, .project-item h3 {
+        font-size: 1rem;
+      }
+      .experience-item p, .project-item p {
+        font-size: 0.85rem;
+      }
+      .contact-item {
+        padding: 0.5rem;
+      }
+      .contact-item span {
+        font-size: 1.2rem;
       }
     }
   </style>
@@ -158,12 +327,14 @@
 
   <main class="main-content">
     <header class="header" id="home">
+      <div class="header-content">
+        <h1>Jaishak J</h1>
+        <p>AI Engineer | Data Scientist | Full-Stack Developer</p>
+        <p>Adaptable and Passionate Learner</p>
+      </div>
       <div class="clock-container">
         <div id="live-clock"></div>
       </div>
-      <h1>Jaishak J</h1>
-      <p>AI Engineer | Data Scientist | Full-Stack Developer</p>
-      <p>Adaptable and Passionate Learner</p>
     </header>
 
     <section class="section" id="skills">
@@ -173,7 +344,6 @@
         <div class="skill-item">Artificial Intelligence</div>
         <div class="skill-item">JavaScript</div>
         <div class="skill-item">HTML/ CSS</div>
-        
         <div class="skill-item">TypeScript</div>
         <div class="skill-item">Data Science</div>
         <div class="skill-item">Linux</div>
@@ -221,13 +391,14 @@
 
     <section class="section" id="courses">
       <h2>📘 Courses</h2>
-      <ul>
-        <li>Joy of Computing with Python – NPTEL (Feb 2022 – Oct 2022)</li>
-        <li>MS Office – Naan Mudhalvan (Nov 2023 – Jun 2024)</li>
-        <li>Network Essentials – Naan Mudhalvan (Jul 2024 – Oct 2024)</li>
-      </ul>
+      <div class="experience-item">
+        <ul>
+          <li>Joy of Computing with Python – NPTEL (Feb 2022 – Oct 2022)</li>
+          <li>MS Office – Naan Mudhalvan (Nov 2023 – Jun 2024)</li>
+          <li>Network Essentials – Naan Mudhalvan (Jul 2024 – Oct 2024)</li>
+        </ul>
+      </div>
     </section>
-
 
     <section class="section" id="contact">
       <h2>📧 Contact</h2>
