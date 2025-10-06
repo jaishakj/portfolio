@@ -1,11 +1,11 @@
 :root {
-  --bg-primary: #190019;
-  --bg-secondary: #2B124C;
-  --text-primary: #DFB6B2;
-  --text-secondary: #FBE4D8;
-  --accent: #6C4675;
-  --gradient-start: #DFB6B2;
-  --gradient-end: #FBE4D8;
+  --bg-primary: #121212;
+  --bg-secondary: #4E586E;
+  --text-primary: #FFFFFF;
+  --text-secondary: #FFFFFF;
+  --accent: #FFD428;
+  --gradient-start: #F54B64;
+  --gradient-end: #F78361;
 }
 
 * {
@@ -79,13 +79,41 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.resume-button-container {
+  margin-top: 1.5rem;
+}
+
+.resume-button {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(245, 75, 100, 0.3);
+  border: 2px solid transparent;
+}
+
+.resume-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 75, 100, 0.4);
+  background: linear-gradient(45deg, var(--gradient-end), var(--gradient-start));
+}
+
+.resume-button:active {
+  transform: translateY(0);
+}
+
 .clock-container {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(78, 88, 110, 0.2);
   padding: 1.5rem 2.5rem;
   border-radius: 20px;
   backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 212, 40, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   flex-shrink: 0;
 }
 
@@ -102,7 +130,7 @@ body {
   border-radius: 20px;
   padding: 2rem;
   margin: 2rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 212, 40, 0.2);
 }
 
 .section h2 {
@@ -118,11 +146,11 @@ body {
 }
 
 .skill-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(18, 18, 18, 0.6);
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 212, 40, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -131,11 +159,11 @@ body {
 }
 
 .experience-item, .project-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(18, 18, 18, 0.6);
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 212, 40, 0.3);
 }
 
 .experience-item h3, .project-item h3 {
@@ -174,13 +202,13 @@ body {
 }
 
 .contact-item {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(18, 18, 18, 0.6);
   padding: 1rem;
   border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 212, 40, 0.3);
   transition: transform 0.3s ease;
 }
 
@@ -292,6 +320,10 @@ body {
   .header p {
     font-size: 1rem;
   }
+  .resume-button {
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+  }
   .clock-container {
     padding: 1rem 1.5rem;
     width: 100%;
@@ -355,6 +387,10 @@ body {
     font-size: 2rem;
   }
   .header p {
+    font-size: 0.9rem;
+  }
+  .resume-button {
+    padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
   .clock-container {
