@@ -108,13 +108,26 @@ body {
 }
 
 .clock-container {
-  background: rgba(78, 88, 110, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   padding: 1.5rem 2.5rem;
   border-radius: 20px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 212, 40, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.clock-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 }
 
 #live-clock {
@@ -126,11 +139,26 @@ body {
 }
 
 .section {
-  background: var(--bg-secondary);
+  background: rgba(78, 88, 110, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 2rem;
   margin: 2rem 0;
-  border: 1px solid rgba(255, 212, 40, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
 }
 
 .section h2 {
@@ -146,24 +174,41 @@ body {
 }
 
 .skill-item {
-  background: rgba(18, 18, 18, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 1rem;
   border-radius: 12px;
   text-align: center;
-  border: 1px solid rgba(255, 212, 40, 0.3);
-  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .skill-item:hover {
   transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .experience-item, .project-item {
-  background: rgba(18, 18, 18, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 1.5rem;
   border-radius: 12px;
   margin-bottom: 1rem;
-  border: 1px solid rgba(255, 212, 40, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.experience-item:hover, .project-item:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .experience-item h3, .project-item h3 {
@@ -202,18 +247,24 @@ body {
 }
 
 .contact-item {
-  background: rgba(18, 18, 18, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 1rem;
   border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: 1px solid rgba(255, 212, 40, 0.3);
-  transition: transform 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .contact-item:hover {
   transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 .contact-item a {
