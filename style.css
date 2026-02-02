@@ -17,7 +17,7 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Crimson Pro', serif;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 1.6;
     overflow-x: hidden;
 }
