@@ -16,11 +16,12 @@
             <div class="logo">Jaishak J</div>
             <div class="nav-links">
                 <a href="#home">HOME</a>
-                <a href="#about">ABOUT</a>
+                <a href="#education">EDUCATION</a>
+                <a href="#skills">SKILLS</a>
                 <a href="#projects">PROJECTS</a>
                 <a href="#contact">CONTACT</a>
             </div>
-            <button class="cta-btn">HIRE ME</button>
+            <a href="./assets/resume.pdf" target="_blank" class="cta-btn">HIRE ME</a>
         </nav>
     </header>
 
@@ -28,51 +29,77 @@
     <section class="hero" id="home">
         <div class="hero-container">
             <div class="hero-content">
-                <h1 class="hero-title">
-                    BUILD THE<br>
-                    FUTURE WITH<br>
-                    <span class="highlight">AI ENGINEERING!</span>
-                </h1>
-                
-                <div class="badge-circle">
-                    <div class="badge-text">
-                        <div class="rotate-text">MACHINE LEARNING • COMPUTER VISION • FULL-STACK DEV •</div>
+                <div class="hero-left">
+                    <h1 class="hero-title">
+                        BUILD THE<br>
+                        FUTURE WITH<br>
+                        <span class="highlight">AI ENGINEERING!</span>
+                    </h1>
+                    
+                    <div class="badge-circle">
+                        <div class="badge-text">
+                            <div class="rotate-text">MACHINE LEARNING • COMPUTER VISION • FULL-STACK DEV •</div>
+                        </div>
+                        <button class="badge-btn">
+                            START<br>EXPLORING
+                        </button>
                     </div>
-                    <button class="badge-btn">
-                        START<br>EXPLORING
-                    </button>
-                </div>
 
-                <div class="info-card">
-                    <div class="card-header">
-                        <span class="card-icon">💼</span>
-                        <span class="card-label">PROFESSIONAL PROFILE</span>
-                    </div>
-                    <p class="card-text">AI Engineer specializing in ML, deep learning & full-stack development. Building intelligent systems with Python, TensorFlow & modern frameworks.</p>
-                    <div class="card-footer">
-                        <a href="#contact" class="download-btn">
-                            <span>CONTACT ME</span>
-                            <span class="arrow">↓</span>
-                        </a>
-                        <div class="location">
-                            <span class="location-dot"></span>
-                            <span>Chennai, India</span>
+                    <div class="info-card">
+                        <div class="card-header">
+                            <span class="card-icon">💼</span>
+                            <span class="card-label">PROFESSIONAL PROFILE</span>
+                        </div>
+                        <p class="card-text">AI Engineer specializing in ML, deep learning & full-stack development. Building intelligent systems with Python, TensorFlow & modern frameworks.</p>
+                        <div class="card-footer">
+                            <a href="#contact" class="download-btn">
+                                <span>CONTACT ME</span>
+                                <span class="arrow">↓</span>
+                            </a>
+                            <div class="location">
+                                <span class="location-dot"></span>
+                                <span>Chennai, India</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="hero-images">
-                <div class="image-card main-card">
-                    <img src="./anime.jpeg" alt="Jaishak Anime Character">
-                    <div class="star-badge">★</div>
+                <div class="hero-right">
+                    <div class="image-card main-card">
+                        <img src="./image.png" alt="Jaishak Anime Character">
+                        <div class="star-badge">★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Experience Section -->
+    <section class="education-section" id="education">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">EDUCATION & EXPERIENCE</h2>
+                <div class="title-underline"></div>
+            </div>
+            
+            <div class="education-experience-grid">
+                <div class="info-box">
+                    <div class="info-number">01</div>
+                    <h3>EDUCATION</h3>
+                    <p>B.Tech in AI & Data Science<br>Jeppiaar Institute of Technology<br>Anna University (2021-2025)<br>CGPA: 7.38</p>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-number">02</div>
+                    <h3>EXPERIENCE</h3>
+                    <p>ML Intern @ Retech Solutions<br>Aug 2023 - Sep 2023<br>Chennai, India</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section class="skills-section" id="about">
+    <section class="skills-section" id="skills">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">TECHNICAL SKILLS</h2>
@@ -139,20 +166,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="education-experience-grid">
-                <div class="info-box">
-                    <div class="info-number">01</div>
-                    <h3>EDUCATION</h3>
-                    <p>B.Tech in AI & Data Science<br>Jeppiaar Institute of Technology<br>Anna University (2021-2025)<br>CGPA: 7.38</p>
-                </div>
-                
-                <div class="info-box">
-                    <div class="info-number">02</div>
-                    <h3>EXPERIENCE</h3>
-                    <p>ML Intern @ Retech Solutions<br>Aug 2023 - Sep 2023<br>Chennai, India</p>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -187,12 +200,8 @@
                     </div>
                 </div>
 
-                <div class="project-side-image">
-                    <img src="./anime.jpeg" alt="AI Engineering">
-                    <div class="side-image-badge">
-                        <span class="badge-icon">⚡</span>
-                        <span class="badge-text">AI POWERED</span>
-                    </div>
+                <div class="project-side-image-circle">
+                    <img src="./image.png" alt="AI Engineering" class="rotating-image">
                 </div>
             </div>
         </div>
@@ -210,7 +219,7 @@
                 <div class="contact-card">
                     <div class="contact-icon">📧</div>
                     <h4>EMAIL</h4>
-                    <a href="/cdn-cgi/l/email-protection#2c464d455f444d471d1e1d156c4b414d4540024f4341"><span class="__cf_email__" data-cfemail="95fff4fce6fdf4fea4a7a4acd5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span></a>
+                    <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a>
                 </div>
                 
                 <div class="contact-card">
