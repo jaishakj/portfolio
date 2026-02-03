@@ -6,203 +6,180 @@
     <title>Jaishak J — AI Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <nav class="container">
-            <div class="logo mono">Jaishak J</div>
-            <ul class="mono">
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+        <nav class="nav-container">
+            <div class="logo">Jaishak J</div>
+            <div class="nav-links">
+                <a href="#home">HOME</a>
+                <a href="#about">ABOUT</a>
+                <a href="#projects">PROJECTS</a>
+                <a href="#contact">CONTACT</a>
+            </div>
+            <button class="cta-btn">HIRE ME</button>
         </nav>
     </header>
 
-    <main>
-        <section class="hero container">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
             <div class="hero-content">
-                <h1>Building <span class="gradient-text">intelligent systems</span> that matter</h1>
-                <p class="tagline">AI Engineer specializing in machine learning, full-stack development, and computer vision</p>
-                <div class="location mono">
-                    <span class="status-dot"></span>
-                    Chennai, India • Open to Remote/Relocation
+                <h1 class="hero-title">
+                    BUILD THE<br>
+                    FUTURE WITH<br>
+                    <span class="highlight">AI ENGINEERING!</span>
+                </h1>
+                
+                <div class="badge-circle">
+                    <div class="badge-text">
+                        <div class="rotate-text">MACHINE LEARNING • COMPUTER VISION • FULL-STACK DEV •</div>
+                    </div>
+                    <button class="badge-btn">
+                        START<br>EXPLORING
+                    </button>
                 </div>
-                <div class="cta-group">
-                    <a href="#projects" class="btn btn-primary mono">View Projects</a>
-                    <a href="#contact" class="btn btn-secondary mono">Get in Touch</a>
-                </div>
-            </div>
-        </section>
 
-        <section id="skills" class="container fade-in">
-            <div class="section-header">
-                <div class="section-label mono">01 / Capabilities</div>
-                <h2 class="section-title">What I Do</h2>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-card stagger-1 fade-in">
-                    <h3 class="mono">Machine Learning</h3>
-                    <p>Building and deploying ML models with TensorFlow, PyTorch, and scikit-learn. Experience with deep learning architectures and model optimization.</p>
-                </div>
-                <div class="skill-card stagger-2 fade-in">
-                    <h3 class="mono">Computer Vision</h3>
-                    <p>Object detection, image classification, and video analysis using YOLOv5, CNNs, and modern CV frameworks.</p>
-                </div>
-                <div class="skill-card stagger-3 fade-in">
-                    <h3 class="mono">Full-Stack Development</h3>
-                    <p>End-to-end web applications using Python, JavaScript, TypeScript, and modern frameworks. RESTful APIs and database design.</p>
-                </div>
-                <div class="skill-card stagger-4 fade-in">
-                    <h3 class="mono">Data Engineering</h3>
-                    <p>Data pipeline design, ETL processes, and working with large-scale datasets. SQL, NoSQL, and data visualization.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="education" class="container fade-in">
-            <div class="section-header">
-                <div class="section-label mono">02 / Background</div>
-                <h2 class="section-title">Education</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date mono">2021 — 2025</div>
-                    <h3 class="timeline-title">B.Tech in AI & Data Science</h3>
-                    <div class="timeline-org">Jeppiaar Institute of Technology, Anna University</div>
-                    <div class="timeline-desc">
-                        CGPA: 7.38/10
-                        <br>Focus: Machine Learning, Deep Learning, Data Structures, Computer Vision
+                <div class="info-card">
+                    <div class="card-header">
+                        <span class="card-icon">💼</span>
+                        <span class="card-label">PROFESSIONAL PROFILE</span>
+                    </div>
+                    <p class="card-text">AI Engineer specializing in ML, deep learning & full-stack development. Building intelligent systems with Python, TensorFlow & modern frameworks.</p>
+                    <div class="card-footer">
+                        <a href="#contact" class="download-btn">
+                            <span>CONTACT ME</span>
+                            <span class="arrow">↓</span>
+                        </a>
+                        <div class="location">
+                            <span class="location-dot"></span>
+                            <span>Chennai, India</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="experience" class="container fade-in">
-            <div class="section-header">
-                <div class="section-label mono">03 / Experience</div>
-                <h2 class="section-title">Where I've Worked</h2>
-            </div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date mono">Aug 2023 — Sep 2023</div>
-                    <h3 class="timeline-title">Machine Learning Intern</h3>
-                    <div class="timeline-org">Retech Solutions • Chennai</div>
-                    <div class="timeline-desc">
-                        <ul>
-                            <li>Developed and deployed ML models for real-world business applications</li>
-                            <li>Worked with Python, TensorFlow, and scikit-learn on production systems</li>
-                            <li>Collaborated with cross-functional teams on data-driven solutions</li>
-                        </ul>
+            <div class="hero-images">
+                <div class="image-card main-card">
+                    <img src="./image.png" alt="Jaishak Anime Character">
+                    <div class="star-badge">★</div>
+                </div>
+                
+                <div class="image-card secondary-card">
+                    <img src="./image.png" alt="AI Projects">
+                    <div class="create-badge">
+                        <span class="create-icon">⚡</span>
+                        <span class="create-text">CREATE<br>WITH AI</span>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="projects" class="container fade-in">
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="section-container">
             <div class="section-header">
-                <div class="section-label mono">04 / Work</div>
-                <h2 class="section-title">Selected Projects</h2>
+                <h2 class="section-title">ABOUT ME</h2>
+                <div class="title-underline"></div>
             </div>
-            <div class="project-grid">
-                <div class="project-card">
-                    <div class="project-meta">
-                        <span class="project-tag mono">Computer Vision</span>
-                        <span class="project-tag mono">YOLOv5</span>
-                        <span class="project-tag mono">NLP</span>
-                    </div>
-                    <h3>AI-Powered Video Summarization</h3>
-                    <p>Built an intelligent video analysis system using YOLOv5 for object detection and LLM integration for automated summarization. Includes chatbot interface and recommendation engine for enhanced user experience.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/jaishakj/Ai-Powered-Video-Summarisation-Multiple-Models.git" target="_blank" class="project-link mono">View Code →</a>
-                    </div>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="card-number">01</div>
+                    <h3>EDUCATION</h3>
+                    <p>B.Tech in AI & Data Science<br>Jeppiaar Institute of Technology<br>Anna University (2021-2025)<br>CGPA: 7.38</p>
                 </div>
-
-                <!-- Placeholder for future projects -->
-                <div class="project-card" style="opacity: 0.5; border-style: dashed;">
-                    <div class="project-meta">
-                        <span class="project-tag mono">Coming Soon</span>
-                    </div>
-                    <h3>More Projects in Progress</h3>
-                    <p>Currently working on additional ML and full-stack projects. Check back soon for updates.</p>
+                
+                <div class="about-card">
+                    <div class="card-number">02</div>
+                    <h3>EXPERIENCE</h3>
+                    <p>ML Intern @ Retech Solutions<br>Aug 2023 - Sep 2023<br>Chennai, India</p>
+                </div>
+                
+                <div class="about-card">
+                    <div class="card-number">03</div>
+                    <h3>SKILLS</h3>
+                    <p>Python • TensorFlow • PyTorch<br>JavaScript • TypeScript • React<br>Computer Vision • NLP • ML</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="container fade-in">
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="section-container">
             <div class="section-header">
-                <div class="section-label mono">05 / Connect</div>
-                <h2 class="section-title">Let's Talk</h2>
+                <h2 class="section-title">FEATURED PROJECTS</h2>
+                <div class="title-underline"></div>
             </div>
+            
+            <div class="project-card-large">
+                <div class="project-badge">NEW PROJECT</div>
+                <h3>AI-POWERED VIDEO SUMMARIZATION</h3>
+                <p>Intelligent video analysis system using YOLOv5 for object detection and LLM integration for automated summarization. Features chatbot interface and recommendation engine.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">YOLOV5</span>
+                    <span class="tech-tag">PYTHON</span>
+                    <span class="tech-tag">NLP</span>
+                    <span class="tech-tag">COMPUTER VISION</span>
+                </div>
+                <a href="https://github.com/jaishakj/Ai-Powered-Video-Summarisation-Multiple-Models.git" target="_blank" class="project-link">
+                    VIEW ON GITHUB →
+                </a>
+            </div>
+
+            <div class="coming-soon-card">
+                <h3>MORE PROJECTS COMING SOON...</h3>
+                <p>Currently working on cutting-edge ML and full-stack projects. Stay tuned for updates!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">LET'S CONNECT</h2>
+                <div class="title-underline"></div>
+            </div>
+            
             <div class="contact-grid">
-                <div class="contact-item">
-                    <div class="contact-label mono">Email</div>
-                    <div class="contact-value">
-                        <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a>
-                    </div>
+                <div class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h4>EMAIL</h4>
+                    <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-label mono">Phone</div>
-                    <div class="contact-value">
-                        <a href="tel:+919345589347">+91 9345589347</a>
-                    </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">📱</div>
+                    <h4>PHONE</h4>
+                    <a href="tel:+919345589347">+91 9345589347</a>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-label mono">LinkedIn</div>
-                    <div class="contact-value">
-                        <a href="https://www.linkedin.com/in/jaishakj" target="_blank">linkedin.com/in/jaishakj</a>
-                    </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">💼</div>
+                    <h4>LINKEDIN</h4>
+                    <a href="https://www.linkedin.com/in/jaishakj" target="_blank">linkedin.com/in/jaishakj</a>
                 </div>
-                <div class="contact-item">
-                    <div class="contact-label mono">GitHub</div>
-                    <div class="contact-value">
-                        <a href="https://github.com/jaishakj" target="_blank">github.com/jaishakj</a>
-                    </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">💻</div>
+                    <h4>GITHUB</h4>
+                    <a href="https://github.com/jaishakj" target="_blank">github.com/jaishakj</a>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p class="footer-text mono">Designed & Built by Jaishak J</p>
-            <p class="footer-text" style="color: #333;">© 2025 — Chennai, India</p>
+        <div class="footer-container">
+            <p>© 2025 JAISHAK J — BUILT WITH ❤️ IN CHENNAI</p>
         </div>
     </footer>
-
-    <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Scroll-triggered animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
 </body>
 </html>
