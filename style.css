@@ -74,6 +74,8 @@ header {
     font-size: 0.9rem;
     cursor: pointer;
     transition: transform 0.2s;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .cta-btn:hover {
@@ -89,10 +91,23 @@ header {
 .hero-container {
     max-width: 1400px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 4rem;
-    align-items: center;
+}
+
+.hero-left {
+    flex: 1;
+    max-width: 700px;
+}
+
+.hero-right {
+    flex-shrink: 0;
+    width: 400px;
 }
 
 .hero-title {
@@ -135,10 +150,6 @@ header {
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.1em;
-}
-
-.rotate-text::before {
-    content: attr(data-text);
 }
 
 .badge-btn {
@@ -240,12 +251,6 @@ header {
 }
 
 /* Hero Images */
-.hero-images {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-
 .image-card {
     position: relative;
     border-radius: 20px;
@@ -256,7 +261,7 @@ header {
 }
 
 .main-card {
-    height: 450px;
+    height: 500px;
 }
 
 .image-card img {
@@ -280,33 +285,10 @@ header {
     border: 2px solid var(--black);
 }
 
-.create-badge {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    background: var(--yellow);
-    border: 2px solid var(--black);
-    border-radius: 15px;
-    padding: 0.8rem 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.create-icon {
-    font-size: 1.5rem;
-}
-
-.create-text {
-    font-weight: 700;
-    font-size: 0.7rem;
-    line-height: 1.2;
-}
-
-/* Skills Section */
-.skills-section {
+/* Education Section */
+.education-section {
     padding: 5rem 2rem;
-    background: var(--white);
+    background: var(--cream);
 }
 
 .section-container {
@@ -333,11 +315,60 @@ header {
     margin: 0 auto;
 }
 
+.education-experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.info-box {
+    background: var(--yellow);
+    border: var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+.info-number {
+    position: absolute;
+    top: -20px;
+    left: 2rem;
+    background: var(--black);
+    color: var(--white);
+    border: 2px solid var(--black);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.info-box h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+.info-box p {
+    line-height: 1.8;
+    color: #333;
+}
+
+/* Skills Section */
+.skills-section {
+    padding: 5rem 2rem;
+    background: var(--white);
+}
+
 .skills-grid-main {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    margin-bottom: 3rem;
 }
 
 .skill-category {
@@ -379,51 +410,6 @@ header {
     font-weight: 600;
 }
 
-.education-experience-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.info-box {
-    background: var(--yellow);
-    border: var(--border);
-    border-radius: 20px;
-    padding: 2.5rem;
-    position: relative;
-    box-shadow: 6px 6px 0 var(--black);
-}
-
-.info-number {
-    position: absolute;
-    top: -20px;
-    left: 2rem;
-    background: var(--black);
-    color: var(--white);
-    border: 2px solid var(--black);
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.info-box h3 {
-    font-family: 'Anton', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-}
-
-.info-box p {
-    line-height: 1.8;
-    color: #333;
-}
-
 /* Projects Section */
 .projects-section {
     padding: 5rem 2rem;
@@ -442,54 +428,11 @@ header {
     gap: 2rem;
 }
 
-.project-side-image {
-    position: relative;
-    border: var(--border);
-    border-radius: 20px;
-    overflow: hidden;
-    background: var(--white);
-    box-shadow: 6px 6px 0 var(--black);
-    height: fit-content;
-    position: sticky;
-    top: 100px;
-}
-
-.project-side-image img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-}
-
-.side-image-badge {
-    position: absolute;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--yellow);
-    border: 2px solid var(--black);
-    border-radius: 50px;
-    padding: 0.8rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-}
-
-.badge-icon {
-    font-size: 1.3rem;
-}
-
-.badge-text {
-    font-weight: 700;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-}
-
 .project-card-large {
     background: var(--white);
     border: var(--border);
     border-radius: 20px;
     padding: 3rem;
-    margin-bottom: 2rem;
     position: relative;
     box-shadow: 8px 8px 0 var(--black);
 }
@@ -576,6 +519,31 @@ header {
     color: #666;
 }
 
+/* Circular Rotating Image */
+.project-side-image-circle {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: var(--border);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: 8px 8px 0 var(--black);
+    position: sticky;
+    top: 100px;
+}
+
+.rotating-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: rotateImage 20s linear infinite;
+}
+
+@keyframes rotateImage {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
 /* Contact Section */
 .contact-section {
     padding: 5rem 2rem;
@@ -639,8 +607,12 @@ footer {
 
 /* Responsive */
 @media (max-width: 968px) {
-    .hero-container {
-        grid-template-columns: 1fr;
+    .hero-content {
+        flex-direction: column;
+    }
+
+    .hero-right {
+        width: 100%;
     }
     
     .nav-links {
@@ -661,9 +633,10 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .project-side-image {
+    .project-side-image-circle {
         position: relative;
         top: 0;
+        margin: 0 auto;
     }
 }
 
@@ -681,5 +654,10 @@ footer {
         width: 90px;
         height: 90px;
         font-size: 0.65rem;
+    }
+
+    .project-side-image-circle {
+        width: 280px;
+        height: 280px;
     }
 }
