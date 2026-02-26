@@ -181,15 +181,24 @@ header {
     background: var(--black);
     color: var(--white);
     border: none;
-    font-weight: 700;
-    font-size: 0.75rem;
-    line-height: 1.3;
     cursor: pointer;
     transition: transform 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .badge-btn:hover {
     transform: translate(-50%, -50%) scale(1.1);
+}
+
+.badge-btn svg {
+    transition: transform 0.3s;
+}
+
+.badge-btn:hover svg {
+    transform: scale(1.1);
 }
 
 /* Info Card */
