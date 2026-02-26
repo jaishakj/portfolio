@@ -145,7 +145,7 @@ header {
     position: absolute;
     width: 100%;
     height: 100%;
-    animation: rotate 20s linear infinite;
+    animation: rotate 10s linear infinite;
 }
 
 @keyframes rotate {
