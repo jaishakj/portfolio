@@ -579,15 +579,15 @@ header {
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
 }
 
 .contact-card {
     background: var(--cream);
     border: var(--border);
     border-radius: 20px;
-    padding: 2.5rem;
+    padding: 1.5rem;
     text-align: center;
     box-shadow: 6px 6px 0 var(--black);
     transition: transform 0.3s;
@@ -598,8 +598,10 @@ header {
 }
 
 .contact-icon {
-    font-size: 3rem;
     margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contact-card h4 {
