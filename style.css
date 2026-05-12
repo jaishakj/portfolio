@@ -685,6 +685,37 @@ footer {
         font-size: 0.65rem;
     }
 
+    /* Custom Cursor */
+.custom-cursor {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--black);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    transform: translate(-50%, -50%);
+}
+
+.custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--black);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+}
+
+/* Hide default cursor on desktop */
+@media (min-width: 769px) {
+    body, a, button {
+        cursor: none;
+    }
+}
+
     .project-side-image-circle {
         width: 280px;
         height: 280px;
