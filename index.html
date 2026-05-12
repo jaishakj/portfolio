@@ -340,5 +340,45 @@
             <p>© 2025 Chennai — Build by Jaishak J</p>
         </div>
     </footer>
+    <script>
+        // Custom cursor
+        const cursor = document.createElement('div');
+        const cursorDot = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        cursorDot.className = 'custom-cursor-dot';
+        document.body.appendChild(cursor);
+        document.body.appendChild(cursorDot);
+        
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursorDot.style.left = mouseX + 'px';
+            cursorDot.style.top = mouseY + 'px';
+        });
+        
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+        
+        // Add hover effects
+        document.querySelectorAll('a, button, .project-card-large, .contact-card, .skill-card').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                cursor.style.borderColor = '#FFE031';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                cursor.style.borderColor = '#000';
+            });
+        });
+    </script>
 </body>
 </html>
