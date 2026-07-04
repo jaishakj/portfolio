@@ -708,7 +708,25 @@ footer {
     z-index: 10000;
     transform: translate(-50%, -50%);
 }
+.custom-cursor {
+    border-color: #FF3366; /* any color */
+}
+.custom-cursor-dot {
+    background: #FF3366;
+}
 
+.custom-cursor {
+    border-radius: 0; /* removes circle, makes square */
+}
+
+.custom-cursor {
+    width: 30px; /* smaller/larger */
+    height: 30px;
+}
+
+.custom-cursor {
+    box-shadow: 0 0 15px #FFE031;
+}
 /* Hide default cursor on desktop */
 @media (min-width: 769px) {
     body, a, button {
