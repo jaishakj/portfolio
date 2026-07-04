@@ -371,12 +371,16 @@
         // Add hover effects
         document.querySelectorAll('a, button, .project-card-large, .contact-card, .skill-card').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                cursor.style.borderColor = '#FFE031';
+                cursorDot.style.width = '20px';
+                cursorDot.style.height = '20px';
+                cursor.style.width = '60px';
+                cursor.style.height = '60px';
             });
             el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.borderColor = '#000';
+                cursorDot.style.width = '6px';
+                cursorDot.style.height = '6px';
+                cursor.style.width = '40px';
+                cursor.style.height = '40px';
             });
         });
     </script>
