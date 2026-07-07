@@ -3,18 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jaishak J — AI Engineer</title>
+
+    <!-- ===== SEO ===== -->
+    <title>Jaishak J — AI Engineer | ML, Computer Vision & Full-Stack</title>
+    <meta name="description" content="AI Engineer specializing in machine learning, computer vision and full-stack development. Built YOLOv5 video summarization and RAG chatbot systems with Python, TensorFlow, LangChain and FastAPI.">
+    <link rel="canonical" href="https://jaishakj.github.io/portfolio/">
+    <meta name="theme-color" content="#E8DCC4">
+
+    <!-- Open Graph (LinkedIn, Discord, WhatsApp previews) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jaishakj.github.io/portfolio/">
+    <meta property="og:title" content="Jaishak J — AI Engineer">
+    <meta property="og:description" content="ML, computer vision & full-stack projects: YOLOv5 video summarization, RAG chatbots, and more.">
+    <meta property="og:image" content="https://jaishakj.github.io/portfolio/assets/og-cover.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter/X card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@jaishak_j">
+    <meta name="twitter:title" content="Jaishak J — AI Engineer">
+    <meta name="twitter:description" content="ML, computer vision & full-stack projects.">
+    <meta name="twitter:image" content="https://jaishakj.github.io/portfolio/assets/og-cover.png">
+
+    <!-- Structured data: developer portfolio -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jaishak J",
+      "url": "https://jaishakj.github.io/portfolio/",
+      "email": "mailto:jaishak1219@gmail.com",
+      "jobTitle": "AI Engineer",
+      "knowsAbout": ["Machine Learning", "Computer Vision", "Natural Language Processing", "Full-Stack Development", "Python", "TensorFlow", "LangChain"],
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Jeppiaar Institute of Technology (Anna University)"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Chennai",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://github.com/jaishakj",
+        "https://www.linkedin.com/in/jaishakj",
+        "https://x.com/jaishak_j",
+        "https://mastodon.social/@jaishakj"
+      ]
+    }
+    </script>
+
+    <!-- ===== Fonts: ONE request, preconnect + swap ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Preload the hero image so LCP fires early -->
+    <link rel="preload" as="image" href="./assets/anime1.png" fetchpriority="high">
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Skip link: first tabbable element, styled brutalist in CSS -->
+    <a class="skip-link" href="#home">SKIP TO CONTENT</a>
+
+    <!-- Grain overlay (pure CSS, zero requests — see .grain in style.css) -->
+    <div class="grain" aria-hidden="true"></div>
+
     <!-- Header -->
     <header>
-        <nav class="nav-container">
-            <div class="logo">Jaishak J</div>
+        <nav class="nav-container" aria-label="Primary">
+            <a href="#home" class="logo">Jaishak J</a>
             <div class="nav-links">
                 <a href="#home">HOME</a>
                 <a href="#education">EDUCATION</a>
@@ -22,85 +82,97 @@
                 <a href="#projects">PROJECTS</a>
                 <a href="#contact">CONTACT</a>
             </div>
-            <a href="./assets/resume.pdf" target="_blank" class="cta-btn">RESUME</a>
+            <a href="./assets/resume.pdf" target="_blank" rel="noopener" class="cta-btn magnetic">RESUME</a>
         </nav>
     </header>
 
+    <main>
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-left">
-                    <h1 class="hero-title">
+                    <h1 class="hero-title reveal">
                         BUILD THE<br>
                         FUTURE WITH<br>
                         <span class="highlight">AI ENGINEERING!</span>
                     </h1>
-                    
-                    <div class="badge-circle">
-                        <svg viewBox="0 0 200 200" style="position: absolute; width: 100%; height: 100%; animation: rotate 20s linear infinite;">
+
+                    <div class="badge-circle reveal" data-reveal-delay="1">
+                        <svg viewBox="0 0 200 200" class="badge-ring" aria-hidden="true">
                             <path id="circlePath" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" fill="none"/>
-                            <text style="font-size: 11px; font-weight: 700; letter-spacing: 2px; fill: black;">
+                            <text class="badge-ring-text">
                                 <textPath href="#circlePath">
                                     ML • COMPUTER VISION • FULL-STACK DEV • DATA SCIENCE •
                                 </textPath>
                             </text>
                         </svg>
-                        <a href="https://github.com/jaishakj" target="_blank" class="badge-btn">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="white">
+                        <a href="https://github.com/jaishakj" target="_blank" rel="noopener"
+                           class="badge-btn magnetic" aria-label="Visit my GitHub profile">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="white" aria-hidden="true">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                             </svg>
                         </a>
                     </div>
 
-                    <div class="info-card">
+                    <div class="info-card reveal" data-reveal-delay="2">
                         <div class="card-header">
-                            <span class="card-icon">💼</span>
+                            <span class="card-icon" aria-hidden="true">💼</span>
                             <span class="card-label">PROFESSIONAL PROFILE</span>
                         </div>
-                        <p class="card-text">AI Engineer specializing in ML, deep learning & full-stack development. Building intelligent systems with Python, TensorFlow & modern frameworks.</p>
+                        <p class="card-text">AI Engineer specializing in ML, deep learning &amp; full-stack development. Building intelligent systems with Python, TensorFlow &amp; modern frameworks.</p>
                         <div class="card-footer">
-                            <a href="#contact" class="download-btn">
+                            <a href="#contact" class="download-btn magnetic">
                                 <span>CONTACT ME</span>
-                                <span class="arrow">↓</span>
+                                <span class="arrow" aria-hidden="true">↓</span>
                             </a>
                             <div class="location">
-                                <span class="location-dot"></span>
+                                <span class="location-dot" aria-hidden="true"></span>
                                 <span>Chennai, India</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="hero-right">
-                    <div class="image-card main-card">
-                        <img src="./assets/anime1.png" alt="Jaishak Anime Character">
-                        <div class="star-badge">★</div>
+                <div class="hero-right reveal" data-reveal-delay="1">
+                    <div class="image-card main-card" data-parallax>
+                        <!-- width/height = intrinsic dimensions of your export; prevents layout shift -->
+                        <img src="./assets/anime1.png" alt="Stylized anime illustration of Jaishak"
+                             width="400" height="500" fetchpriority="high" decoding="async">
+                        <div class="star-badge" aria-hidden="true">★</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Animated SVG divider between sections -->
+    <div class="section-divider" aria-hidden="true">
+        <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path class="divider-path" d="M0,30 L60,30 L80,10 L100,50 L120,30 L1080,30 L1100,10 L1120,50 L1140,30 L1200,30"
+                  fill="none" stroke="#000" stroke-width="4"/>
+        </svg>
+    </div>
+
     <!-- Education & Experience Section -->
     <section class="education-section" id="education">
         <div class="section-container">
-            <div class="section-header">
-                <h2 class="section-title">EDUCATION & EXPERIENCE</h2>
+            <div class="section-header reveal">
+                <h2 class="section-title">EDUCATION &amp; EXPERIENCE</h2>
                 <div class="title-underline"></div>
             </div>
-            
+
             <div class="education-experience-grid">
-                <div class="info-box">
-                    <div class="info-number">01</div>
+                <div class="info-box reveal">
+                    <div class="info-number" aria-hidden="true">01</div>
                     <h3>EDUCATION</h3>
-                    <p>B.Tech in Artificial Intelligence & Data Science<br>Jeppiaar Institute of Technology, Chennai<br>Anna University (2021-2025)<br>CGPA: 7.38</p>
+                    <p>B.Tech in Artificial Intelligence &amp; Data Science<br>Jeppiaar Institute of Technology, Chennai<br>Anna University (2021–2025)<br>CGPA: 7.34</p>
                 </div>
-                
-                <div class="info-box">
-                    <div class="info-number">02</div>
+
+                <div class="info-box reveal" data-reveal-delay="1">
+                    <div class="info-number" aria-hidden="true">02</div>
                     <h3>EXPERIENCE</h3>
-                    <p>Machine Learning Intern @ Retech Solutions pvt.ltd<br>Aug 2023 - Sep 2023<br>Chennai, India</p>
+                    <p>Machine Learning Intern @ Retech Solutions Pvt. Ltd<br>Aug 2023 – Sep 2023 · Chennai, India<br>Built churn-prediction models (87% accuracy on 50K+ records), cut training time 40%, deployed with FastAPI + Docker at &lt;200ms latency.</p>
                 </div>
             </div>
         </div>
@@ -109,15 +181,15 @@
     <!-- Skills Section -->
     <section class="skills-section" id="skills">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2 class="section-title">TECHNICAL SKILLS</h2>
                 <div class="title-underline"></div>
             </div>
-            
+
             <div class="skills-grid-main">
-                <div class="skill-category">
+                <div class="skill-category reveal">
                     <div class="skill-category-header">
-                        <span class="skill-icon">💻</span>
+                        <span class="skill-icon" aria-hidden="true">💻</span>
                         <h3>PROGRAMMING LANGUAGES</h3>
                     </div>
                     <div class="skill-tags">
@@ -128,10 +200,10 @@
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="skill-category reveal" data-reveal-delay="1">
                     <div class="skill-category-header">
-                        <span class="skill-icon">🤖</span>
-                        <h3>AI & MACHINE LEARNING</h3>
+                        <span class="skill-icon" aria-hidden="true">🤖</span>
+                        <h3>AI &amp; MACHINE LEARNING</h3>
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">TensorFlow</span>
@@ -145,10 +217,10 @@
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="skill-category reveal" data-reveal-delay="2">
                     <div class="skill-category-header">
-                        <span class="skill-icon">📊</span>
-                        <h3>DATA SCIENCE & TOOLS</h3>
+                        <span class="skill-icon" aria-hidden="true">📊</span>
+                        <h3>DATA SCIENCE &amp; TOOLS</h3>
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">Pandas</span>
@@ -159,10 +231,10 @@
                     </div>
                 </div>
 
-                <div class="skill-category">
+                <div class="skill-category reveal" data-reveal-delay="3">
                     <div class="skill-category-header">
-                        <span class="skill-icon">🚀</span>
-                        <h3>DEVELOPMENT & FRAMEWORKS</h3>
+                        <span class="skill-icon" aria-hidden="true">🚀</span>
+                        <h3>DEVELOPMENT &amp; FRAMEWORKS</h3>
                     </div>
                     <div class="skill-tags">
                         <span class="skill-tag">React.js</span>
@@ -177,34 +249,42 @@
         </div>
     </section>
 
+    <div class="section-divider" aria-hidden="true">
+        <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+            <path class="divider-path" d="M0,30 L60,30 L80,10 L100,50 L120,30 L1080,30 L1100,10 L1120,50 L1140,30 L1200,30"
+                  fill="none" stroke="#000" stroke-width="4"/>
+        </svg>
+    </div>
+
     <!-- Projects Section -->
     <section class="projects-section" id="projects">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2 class="section-title">FEATURED PROJECTS</h2>
                 <div class="title-underline"></div>
             </div>
-            
+
             <div class="projects-layout">
                 <div class="projects-main">
-                    <div class="project-card-large">
+                    <article class="project-card-large reveal">
                         <div class="project-badge">NEW PROJECT</div>
                         <h3>AI-POWERED VIDEO SUMMARIZATION</h3>
-                        <p>Intelligent video analysis system using YOLOv5 for object detection and LLM integration for automated summarization. Features chatbot interface and recommendation engine.</p>
+                        <p>Intelligent video analysis system using YOLOv5 for object detection and LLM integration for automated summarization. Processes 30 FPS streams in real time with 92% accuracy.</p>
                         <div class="tech-tags">
                             <span class="tech-tag">YOLOV5</span>
                             <span class="tech-tag">PYTHON</span>
                             <span class="tech-tag">NLP</span>
                             <span class="tech-tag">COMPUTER VISION</span>
                         </div>
-                        <a href="https://github.com/jaishakj/Ai-Powered-Video-Summarisation-Multiple-Models.git" target="_blank" class="project-link">
-                            VIEW ON GITHUB →
+                        <a href="https://github.com/jaishakj/Ai-Powered-Video-Summarisation-Multiple-Models" target="_blank" rel="noopener" class="project-link magnetic">
+                            VIEW ON GITHUB <span aria-hidden="true">→</span>
                         </a>
-                    </div>
-                    <div class="project-card-large">
+                    </article>
+
+                    <article class="project-card-large reveal">
                         <div class="project-badge">NEW PROJECT</div>
                         <h3>SUPPORT RAG CHATBOT</h3>
-                        <p>RAG-powered customer support chatbot built with LangChain, Pinecone, Google Gemini 1.5 Pro, FastAPI, and React. Uses vector similarity search across a knowledge base to answer support queries with cited sources and confidence scores. Features multi-turn conversation memory and automatic agent escalation detection.</p>
+                        <p>RAG-powered customer support chatbot built with LangChain, Pinecone, Gemini 1.5 Pro, FastAPI, and React. Vector search across 5,000+ documents with cited sources, multi-turn memory (68% → 89% accuracy), and automatic agent escalation.</p>
                         <div class="tech-tags">
                             <span class="tech-tag">LANGCHAIN</span>
                             <span class="tech-tag">PINECONE</span>
@@ -213,19 +293,25 @@
                             <span class="tech-tag">REACT</span>
                             <span class="tech-tag">RAG</span>
                         </div>
-                        <a href="https://github.com/jaishakj/Support-RAG-Chatbot.git" target="_blank" class="project-link">
-                            VIEW ON GITHUB →
+                        <a href="https://github.com/jaishakj/Support-RAG-Chatbot" target="_blank" rel="noopener" class="project-link magnetic">
+                            VIEW ON GITHUB <span aria-hidden="true">→</span>
                         </a>
-                    </div>
+                    </article>
 
-                    <div class="coming-soon-card">
+                    <div class="coming-soon-card reveal">
                         <h3>EXPLORING MORE AI PROJECTS...</h3>
                         <p>Continuously building and experimenting with ML and full-stack solutions. Check my GitHub for latest work!</p>
                     </div>
                 </div>
 
-                <div class="project-side-image-circle">
-                    <div class="tenor-gif-embed" data-postid="402674747635664052" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/racoon-raccoon-raccoon-in-a-circle-silly-raccooon-dancing-raccoon-gif-402674747635664052">Racoon Raccoon GIF</a>from <a href="https://tenor.com/search/racoon-gifs">Racoon GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+                <!-- Tenor embed REPLACED with a self-hosted looping video.
+                     Convert your GIF once:  ffmpeg -i raccoon.gif -movflags faststart -pix_fmt yuv420p -vf "crop=min(iw\,ih):min(iw\,ih)" raccoon.mp4
+                     ~90% smaller than the GIF, no third-party script, zero layout shift. -->
+                <div class="project-side-image-circle reveal">
+                    <video class="rotating-image" autoplay muted loop playsinline
+                           width="350" height="350" aria-label="Decorative looping animation">
+                        <source src="./assets/raccoon.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
         </div>
@@ -234,155 +320,114 @@
     <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2 class="section-title">LET'S CONNECT</h2>
                 <div class="title-underline"></div>
             </div>
-            
+
             <div class="contact-grid">
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#EA4335"/>
-                <path d="M34 16H14c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V18c0-1.1-.9-2-2-2zm0 4l-10 6-10-6v-2l10 6 10-6v2z" fill="white"/>
-            </svg>
-        </div>
-        <h4>EMAIL</h4>
-        <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a>
-    </div>
-    
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#34A853"/>
-                <path d="M31 18h-3v-1c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1v1h-3c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V20c0-1.1-.9-2-2-2zm-7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="white"/>
-            </svg>
-        </div>
-        <h4>PHONE</h4>
-        <a href="tel:+919345589347">+91 9345589347</a>
-    </div>
-    
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#0A66C2"/>
-                <path d="M19 19h-4v13h4V19zM17 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM29 19h-4v6.5c0 1.38-1.12 2.5-2.5 2.5S20 26.88 20 25.5V19h-4v13h4v-1.8c1.19 1.04 2.75 1.8 4.5 1.8 3.59 0 6.5-2.91 6.5-6.5V19h-2z" fill="white"/>
-            </svg>
-        </div>
-        <h4>LINKEDIN</h4>
-        <a href="https://www.linkedin.com/in/jaishakj" target="_blank">linkedin.com/in/jaishakj</a>
-    </div>
-    
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#1DA1F2"/>
-                <path d="M36 16.5c-.9.4-1.9.7-2.9.8 1-.6 1.8-1.6 2.2-2.7-1 .6-2 1-3.1 1.2-.9-1-2.2-1.6-3.6-1.6-2.7 0-4.9 2.2-4.9 4.9 0 .4 0 .8.1 1.1-4.1-.2-7.7-2.2-10.1-5.2-.4.7-.7 1.6-.7 2.5 0 1.7.9 3.2 2.2 4.1-.8 0-1.6-.2-2.2-.6v.1c0 2.4 1.7 4.4 3.9 4.8-.4.1-.8.2-1.3.2-.3 0-.6 0-.9-.1.6 2 2.4 3.4 4.6 3.4-1.7 1.3-3.8 2.1-6.1 2.1-.4 0-.8 0-1.2-.1 2.2 1.4 4.8 2.2 7.5 2.2 9.1 0 14-7.5 14-14v-.6c1-.7 1.8-1.6 2.5-2.5z" fill="white"/>
-            </svg>
-        </div>
-        <h4>TWITTER</h4>
-        <a href="https://x.com/jaishak_j" target="_blank">x.com/jaishak_j</a>
-    </div>
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#EA4335"/>
+                            <path d="M34 16H14c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V18c0-1.1-.9-2-2-2zm0 4l-10 6-10-6v-2l10 6 10-6v2z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h4>EMAIL</h4>
+                    <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a>
+                </div>
 
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#6364FF"/>
-                <path d="M33 24c0-4.97-4.03-9-9-9s-9 4.03-9 9c0 3.54 2.04 6.59 5 8.06v-5.7h-1.5V24h1.5v-1.98c0-1.48.88-2.3 2.23-2.3.65 0 1.32.12 1.32.12v1.45h-.74c-.73 0-.96.45-.96.92V24h1.63l-.26 2.36H22.34v5.7c2.96-1.47 5-4.52 5-8.06z" fill="white"/>
-                <circle cx="30" cy="18" r="3" fill="#FFD700"/>
-                <circle cx="18" cy="18" r="3" fill="#FFD700"/>
-                <circle cx="30" cy="30" r="3" fill="#FFD700"/>
-            </svg>
-        </div>
-        <h4>MASTODON</h4>
-        <a href="https://mastodon.social/@jaishakj" target="_blank">mastodon.social/@jaishakj</a>
-    </div>
-    
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#181717"/>
-                <path d="M24 14c-5.52 0-10 4.48-10 10 0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10.01 10.01 0 0034 24c0-5.52-4.48-10-10-10z" fill="white"/>
-            </svg>
-        </div>
-        <h4>GITHUB</h4>
-        <a href="https://github.com/jaishakj" target="_blank">github.com/jaishakj</a>
-    </div>
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#5865F2"/>
-                <path d="M32.5 16.5c-1.5-.7-3.1-1.2-4.8-1.5-.2.4-.4.8-.6 1.2-1.8-.3-3.6-.3-5.4 0-.2-.4-.4-.8-.6-1.2-1.7.3-3.3.8-4.8 1.5-3.1 4.6-4 9.1-3.6 13.5 2 1.5 4 2.4 5.9 3 .5-.6.9-1.3 1.3-2-.7-.3-1.4-.6-2-1 .2-.1.3-.2.5-.4 3.9 1.8 8.1 1.8 12 0 .2.1.3.3.5.4-.7.4-1.3.7-2 1 .4.7.8 1.4 1.3 2 2-.6 3.9-1.5 5.9-3 .5-5.1-.8-9.5-3.6-13.5zM20.3 27c-1.2 0-2.2-1.1-2.2-2.5s1-2.5 2.2-2.5 2.2 1.1 2.2 2.5-1 2.5-2.2 2.5zm7.4 0c-1.2 0-2.2-1.1-2.2-2.5s1-2.5 2.2-2.5 2.2 1.1 2.2 2.5-1 2.5-2.2 2.5z" fill="white"/>
-            </svg>
-        </div>
-        <h4>DISCORD</h4>
-        <a href="https://discord.com/users/923801110752399360" target="_blank">923801110752399360</a>
-    </div>
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#34A853"/>
+                            <path d="M31 18h-3v-1c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1v1h-3c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V20c0-1.1-.9-2-2-2zm-7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h4>PHONE</h4>
+                    <a href="tel:+919345589347">+91 93455 89347</a>
+                </div>
 
-    <div class="contact-card">
-        <div class="contact-icon">
-            <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
-                <rect width="48" height="48" rx="12" fill="#26A5E4"/>
-                <path d="M24 15l-11 4v8c0 6.6 4.5 12.8 11 14 6.5-1.2 11-7.4 11-14v-8l-11-4zm0 2.2l9 3.3v7c0 5.6-3.8 10.8-9 11.8-5.2-1-9-6.2-9-11.8v-7l9-3.3zm-4 8.8l-1.4 1.4 4.4 4.4 7-7-1.4-1.4-5.6 5.6-3-3z" fill="white"/>
-                <path d="M16 22l2 1 4 4 6-6 2 1-8 8-6-6z" fill="white"/>
-            </svg>
-        </div>
-        <h4>TELEGRAM</h4>
-        <a href="https://t.me/Jaishakj" target="_blank">@Jaishakj</a>
-    </div>
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#0A66C2"/>
+                            <path d="M19 19h-4v13h4V19zM17 13c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM29 19h-4v6.5c0 1.38-1.12 2.5-2.5 2.5S20 26.88 20 25.5V19h-4v13h4v-1.8c1.19 1.04 2.75 1.8 4.5 1.8 3.59 0 6.5-2.91 6.5-6.5V19h-2z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h4>LINKEDIN</h4>
+                    <a href="https://www.linkedin.com/in/jaishakj" target="_blank" rel="noopener">linkedin.com/in/jaishakj</a>
+                </div>
+
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#1DA1F2"/>
+                            <path d="M36 16.5c-.9.4-1.9.7-2.9.8 1-.6 1.8-1.6 2.2-2.7-1 .6-2 1-3.1 1.2-.9-1-2.2-1.6-3.6-1.6-2.7 0-4.9 2.2-4.9 4.9 0 .4 0 .8.1 1.1-4.1-.2-7.7-2.2-10.1-5.2-.4.7-.7 1.6-.7 2.5 0 1.7.9 3.2 2.2 4.1-.8 0-1.6-.2-2.2-.6v.1c0 2.4 1.7 4.4 3.9 4.8-.4.1-.8.2-1.3.2-.3 0-.6 0-.9-.1.6 2 2.4 3.4 4.6 3.4-1.7 1.3-3.8 2.1-6.1 2.1-.4 0-.8 0-1.2-.1 2.2 1.4 4.8 2.2 7.5 2.2 9.1 0 14-7.5 14-14v-.6c1-.7 1.8-1.6 2.5-2.5z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h4>TWITTER</h4>
+                    <a href="https://x.com/jaishak_j" target="_blank" rel="noopener">x.com/jaishak_j</a>
+                </div>
+
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#6364FF"/>
+                            <path d="M33 24c0-4.97-4.03-9-9-9s-9 4.03-9 9c0 3.54 2.04 6.59 5 8.06v-5.7h-1.5V24h1.5v-1.98c0-1.48.88-2.3 2.23-2.3.65 0 1.32.12 1.32.12v1.45h-.74c-.73 0-.96.45-.96.92V24h1.63l-.26 2.36H22.34v5.7c2.96-1.47 5-4.52 5-8.06z" fill="white"/>
+                            <circle cx="30" cy="18" r="3" fill="#FFD700"/>
+                            <circle cx="18" cy="18" r="3" fill="#FFD700"/>
+                            <circle cx="30" cy="30" r="3" fill="#FFD700"/>
+                        </svg>
+                    </div>
+                    <h4>MASTODON</h4>
+                    <a href="https://mastodon.social/@jaishakj" target="_blank" rel="noopener">mastodon.social/@jaishakj</a>
+                </div>
+
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#181717"/>
+                            <path d="M24 14c-5.52 0-10 4.48-10 10 0 4.42 2.87 8.17 6.84 9.49.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10.01 10.01 0 0034 24c0-5.52-4.48-10-10-10z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h4>GITHUB</h4>
+                    <a href="https://github.com/jaishakj" target="_blank" rel="noopener">github.com/jaishakj</a>
+                </div>
+
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#5865F2"/>
+                            <path d="M32.5 16.5c-1.5-.7-3.1-1.2-4.8-1.5-.2.4-.4.8-.6 1.2-1.8-.3-3.6-.3-5.4 0-.2-.4-.4-.8-.6-1.2-1.7.3-3.3.8-4.8 1.5-3.1 4.6-4 9.1-3.6 13.5 2 1.5 4 2.4 5.9 3 .5-.6.9-1.3 1.3-2-.7-.3-1.4-.6-2-1 .2-.1.3-.2.5-.4 3.9 1.8 8.1 1.8 12 0 .2.1.3.3.5.4-.7.4-1.3.7-2 1 .4.7.8 1.4 1.3 2 2-.6 3.9-1.5 5.9-3 .5-5.1-.8-9.5-3.6-13.5zM20.3 27c-1.2 0-2.2-1.1-2.2-2.5s1-2.5 2.2-2.5 2.2 1.1 2.2 2.5-1 2.5-2.2 2.5zm7.4 0c-1.2 0-2.2-1.1-2.2-2.5s1-2.5 2.2-2.5 2.2 1.1 2.2 2.5-1 2.5-2.2 2.5z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h4>DISCORD</h4>
+                    <a href="https://discord.com/users/923801110752399360" target="_blank" rel="noopener">923801110752399360</a>
+                </div>
+
+                <div class="contact-card reveal">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
+                            <rect width="48" height="48" rx="12" fill="#26A5E4"/>
+                            <path d="M24 15l-11 4v8c0 6.6 4.5 12.8 11 14 6.5-1.2 11-7.4 11-14v-8l-11-4zm0 2.2l9 3.3v7c0 5.6-3.8 10.8-9 11.8-5.2-1-9-6.2-9-11.8v-7l9-3.3zm-4 8.8l-1.4 1.4 4.4 4.4 7-7-1.4-1.4-5.6 5.6-3-3z" fill="white"/>
+                        </svg>
+                    </div>
+                    <h4>TELEGRAM</h4>
+                    <a href="https://t.me/Jaishakj" target="_blank" rel="noopener">@Jaishakj</a>
+                </div>
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer>
         <div class="footer-container">
-            <p>© 2025 Chennai — Build by Jaishak J</p>
+            <p>© 2025 Chennai — Built by Jaishak J</p>
         </div>
     </footer>
-    <script>
-        // Custom cursor
-        const cursor = document.createElement('div');
-        const cursorDot = document.createElement('div');
-        cursor.className = 'custom-cursor';
-        cursorDot.className = 'custom-cursor-dot';
-        document.body.appendChild(cursor);
-        document.body.appendChild(cursorDot);
-        
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursorDot.style.left = mouseX + 'px';
-            cursorDot.style.top = mouseY + 'px';
-        });
-        
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.1;
-            cursorY += (mouseY - cursorY) * 0.1;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-        
-        // Add hover effects
-        document.querySelectorAll('a, button, .project-card-large, .contact-card, .skill-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorDot.style.width = '20px';
-                cursorDot.style.height = '20px';
-                cursor.style.width = '60px';
-                cursor.style.height = '60px';
-            });
-            el.addEventListener('mouseleave', () => {
-                cursorDot.style.width = '6px';
-                cursorDot.style.height = '6px';
-                cursor.style.width = '40px';
-                cursor.style.height = '40px';
-            });
-        });
-    </script>
+
+    <script src="script.js" defer></script>
 </body>
 </html>
