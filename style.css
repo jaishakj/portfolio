@@ -10,7 +10,20 @@
     --white: #FFFFFF;
     --yellow: #FFE031;
     --green: #4A7C59;
+    --pink: #FF3366;
     --border: 4px solid #000;
+
+    /* Custom easing tokens — the personality of the whole site */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);      /* fast in, long settle — reveals */
+    --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);  /* overshoot — buttons, snaps */
+    --ease-brutal:   cubic-bezier(0.7, 0, 0.3, 1);       /* hard stop — dividers */
+
+    --reveal-duration: 0.7s;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* anchors land below sticky header */
 }
 
 body {
@@ -18,6 +31,111 @@ body {
     background: var(--cream);
     color: var(--black);
     overflow-x: hidden;
+}
+
+/* ===== Grain overlay — inline SVG noise, zero network requests ===== */
+.grain {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== Skip link — brutalist style, visible only when focused ===== */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 3000;
+    background: var(--yellow);
+    color: var(--black);
+    border: var(--border);
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 6px 6px 0 var(--black);
+    transition: top 0.2s var(--ease-out-expo);
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+/* ===== Focus states that MATCH the aesthetic =====
+   Thick black outline + yellow halo. Only on keyboard focus
+   (:focus-visible), so mouse clicks stay clean. */
+:focus-visible {
+    outline: 4px solid var(--black);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 8px var(--yellow);
+    border-radius: 2px;
+}
+
+.nav-links a:focus-visible,
+.logo:focus-visible {
+    outline-color: var(--yellow);
+    box-shadow: none;
+}
+
+/* ===== Scroll reveal system =====
+   .reveal starts shifted down with NO shadow; .is-visible slides it up
+   and the hard shadow "lands". Stagger with data-reveal-delay. */
+.reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition:
+        opacity var(--reveal-duration) var(--ease-out-expo),
+        transform var(--reveal-duration) var(--ease-out-expo),
+        box-shadow var(--reveal-duration) var(--ease-out-expo);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal[data-reveal-delay="1"] { transition-delay: 0.12s; }
+.reveal[data-reveal-delay="2"] { transition-delay: 0.24s; }
+.reveal[data-reveal-delay="3"] { transition-delay: 0.36s; }
+
+/* Shadow "landing" effect for shadowed cards */
+.info-card.reveal,
+.info-box.reveal,
+.skill-category.reveal,
+.project-card-large.reveal,
+.contact-card.reveal,
+.image-card.reveal .image-card,
+.hero-right.reveal .image-card {
+    box-shadow: 0 0 0 var(--black);
+}
+
+.info-card.reveal.is-visible          { box-shadow: 8px 8px 0 var(--black); }
+.info-box.reveal.is-visible           { box-shadow: 6px 6px 0 var(--black); }
+.skill-category.reveal.is-visible     { box-shadow: 6px 6px 0 var(--black); }
+.project-card-large.reveal.is-visible { box-shadow: 8px 8px 0 var(--black); }
+.contact-card.reveal.is-visible       { box-shadow: 6px 6px 0 var(--black); }
+.hero-right.reveal.is-visible .image-card { box-shadow: 8px 8px 0 var(--black); }
+
+/* ===== Animated SVG section dividers ===== */
+.section-divider {
+    line-height: 0;
+    background: var(--cream);
+}
+
+.section-divider svg {
+    width: 100%;
+    height: 60px;
+    display: block;
+}
+
+.divider-path.is-drawn {
+    animation: drawPath 1.2s var(--ease-brutal) forwards;
+}
+
+@keyframes drawPath {
+    to { stroke-dashoffset: 0; }
 }
 
 /* Header */
@@ -44,11 +162,12 @@ header {
     font-weight: 700;
     font-size: 1.4rem;
     color: var(--black);
-    background: var(--cream); 
+    background: var(--cream);
     padding: 0 2.5rem;
     display: flex;
     align-items: center;
     border: none;
+    text-decoration: none;
 }
 
 .nav-links {
@@ -82,14 +201,10 @@ header {
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
-    transition: transform 0.2s;
     text-decoration: none;
     display: flex;
     align-items: center;
-}
-
-.cta-btn:hover {
-    transform: scale(1.05);
+    /* transform handled by magnetic JS; keep transition off here */
 }
 
 /* Hero Section */
@@ -141,33 +256,23 @@ header {
     margin-bottom: 3rem;
 }
 
-.badge-text {
+.badge-ring {
     position: absolute;
     width: 100%;
     height: 100%;
-    animation: rotate 10s linear infinite;
+    animation: rotate 20s linear infinite;
+}
+
+.badge-ring-text {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    fill: var(--black);
 }
 
 @keyframes rotate {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
-}
-
-}
-
-.rotate-text::before {
-    content: 'MACHINE LEARNING • COMPUTER VISION • FULL-STACK DEV •';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: rotate 20s linear infinite;
-    transform-origin: center;
-}
-
-.rotate-text {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
 }
 
 .badge-btn {
@@ -182,23 +287,10 @@ header {
     color: var(--white);
     border: none;
     cursor: pointer;
-    transition: transform 0.3s;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.badge-btn:hover {
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-.badge-btn svg {
-    transition: transform 0.3s;
-}
-
-.badge-btn:hover svg {
-    transform: scale(1.1);
 }
 
 /* Info Card */
@@ -252,11 +344,6 @@ header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: transform 0.2s;
-}
-
-.download-btn:hover {
-    transform: translateY(-2px);
 }
 
 .arrow {
@@ -435,6 +522,12 @@ header {
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 600;
+    transition: transform 0.25s var(--ease-spring), background 0.25s;
+}
+
+.skill-tag:hover {
+    transform: translateY(-3px) rotate(-1.5deg);
+    background: var(--green);
 }
 
 /* Projects Section */
@@ -520,11 +613,6 @@ header {
     border-radius: 50px;
     font-weight: 700;
     font-size: 0.9rem;
-    transition: transform 0.2s;
-}
-
-.project-link:hover {
-    transform: translateY(-3px);
 }
 
 .coming-soon-card {
@@ -546,7 +634,7 @@ header {
     color: #666;
 }
 
-/* Circular Rotating Image */
+/* Circular side media (video or image) */
 .project-side-image-circle {
     width: 350px;
     height: 350px;
@@ -563,12 +651,6 @@ header {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    animation: rotateImage 20s linear infinite;
-}
-
-@keyframes rotateImage {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
 }
 
 /* Contact Section */
@@ -590,7 +672,7 @@ header {
     padding: 1.5rem;
     text-align: center;
     box-shadow: 6px 6px 0 var(--black);
-    transition: transform 0.3s;
+    transition: transform 0.3s var(--ease-spring);
 }
 
 .contact-card:hover {
@@ -615,6 +697,7 @@ header {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
+    word-break: break-word;
 }
 
 .contact-card a:hover {
@@ -634,6 +717,67 @@ footer {
     letter-spacing: 0.05em;
 }
 
+/* ===== Custom Cursor =====
+   FIXED: previously trapped inside @media (max-width: 480px),
+   so it never worked on desktop. Now top-level, gated by JS
+   (pointer: fine + no reduced-motion), styled via body classes. */
+.custom-cursor {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--pink);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--yellow);
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.2s ease, height 0.2s ease;
+    will-change: transform;
+}
+
+.custom-cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--pink);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+    transition: width 0.2s ease, height 0.2s ease;
+    will-change: transform;
+}
+
+body.cursor-grow .custom-cursor     { width: 60px; height: 60px; }
+body.cursor-grow .custom-cursor-dot { width: 20px; height: 20px; }
+
+/* Only hide the native cursor when JS has actually mounted the custom one */
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button {
+    cursor: none;
+}
+
+/* ===== Reduced motion: kill ALL animation, show everything ===== */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}
+
 /* Responsive */
 @media (max-width: 968px) {
     .hero-content {
@@ -643,15 +787,15 @@ footer {
     .hero-right {
         width: 100%;
     }
-    
+
     .nav-links {
         display: none;
     }
-    
+
     .hero-title {
         font-size: 3rem;
     }
-    
+
     .skills-grid-main,
     .education-experience-grid,
     .contact-grid {
@@ -673,49 +817,16 @@ footer {
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .badge-circle {
         width: 150px;
         height: 150px;
     }
-    
+
     .badge-btn {
         width: 90px;
         height: 90px;
-        font-size: 0.65rem;
     }
-
-    /* Custom Cursor */
-.custom-cursor {
-    width: 40px;
-    height: 40px;
-    border: 2px solid #FF3366;
-    border-radius: 50%;
-    box-shadow: 0 0 15px #FFE031;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
-    transform: translate(-50%, -50%);
-}
-
-.custom-cursor-dot {
-    width: 6px;
-    height: 6px;
-    background: #FF3366;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 10000;
-    transition: width 0.2s ease, height 0.2s ease;
-    transform: translate(-50%, -50%);
-}
-/* Hide default cursor on desktop */
-@media (min-width: 769px) {
-    body, a, button {
-        cursor: none;
-    }
-}
 
     .project-side-image-circle {
         width: 280px;
