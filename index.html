@@ -51,11 +51,16 @@
 
     <link rel="preload" as="image" href="./assets/anime1.png" fetchpriority="high">
 
-    <!-- Progressive enhancement guard: animations only hide content if JS runs.
-         Without JS, everything renders visible and static. -->
-    <script>document.documentElement.classList.add('js');</script>
-
     <link rel="stylesheet" href="style.css">
+
+    <!-- Fallback: if JS is disabled, the reveal observer never runs, so
+         force all hidden-until-revealed content visible. This ONLY applies
+         with no JS; when JS runs, the normal reveal animations take over. -->
+    <noscript>
+        <style>
+            .reveal, .load-reveal { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
 </head>
 <body>
     <a class="skip-link" href="#home">SKIP TO CONTENT</a>
