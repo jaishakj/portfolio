@@ -10,7 +10,6 @@
     <link rel="canonical" href="https://jaishakj.github.io/portfolio/">
     <meta name="theme-color" content="#E8DCC4">
 
-    <!-- Open Graph (LinkedIn, Discord, WhatsApp previews) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://jaishakj.github.io/portfolio/">
     <meta property="og:title" content="Jaishak J — AI Engineer">
@@ -19,14 +18,12 @@
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
-    <!-- Twitter/X card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@jaishak_j">
     <meta name="twitter:title" content="Jaishak J — AI Engineer">
     <meta name="twitter:description" content="ML, computer vision & full-stack projects.">
     <meta name="twitter:image" content="https://jaishakj.github.io/portfolio/assets/og-cover.png">
 
-    <!-- Structured data: developer portfolio -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -36,15 +33,8 @@
       "email": "mailto:jaishak1219@gmail.com",
       "jobTitle": "AI Engineer",
       "knowsAbout": ["Machine Learning", "Computer Vision", "Natural Language Processing", "Full-Stack Development", "Python", "TensorFlow", "LangChain"],
-      "alumniOf": {
-        "@type": "CollegeOrUniversity",
-        "name": "Jeppiaar Institute of Technology (Anna University)"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Chennai",
-        "addressCountry": "IN"
-      },
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Jeppiaar Institute of Technology (Anna University)" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Chennai", "addressCountry": "IN" },
       "sameAs": [
         "https://github.com/jaishakj",
         "https://www.linkedin.com/in/jaishakj",
@@ -54,35 +44,62 @@
     }
     </script>
 
-    <!-- ===== Fonts: ONE request, preconnect + swap ===== -->
+    <!-- ===== Fonts: one request, preconnect + swap ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
-    <!-- Preload the hero image so LCP fires early -->
     <link rel="preload" as="image" href="./assets/anime1.png" fetchpriority="high">
+
+    <!-- Progressive enhancement guard: animations only hide content if JS runs.
+         Without JS, everything renders visible and static. -->
+    <script>document.documentElement.classList.add('js');</script>
 
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Skip link: first tabbable element, styled brutalist in CSS -->
     <a class="skip-link" href="#home">SKIP TO CONTENT</a>
-
-    <!-- Grain overlay (pure CSS, zero requests — see .grain in style.css) -->
     <div class="grain" aria-hidden="true"></div>
 
-    <!-- Header -->
-    <header>
+    <!-- ===== Floating rounded header ===== -->
+    <header class="site-header">
         <nav class="nav-container" aria-label="Primary">
             <a href="#home" class="logo">Jaishak J</a>
-            <div class="nav-links">
+
+            <div class="nav-links" id="nav-links">
                 <a href="#home">HOME</a>
                 <a href="#education">EDUCATION</a>
                 <a href="#skills">SKILLS</a>
                 <a href="#projects">PROJECTS</a>
                 <a href="#contact">CONTACT</a>
             </div>
-            <a href="./assets/resume.pdf" target="_blank" rel="noopener" class="cta-btn magnetic">RESUME</a>
+
+            <div class="nav-actions">
+                <a href="./assets/resume.pdf" target="_blank" rel="noopener" class="cta-btn press">RESUME</a>
+
+                <!-- Theme toggle: pure class-swap, resets on reload -->
+                <button class="theme-toggle press" id="theme-toggle" type="button"
+                        aria-pressed="false" aria-label="Switch to dark theme">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4.5" fill="currentColor" stroke="none"/>
+                        <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/>
+                    </svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z" fill="currentColor"/>
+                    </svg>
+                </button>
+
+                <button class="menu-toggle" id="menu-toggle" type="button"
+                        aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+                    <span class="menu-bar" aria-hidden="true"></span>
+                    <span class="menu-bar" aria-hidden="true"></span>
+                    <span class="menu-bar" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <!-- Yellow scroll progress along the nav's bottom edge -->
+            <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
         </nav>
     </header>
 
@@ -92,13 +109,13 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-left">
-                    <h1 class="hero-title reveal">
-                        BUILD THE<br>
-                        FUTURE WITH<br>
-                        <span class="highlight">AI ENGINEERING!</span>
+                    <h1 class="hero-title">
+                        <span class="line-mask"><span class="line load-reveal">BUILD THE</span></span>
+                        <span class="line-mask"><span class="line load-reveal" data-load-delay="1">FUTURE WITH</span></span>
+                        <span class="line-mask"><span class="line load-reveal highlight" data-load-delay="2">AI ENGINEERING!</span></span>
                     </h1>
 
-                    <div class="badge-circle reveal" data-reveal-delay="1">
+                    <div class="badge-circle load-reveal" data-load-delay="3">
                         <svg viewBox="0 0 200 200" class="badge-ring" aria-hidden="true">
                             <path id="circlePath" d="M 100, 100 m -80, 0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0" fill="none"/>
                             <text class="badge-ring-text">
@@ -109,20 +126,20 @@
                         </svg>
                         <a href="https://github.com/jaishakj" target="_blank" rel="noopener"
                            class="badge-btn magnetic" aria-label="Visit my GitHub profile">
-                            <svg width="50" height="50" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+                            <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                             </svg>
                         </a>
                     </div>
 
-                    <div class="info-card reveal" data-reveal-delay="2">
+                    <div class="info-card load-reveal press" data-load-delay="4">
                         <div class="card-header">
                             <span class="card-icon" aria-hidden="true">💼</span>
                             <span class="card-label">PROFESSIONAL PROFILE</span>
                         </div>
                         <p class="card-text">AI Engineer specializing in ML, deep learning &amp; full-stack development. Building intelligent systems with Python, TensorFlow &amp; modern frameworks.</p>
                         <div class="card-footer">
-                            <a href="#contact" class="download-btn magnetic">
+                            <a href="#contact" class="download-btn press">
                                 <span>CONTACT ME</span>
                                 <span class="arrow" aria-hidden="true">↓</span>
                             </a>
@@ -134,9 +151,8 @@
                     </div>
                 </div>
 
-                <div class="hero-right reveal" data-reveal-delay="1">
+                <div class="hero-right load-reveal" data-load-delay="2">
                     <div class="image-card main-card" data-parallax>
-                        <!-- width/height = intrinsic dimensions of your export; prevents layout shift -->
                         <img src="./assets/anime1.png" alt="Stylized anime illustration of Jaishak"
                              width="400" height="500" fetchpriority="high" decoding="async">
                         <div class="star-badge" aria-hidden="true">★</div>
@@ -146,13 +162,14 @@
         </div>
     </section>
 
-    <!-- Animated SVG divider between sections -->
-    <div class="section-divider" aria-hidden="true">
-        <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
-            <path class="divider-path" d="M0,30 L60,30 L80,10 L100,50 L120,30 L1080,30 L1100,10 L1120,50 L1140,30 L1200,30"
-                  fill="none" stroke="#000" stroke-width="4"/>
-        </svg>
+    <!-- ===== Marquee strip: the one loud element ===== -->
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+            <span>AI ENGINEER ✦ MACHINE LEARNING ✦ COMPUTER VISION ✦ RAG SYSTEMS ✦ FULL-STACK ✦ PYTHON ✦ TENSORFLOW ✦&nbsp;</span>
+            <span>AI ENGINEER ✦ MACHINE LEARNING ✦ COMPUTER VISION ✦ RAG SYSTEMS ✦ FULL-STACK ✦ PYTHON ✦ TENSORFLOW ✦&nbsp;</span>
+        </div>
     </div>
+    <p class="sr-only">Skills: AI engineering, machine learning, computer vision, RAG systems, full-stack development, Python, TensorFlow.</p>
 
     <!-- Education & Experience Section -->
     <section class="education-section" id="education">
@@ -163,13 +180,13 @@
             </div>
 
             <div class="education-experience-grid">
-                <div class="info-box reveal">
+                <div class="info-box reveal press">
                     <div class="info-number" aria-hidden="true">01</div>
                     <h3>EDUCATION</h3>
                     <p>B.Tech in Artificial Intelligence &amp; Data Science<br>Jeppiaar Institute of Technology, Chennai<br>Anna University (2021–2025)<br>CGPA: 7.34</p>
                 </div>
 
-                <div class="info-box reveal" data-reveal-delay="1">
+                <div class="info-box reveal press" data-reveal-delay="1">
                     <div class="info-number" aria-hidden="true">02</div>
                     <h3>EXPERIENCE</h3>
                     <p>Machine Learning Intern @ Retech Solutions Pvt. Ltd<br>Aug 2023 – Sep 2023 · Chennai, India<br>Built churn-prediction models (87% accuracy on 50K+ records), cut training time 40%, deployed with FastAPI + Docker at &lt;200ms latency.</p>
@@ -187,7 +204,7 @@
             </div>
 
             <div class="skills-grid-main">
-                <div class="skill-category reveal">
+                <div class="skill-category reveal press">
                     <div class="skill-category-header">
                         <span class="skill-icon" aria-hidden="true">💻</span>
                         <h3>PROGRAMMING LANGUAGES</h3>
@@ -200,7 +217,7 @@
                     </div>
                 </div>
 
-                <div class="skill-category reveal" data-reveal-delay="1">
+                <div class="skill-category reveal press" data-reveal-delay="1">
                     <div class="skill-category-header">
                         <span class="skill-icon" aria-hidden="true">🤖</span>
                         <h3>AI &amp; MACHINE LEARNING</h3>
@@ -217,7 +234,7 @@
                     </div>
                 </div>
 
-                <div class="skill-category reveal" data-reveal-delay="2">
+                <div class="skill-category reveal press" data-reveal-delay="2">
                     <div class="skill-category-header">
                         <span class="skill-icon" aria-hidden="true">📊</span>
                         <h3>DATA SCIENCE &amp; TOOLS</h3>
@@ -231,7 +248,7 @@
                     </div>
                 </div>
 
-                <div class="skill-category reveal" data-reveal-delay="3">
+                <div class="skill-category reveal press" data-reveal-delay="3">
                     <div class="skill-category-header">
                         <span class="skill-icon" aria-hidden="true">🚀</span>
                         <h3>DEVELOPMENT &amp; FRAMEWORKS</h3>
@@ -252,7 +269,7 @@
     <div class="section-divider" aria-hidden="true">
         <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
             <path class="divider-path" d="M0,30 L60,30 L80,10 L100,50 L120,30 L1080,30 L1100,10 L1120,50 L1140,30 L1200,30"
-                  fill="none" stroke="#000" stroke-width="4"/>
+                  fill="none" stroke-width="4"/>
         </svg>
     </div>
 
@@ -266,7 +283,7 @@
 
             <div class="projects-layout">
                 <div class="projects-main">
-                    <article class="project-card-large reveal">
+                    <article class="project-card-large reveal press">
                         <div class="project-badge">NEW PROJECT</div>
                         <h3>AI-POWERED VIDEO SUMMARIZATION</h3>
                         <p>Intelligent video analysis system using YOLOv5 for object detection and LLM integration for automated summarization. Processes 30 FPS streams in real time with 92% accuracy.</p>
@@ -276,12 +293,12 @@
                             <span class="tech-tag">NLP</span>
                             <span class="tech-tag">COMPUTER VISION</span>
                         </div>
-                        <a href="https://github.com/jaishakj/Ai-Powered-Video-Summarisation-Multiple-Models" target="_blank" rel="noopener" class="project-link magnetic">
+                        <a href="https://github.com/jaishakj/Ai-Powered-Video-Summarisation-Multiple-Models" target="_blank" rel="noopener" class="project-link press">
                             VIEW ON GITHUB <span aria-hidden="true">→</span>
                         </a>
                     </article>
 
-                    <article class="project-card-large reveal">
+                    <article class="project-card-large reveal press">
                         <div class="project-badge">NEW PROJECT</div>
                         <h3>SUPPORT RAG CHATBOT</h3>
                         <p>RAG-powered customer support chatbot built with LangChain, Pinecone, Gemini 1.5 Pro, FastAPI, and React. Vector search across 5,000+ documents with cited sources, multi-turn memory (68% → 89% accuracy), and automatic agent escalation.</p>
@@ -293,7 +310,7 @@
                             <span class="tech-tag">REACT</span>
                             <span class="tech-tag">RAG</span>
                         </div>
-                        <a href="https://github.com/jaishakj/Support-RAG-Chatbot" target="_blank" rel="noopener" class="project-link magnetic">
+                        <a href="https://github.com/jaishakj/Support-RAG-Chatbot" target="_blank" rel="noopener" class="project-link press">
                             VIEW ON GITHUB <span aria-hidden="true">→</span>
                         </a>
                     </article>
@@ -304,12 +321,10 @@
                     </div>
                 </div>
 
-                <!-- Tenor embed REPLACED with a self-hosted looping video.
-                     Convert your GIF once:  ffmpeg -i raccoon.gif -movflags faststart -pix_fmt yuv420p -vf "crop=min(iw\,ih):min(iw\,ih)" raccoon.mp4
-                     ~90% smaller than the GIF, no third-party script, zero layout shift. -->
+                <!-- Self-hosted looping video (see previous notes: convert GIF with ffmpeg) -->
                 <div class="project-side-image-circle reveal">
                     <video class="rotating-image" autoplay muted loop playsinline
-                           width="350" height="350" aria-label="Decorative looping animation">
+                           width="350" height="350" loading="lazy" aria-label="Decorative looping animation">
                         <source src="./assets/raccoon.mp4" type="video/mp4">
                     </video>
                 </div>
@@ -326,7 +341,7 @@
             </div>
 
             <div class="contact-grid">
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#EA4335"/>
@@ -337,7 +352,7 @@
                     <a href="mailto:jaishak1219@gmail.com">jaishak1219@gmail.com</a>
                 </div>
 
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#34A853"/>
@@ -348,7 +363,7 @@
                     <a href="tel:+919345589347">+91 93455 89347</a>
                 </div>
 
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#0A66C2"/>
@@ -359,7 +374,7 @@
                     <a href="https://www.linkedin.com/in/jaishakj" target="_blank" rel="noopener">linkedin.com/in/jaishakj</a>
                 </div>
 
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#1DA1F2"/>
@@ -370,7 +385,7 @@
                     <a href="https://x.com/jaishak_j" target="_blank" rel="noopener">x.com/jaishak_j</a>
                 </div>
 
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#6364FF"/>
@@ -384,7 +399,7 @@
                     <a href="https://mastodon.social/@jaishakj" target="_blank" rel="noopener">mastodon.social/@jaishakj</a>
                 </div>
 
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#181717"/>
@@ -395,7 +410,7 @@
                     <a href="https://github.com/jaishakj" target="_blank" rel="noopener">github.com/jaishakj</a>
                 </div>
 
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#5865F2"/>
@@ -406,7 +421,7 @@
                     <a href="https://discord.com/users/923801110752399360" target="_blank" rel="noopener">923801110752399360</a>
                 </div>
 
-                <div class="contact-card reveal">
+                <div class="contact-card reveal press">
                     <div class="contact-icon" aria-hidden="true">
                         <svg width="60" height="60" viewBox="0 0 48 48" fill="none">
                             <rect width="48" height="48" rx="12" fill="#26A5E4"/>
