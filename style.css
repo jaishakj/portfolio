@@ -319,14 +319,14 @@ body.theme-fade * {
     display: inline-block;
 }
 
-html.js .load-reveal {
+.load-reveal {
     opacity: 0;
     transform: translateY(110%);
 }
 
-html.js .hero-right.load-reveal,
-html.js .badge-circle.load-reveal,
-html.js .info-card.load-reveal {
+.hero-right.load-reveal,
+.badge-circle.load-reveal,
+.info-card.load-reveal {
     transform: translateY(30px);
 }
 
@@ -386,8 +386,11 @@ body.is-loaded .load-reveal[data-load-delay="4"] { transition-delay: 0.36s; }
 .project-link.press:active,
 .theme-toggle.press:active               { box-shadow: 0 0 0 var(--shadow-c); }
 
-/* ===== Scroll reveal system (shadow "lands" on arrival) ===== */
-html.js .reveal {
+/* ===== Scroll reveal system (shadow "lands" on arrival) =====
+   NOTE: base .reveal must stay a single-class selector. If it were
+   prefixed (e.g. `html.js .reveal`) its specificity would exceed
+   `.reveal.is-visible` and content would never un-hide. */
+.reveal {
     opacity: 0;
     transform: translateY(36px);
     transition:
@@ -405,10 +408,10 @@ html.js .reveal {
 .reveal[data-reveal-delay="2"] { transition-delay: 0.24s; }
 .reveal[data-reveal-delay="3"] { transition-delay: 0.36s; }
 
-html.js .info-box.reveal:not(.is-visible),
-html.js .skill-category.reveal:not(.is-visible),
-html.js .project-card-large.reveal:not(.is-visible),
-html.js .contact-card.reveal:not(.is-visible) {
+.info-box.reveal:not(.is-visible),
+.skill-category.reveal:not(.is-visible),
+.project-card-large.reveal:not(.is-visible),
+.contact-card.reveal:not(.is-visible) {
     box-shadow: 0 0 0 var(--shadow-c);
 }
 
