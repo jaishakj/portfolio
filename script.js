@@ -7,33 +7,145 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 const isFinePointer = window.matchMedia('(pointer: fine)').matches;
 
 /* ----------------------------------------------------------
-   1. SCROLL-TRIGGERED REVEALS (IntersectionObserver)
-   Elements with .reveal slide up + shadow "lands".
-   data-reveal-delay="1|2|3" staggers siblings.
+   1. THEME TOGGLE
+   Pure class-swap on <html>, no persistence — resets on reload.
+   Uses the View Transitions API for a crossfade when available;
+   falls back to a brief CSS transition class otherwise.
+   ---------------------------------------------------------- */
+const themeToggle = document.getElementById('theme-toggle');
+const root = document.documentElement;
+
+function applyTheme(dark) {
+  root.classList.toggle('dark', dark);
+  themeToggle.setAttribute('aria-pressed', String(dark));
+  themeToggle.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+  // keep the browser chrome (mobile URL bar) in sync
+  document.querySelector('meta[name="theme-color"]')
+    ?.setAttribute('content', dark ? '#191510' : '#E8DCC4');
+}
+
+themeToggle.addEventListener('click', () => {
+  const next = !root.classList.contains('dark');
+
+  if (document.startViewTransition && !prefersReducedMotion) {
+    document.startViewTransition(() => applyTheme(next));
+  } else {
+    document.body.classList.add('theme-fade');
+    applyTheme(next);
+    setTimeout(() => document.body.classList.remove('theme-fade'), 400);
+  }
+});
+
+/* ----------------------------------------------------------
+   2. MOBILE MENU
+   ---------------------------------------------------------- */
+const menuToggle = document.getElementById('menu-toggle');
+const navLinks = document.getElementById('nav-links');
+
+function setMenu(open) {
+  navLinks.classList.toggle('open', open);
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+}
+
+menuToggle.addEventListener('click', () => {
+  setMenu(!navLinks.classList.contains('open'));
+});
+
+// Close on link tap and on Escape
+navLinks.addEventListener('click', (e) => {
+  if (e.target.tagName === 'A') setMenu(false);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+    setMenu(false);
+    menuToggle.focus();
+  }
+});
+
+/* ----------------------------------------------------------
+   3. SCROLL PROGRESS (yellow bar on the nav's bottom edge)
+   transform-only, rAF-throttled
+   ---------------------------------------------------------- */
+const progressBar = document.getElementById('scroll-progress');
+let progressTicking = false;
+
+function updateProgress() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? window.scrollY / max : 0;
+  progressBar.style.transform = `scaleX(${pct})`;
+  progressTicking = false;
+}
+
+window.addEventListener('scroll', () => {
+  if (!progressTicking) {
+    progressTicking = true;
+    requestAnimationFrame(updateProgress);
+  }
+}, { passive: true });
+updateProgress();
+
+/* ----------------------------------------------------------
+   4. SCROLLSPY — highlight the section in view
+   ---------------------------------------------------------- */
+const sections = document.querySelectorAll('main section[id]');
+const spyLinks = new Map(
+  [...document.querySelectorAll('.nav-links a[href^="#"]')]
+    .map(a => [a.getAttribute('href').slice(1), a])
+);
+
+const spyObserver = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    const link = spyLinks.get(entry.target.id);
+    if (!link) continue;
+    if (entry.isIntersecting) {
+      spyLinks.forEach(a => { a.classList.remove('active'); a.removeAttribute('aria-current'); });
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'true');
+    }
+  }
+}, { rootMargin: '-40% 0px -55% 0px' }); // "active" = section crossing the viewport's middle band
+
+sections.forEach(s => spyObserver.observe(s));
+
+/* ----------------------------------------------------------
+   5. PAGE-LOAD INTRO — staggered hero entrance, runs once
+   ---------------------------------------------------------- */
+if (prefersReducedMotion) {
+  document.body.classList.add('is-loaded');
+} else {
+  // Wait for fonts so Anton doesn't swap mid-animation, cap the wait at 600ms
+  Promise.race([
+    document.fonts ? document.fonts.ready : Promise.resolve(),
+    new Promise(r => setTimeout(r, 600))
+  ]).then(() => {
+    requestAnimationFrame(() => document.body.classList.add('is-loaded'));
+  });
+}
+
+/* ----------------------------------------------------------
+   6. SCROLL-TRIGGERED REVEALS
    ---------------------------------------------------------- */
 const revealEls = document.querySelectorAll('.reveal');
 
 if (prefersReducedMotion) {
-  // Show everything immediately — no motion.
   revealEls.forEach(el => el.classList.add('is-visible'));
 } else {
   const revealObserver = new IntersectionObserver((entries) => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target); // reveal once, then stop watching
+        revealObserver.unobserve(entry.target);
       }
     }
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -40px 0px' // trigger slightly before fully in view
-  });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
   revealEls.forEach(el => revealObserver.observe(el));
 }
 
 /* ----------------------------------------------------------
-   2. ANIMATED SVG SECTION DIVIDERS (stroke draw-on)
+   7. SVG DIVIDER DRAW-ON
    ---------------------------------------------------------- */
 const dividerPaths = document.querySelectorAll('.divider-path');
 
@@ -57,26 +169,23 @@ if (!prefersReducedMotion && dividerPaths.length) {
 }
 
 /* ----------------------------------------------------------
-   3. MAGNETIC BUTTONS
-   Elements with .magnetic lean toward the cursor, snap back on leave.
-   Uses transform only — no layout thrash.
+   8. MAGNETIC ELEMENTS (.magnetic)
    ---------------------------------------------------------- */
 if (isFinePointer && !prefersReducedMotion) {
-  const STRENGTH = 0.35; // how far the element follows (0–1)
+  const STRENGTH = 0.35;
 
   document.querySelectorAll('.magnetic').forEach(el => {
     el.addEventListener('mousemove', (e) => {
       const rect = el.getBoundingClientRect();
       const dx = e.clientX - (rect.left + rect.width / 2);
       const dy = e.clientY - (rect.top + rect.height / 2);
-      // badge-btn is absolutely centered with translate(-50%,-50%): preserve it
       const base = el.classList.contains('badge-btn') ? 'translate(-50%, -50%) ' : '';
       el.style.transform = `${base}translate(${dx * STRENGTH}px, ${dy * STRENGTH}px)`;
     });
 
     el.addEventListener('mouseleave', () => {
       const base = el.classList.contains('badge-btn') ? 'translate(-50%, -50%)' : 'translate(0, 0)';
-      el.style.transition = 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)'; // springy snap-back
+      el.style.transition = 'transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
       el.style.transform = base;
       setTimeout(() => { el.style.transition = ''; }, 450);
     });
@@ -84,7 +193,7 @@ if (isFinePointer && !prefersReducedMotion) {
 }
 
 /* ----------------------------------------------------------
-   4. HERO PARALLAX (subtle, transform-only, rAF-throttled)
+   9. HERO PARALLAX
    ---------------------------------------------------------- */
 const parallaxEl = document.querySelector('[data-parallax]');
 
@@ -104,10 +213,8 @@ if (parallaxEl && !prefersReducedMotion) {
 }
 
 /* ----------------------------------------------------------
-   5. CUSTOM CURSOR (fixed version)
-   - Only on fine pointers (no phantom cursor on touch devices)
-   - Disabled for reduced-motion users
-   - Uses transform instead of left/top (compositor-only, smoother)
+   10. CUSTOM CURSOR — cream ring + dot, difference blend
+   Fine pointers only, disabled for reduced-motion users.
    ---------------------------------------------------------- */
 if (isFinePointer && !prefersReducedMotion) {
   const cursor = document.createElement('div');
@@ -135,7 +242,6 @@ if (isFinePointer && !prefersReducedMotion) {
     requestAnimationFrame(animateCursor);
   })();
 
-  // Grow on interactive elements (fixed: .skill-category, not .skill-card)
   const growTargets = 'a, button, .project-card-large, .contact-card, .skill-category';
   document.querySelectorAll(growTargets).forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-grow'));
@@ -144,9 +250,7 @@ if (isFinePointer && !prefersReducedMotion) {
 }
 
 /* ----------------------------------------------------------
-   6. SMOOTH IN-PAGE NAVIGATION with focus management
-   scroll-behavior: smooth is in CSS; this moves keyboard focus
-   to the target section so tab order follows the scroll.
+   11. IN-PAGE NAVIGATION — move keyboard focus with the scroll
    ---------------------------------------------------------- */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', () => {
