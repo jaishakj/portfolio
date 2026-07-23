@@ -70,7 +70,7 @@ function finish(){
     });
 }
 
-document.addEventListener("DOMContentLoaded", nextWord);
+window.addEventListener("load", nextWord);
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isFinePointer = window.matchMedia('(pointer: fine)').matches;
