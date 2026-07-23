@@ -21,7 +21,9 @@ const text=document.querySelector("#loader-text");
 let current = 0;
 let split;
 function nextWord() {
-    if (split) split.revert();
+    if (text.querySelector(".char")) {
+    text.innerHTML = "";
+}
     text.textContent = greetings[current];
     split = new SplitType(text, {
         types: "chars"
