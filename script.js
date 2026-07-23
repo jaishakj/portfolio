@@ -73,7 +73,7 @@ function finish(){
     });
 }
 
-window.addEventListener("load", nextWord);
+document.addEventListener("DOMContentLoaded", nextWord);
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isFinePointer = window.matchMedia('(pointer: fine)').matches;
