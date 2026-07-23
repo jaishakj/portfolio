@@ -1086,3 +1086,32 @@ body.has-custom-cursor button {
     .cta-btn { padding: 0.55rem 1rem; }
     .marquee-track span { font-size: 1.1rem; }
 }
+
+/* ===========================
+        LOADER
+=========================== */
+
+#loader{
+    position:fixed;
+    inset:0;
+    background:#050505;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    overflow:hidden;
+}
+
+#loader-text{
+    font-size:3rem;
+    color:white;
+    font-weight:700;
+    letter-spacing:.04em;
+    transition:opacity .25s ease;
+    user-select:none;
+}
+
+.hide-loader{
+    opacity:0;
+    pointer-events:none;
+}
