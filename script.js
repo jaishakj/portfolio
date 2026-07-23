@@ -19,14 +19,28 @@ function nextWord() {
     if (split) split.revert();
     text.textContent = greetings[current];
    
-    try {
-    split = new SplitType(text, {
-        types: "chars"
-    });
-} catch (e) {
+    const noSplitLanguages = [
+    "வணக்கம்",
+    "こんにちは",
+    "你好",
+    "안녕하세요",
+    "नमस्ते"
+];
+
+if (noSplitLanguages.includes(greetings[current])) {
     split = {
         chars: [text]
     };
+} else {
+    try {
+        split = new SplitType(text, {
+            types: "chars"
+        });
+    } catch (e) {
+        split = {
+            chars: [text]
+        };
+    }
 }
 
 gsap.fromTo(split.chars,
