@@ -17,38 +17,63 @@ const greetings = [
 "வணக்கம்",
 ];
 
-const loader = document.getElementById("loader");
-const loaderText = document.getElementById("loader-text");
+const loader=document.querySelector("#loader");
+const text=document.querySelector("#loader-text");
 
-let index = 0;
-function showGreeting(){
-    loaderText.style.opacity = 0;
-    setTimeout(()=>{
-        loaderText.textContent = greetings[index];
-        loaderText.style.opacity = 1;
-        index++;
-        if(index<greetings.length){
-            setTimeout(showGreeting,140);
+let current=0;
+function nextWord(){
+    text.textContent=greetings[current];
+    new SplitType(text,{types:"chars"});
+    gsap.fromTo(".char",
+    {
+        opacity:0,
+        y:40,
+        filter:"blur(8px)",
+        scale:.8
+    },
+    {
+        opacity:1,
+        y:0,
+        scale:1,
+        filter:"blur(0px)",
+        stagger:.04,
+        duration:.45,
+        ease:"power3.out",
+        onComplete(){
+            gsap.to(".char",{
+                opacity:0,
+                y:-25,
+                filter:"blur(6px)",
+                stagger:.025,
+                duration:.3,
+                delay:.35,
+                ease:"power2.in",
+                onComplete(){
+                    current++;
+                    if(current<greetings.length){
+                        nextWord();
+                    }
+                    else{
+                        finish();
+                    }
+                }
+            });
         }
-        else{
-            setTimeout(finishLoading,350);
-        }
-    },120);
-}
-
-function finishLoading(){
-    loader.style.opacity="0";
-    loader.style.transition="opacity .7s ease";
-    setTimeout(()=>{
-        loader.remove();
-    },700);
-}
-
-window.addEventListener("load",()=>{
-    requestAnimationFrame(()=>{
-        showGreeting();
     });
-});
+}
+
+function finish(){
+    gsap.to(loader,{
+        opacity:0,
+        duration:.8,
+        ease:"power2.out",
+        onComplete(){
+            loader.remove();
+        }
+    });
+}
+
+window.addEventListener("load",nextWord);
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isFinePointer = window.matchMedia('(pointer: fine)').matches;
