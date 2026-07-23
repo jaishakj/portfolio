@@ -1099,16 +1099,17 @@ body.has-custom-cursor button {
     justify-content:center;
     align-items:center;
     z-index:99999;
-    overflow:hidden;
 }
 
 #loader-text{
-    font-size:3rem;
+    font-size:clamp(42px,6vw,90px);
     color:white;
     font-weight:700;
-    letter-spacing:.04em;
-    transition:opacity .25s ease;
-    user-select:none;
+    letter-spacing:-0.03em;
+    line-height:1;
+}
+.char{
+    display:inline-block;
 }
 
 .hide-loader{
