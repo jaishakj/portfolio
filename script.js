@@ -16,9 +16,7 @@ let current = 0;
 let split;
 
 function nextWord() {
-    if (text.querySelector(".char")) {
-    text.innerHTML = "";
-}
+    if (split) split.revert();
     text.textContent = greetings[current];
    
     try {
