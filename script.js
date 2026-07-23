@@ -48,7 +48,9 @@ function finishLoading(){
 }
 
 window.addEventListener("load",()=>{
-    showGreeting();
+    requestAnimationFrame(()=>{
+        showGreeting();
+    });
 });
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
