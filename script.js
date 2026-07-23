@@ -10,8 +10,6 @@ const greetings = [
 "你好",
 "Bonjour",
 "Hola",
-"שלום",
-"Olá",
 "مرحبًا",
 "Привет",
 "வணக்கம்",
@@ -20,52 +18,51 @@ const greetings = [
 const loader=document.querySelector("#loader");
 const text=document.querySelector("#loader-text");
 
-let current=0;
-function nextWord(){
-    text.textContent=greetings[current];
-    new SplitType(text,{types:"chars"});
-    gsap.fromTo(".char",
-    {
-        opacity:0,
-        y:40,
-        filter:"blur(8px)",
-        scale:.8
-    },
-    {
-        opacity:1,
-        y:0,
-        scale:1,
-        filter:"blur(0px)",
-        stagger:.04,
-        duration:.45,
-        ease:"power3.out",
-        onComplete(){
-            gsap.to(".char",{
-                opacity:0,
-                y:-25,
-                filter:"blur(6px)",
-                stagger:.025,
-                duration:.3,
-                delay:.35,
-                ease:"power2.in",
-                onComplete(){
-                    current++;
-                    if(current<greetings.length){
-                        nextWord();
-                    }
-                    else{
-                        finish();
-                    }
-                }
-            });
-        }
+let split;
+function nextWord() {
+    if (split) split.revert();
+    text.textContent = greetings[current];
+    split = new SplitType(text, {
+        types: "chars"
     });
+    gsap.fromTo(split.chars,
+        {
+            opacity: 0,
+            y: 25,
+            filter: "blur(6px)"
+        },
+        {
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            stagger: 0.025,
+            duration: 0.35,
+            ease: "power3.out",
+            onComplete() {
+                gsap.to(split.chars, {
+                    opacity: 0,
+                    y: -20,
+                    filter: "blur(6px)",
+                    stagger: 0.02,
+                    duration: 0.25,
+                    delay: 0.12,
+                    onComplete() {
+                        current++;
+                        if (current < greetings.length) {
+                            nextWord();
+                        } else {
+                            finish();
+                        }
+                    }
+                });
+            }
+        });
 }
 
 function finish(){
     gsap.to(loader,{
         opacity:0,
-        duration:.8,
+        duration:.7,
         ease:"power2.out",
         onComplete(){
             loader.remove();
@@ -73,7 +70,7 @@ function finish(){
     });
 }
 
-window.addEventListener("load",nextWord);
+document.addEventListener("DOMContentLoaded", nextWord);
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isFinePointer = window.matchMedia('(pointer: fine)').matches;
