@@ -10,14 +10,11 @@ const greetings = [
 "你好",
 "Bonjour",
 "Hola",
+"שלום",
 "Olá",
 "مرحبًا",
 "Привет",
 "வணக்கம்",
-"שלום",
-"ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
-"Hallo",
-"Ciao"
 ];
 
 const loader = document.getElementById("loader");
