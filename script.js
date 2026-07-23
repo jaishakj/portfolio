@@ -18,6 +18,7 @@ const greetings = [
 const loader=document.querySelector("#loader");
 const text=document.querySelector("#loader-text");
 
+let current = 0;
 let split;
 function nextWord() {
     if (split) split.revert();
