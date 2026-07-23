@@ -20,7 +20,7 @@ function nextWord() {
 }
     text.textContent = greetings[current];
     split = new SplitType(text, {
-        types: "chars"
+        types: "chars", absolute: false
     });
     gsap.fromTo(split.chars,
         {
