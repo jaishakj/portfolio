@@ -14,15 +14,24 @@ const text=document.querySelector("#loader-text");
 
 let current = 0;
 let split;
+
 function nextWord() {
     if (text.querySelector(".char")) {
     text.innerHTML = "";
 }
     text.textContent = greetings[current];
+   
+    try {
     split = new SplitType(text, {
-        types: "chars", absolute: false
+        types: "chars"
     });
-    gsap.fromTo(split.chars,
+} catch (e) {
+    split = {
+        chars: [text]
+    };
+}
+
+gsap.fromTo(split.chars,
         {
             opacity: 0,
             y: 25,
