@@ -6,7 +6,6 @@ const greetings = [
 "Hello",
 "こんにちは",
 "வணக்கம்",
-"👋",
 ];
 
 const loader=document.querySelector("#loader");
