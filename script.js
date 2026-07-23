@@ -16,7 +16,9 @@ let current = 0;
 let split;
 
 function nextWord() {
-    if (split) split.revert();
+    if (split && typeof split.revert === "function") {
+        split.revert();
+    }
     text.textContent = greetings[current];
    
     const noSplitLanguages = [
