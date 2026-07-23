@@ -2,6 +2,54 @@
    Jaishak J — portfolio interactions
    Zero dependencies. Everything respects prefers-reduced-motion.
    ========================================================== */
+const greetings = [
+"Hello",
+"नमस्ते",
+"こんにちは",
+"안녕하세요",
+"你好",
+"Bonjour",
+"Hola",
+"Olá",
+"مرحبًا",
+"Привет",
+"வணக்கம்",
+"שלום",
+"ਸਤ ਸ੍ਰੀ ਅਕਾਲ",
+"Hallo",
+"Ciao"
+];
+
+const loader = document.getElementById("loader");
+const loaderText = document.getElementById("loader-text");
+
+let index = 0;
+function showGreeting(){
+    loaderText.style.opacity = 0;
+    setTimeout(()=>{
+        loaderText.textContent = greetings[index];
+        loaderText.style.opacity = 1;
+        index++;
+        if(index<greetings.length){
+            setTimeout(showGreeting,140);
+        }
+        else{
+            setTimeout(finishLoading,350);
+        }
+    },120);
+}
+
+function finishLoading(){
+    loader.style.opacity="0";
+    loader.style.transition="opacity .7s ease";
+    setTimeout(()=>{
+        loader.remove();
+    },700);
+}
+
+window.addEventListener("load",()=>{
+    showGreeting();
+});
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isFinePointer = window.matchMedia('(pointer: fine)').matches;
