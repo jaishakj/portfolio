@@ -1,0 +1,304 @@
+/* ============================================
+   RETRO UI PAYMENT PAGE — STYLESHEET
+   Design language inspired by retroui.dev:
+   thick black borders, pastel fills, hard
+   drop shadows, chunky rounded buttons.
+   ============================================ */
+
+/* ---------- CSS Variables (Design Tokens) ---------- */
+:root {
+  /* Paper / surface colors */
+  --color-bg: #fdf3e7;
+  --color-card: #fffaf0;
+  --color-border: #1a1a1a;
+  --color-text: #1a1a1a;
+  --color-subtitle: #55524d;
+
+  /* Pastel accents */
+  --color-pink: #ffc9de;
+  --color-blue: #bfe3ff;
+  --color-yellow: #ffe9a8;
+  --color-green: #c5f0c0;
+  --color-purple: #e3ccff;
+  --color-cyan: #c3f3ee;
+
+  /* Shadows (hard pixel-style offset shadow) */
+  --shadow-sm: 3px 3px 0 var(--color-border);
+  --shadow-md: 5px 5px 0 var(--color-border);
+  --shadow-lg: 8px 8px 0 var(--color-border);
+
+  /* Borders */
+  --border-thick: 3px solid var(--color-border);
+  --radius-md: 14px;
+  --radius-sm: 10px;
+
+  /* Motion */
+  --transition-fast: 120ms ease;
+  --transition-med: 220ms ease;
+
+  /* Toast */
+  --color-toast-bg: #1a1a1a;
+  --color-toast-text: #fffaf0;
+}
+
+/* ---------- Dark Mode Overrides ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1c1a22;
+    --color-card: #26232c;
+    --color-border: #f5f0fa;
+    --color-text: #f5f0fa;
+    --color-subtitle: #c9c4d2;
+
+    --color-pink: #7a4a63;
+    --color-blue: #3f5b73;
+    --color-yellow: #7a6a3a;
+    --color-green: #3c6b46;
+    --color-purple: #5a4578;
+    --color-cyan: #386868;
+
+    --color-toast-bg: #f5f0fa;
+    --color-toast-text: #1c1a22;
+  }
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: var(--color-bg);
+  background-image:
+    radial-gradient(var(--color-border) 1px, transparent 1px);
+  background-size: 22px 22px;
+  background-position: -10px -10px;
+  opacity: 1;
+  font-family: "Courier New", Courier, ui-monospace, monospace;
+  color: var(--color-text);
+}
+
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Retro Card ---------- */
+.card {
+  width: 100%;
+  max-width: 420px;
+  background-color: var(--color-card);
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 32px 28px;
+  text-align: center;
+  transition: transform var(--transition-med), box-shadow var(--transition-med);
+}
+
+.card__icon {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 8px;
+  display: inline-block;
+  animation: bounce-in 500ms ease;
+}
+
+.card__heading {
+  font-size: 26px;
+  margin: 8px 0 4px;
+  letter-spacing: 0.5px;
+}
+
+.card__subtitle {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: var(--color-subtitle);
+}
+
+.card__footer {
+  margin-top: 26px;
+  font-size: 13px;
+  color: var(--color-subtitle);
+}
+
+/* ---------- UPI Input Box ---------- */
+.upi-box {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.upi-box__label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.upi-box__field {
+  display: flex;
+  align-items: stretch;
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-yellow);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.upi-box__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--color-text);
+  cursor: default;
+}
+
+.upi-box__input:focus {
+  outline: none;
+}
+
+.upi-box__copy {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  border: none;
+  border-left: var(--border-thick);
+  background-color: var(--color-pink);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.upi-box__copy:hover {
+  background-color: var(--color-purple);
+}
+
+.upi-box__copy:active {
+  transform: scale(0.9);
+}
+
+.upi-box__copy:focus-visible,
+.btn:focus-visible {
+  outline: 3px dashed var(--color-text);
+  outline-offset: 2px;
+}
+
+/* ---------- Payment Buttons ---------- */
+.pay-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--color-text);
+  padding: 14px 16px;
+  border: var(--border-thick);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--color-border);
+}
+
+.btn--primary   { background-color: var(--color-green); }
+.btn--gpay      { background-color: var(--color-blue); }
+.btn--phonepe   { background-color: var(--color-purple); }
+.btn--paytm     { background-color: var(--color-cyan); }
+.btn--bhim      { background-color: var(--color-pink); }
+
+/* ---------- Toast Notification ---------- */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translate(-50%, 20px);
+  background-color: var(--color-toast-bg);
+  color: var(--color-toast-text);
+  border: var(--border-thick);
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-med), transform var(--transition-med);
+  z-index: 10;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Animations ---------- */
+@keyframes bounce-in {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .card {
+    padding: 24px 18px;
+    border-radius: 12px;
+  }
+
+  .card__heading {
+    font-size: 22px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 13px 14px;
+  }
+}
