@@ -266,6 +266,26 @@ body.theme-fade * {
 :root.dark .theme-toggle .icon-sun  { opacity: 0; transform: rotate(90deg) scale(0.5); }
 :root.dark .theme-toggle .icon-moon { opacity: 1; transform: rotate(0) scale(1); }
 
+.support-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    padding:12px 20px;
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:12px;
+    background:transparent;
+    color:var(--text-color);
+    text-decoration:none;
+    font-weight:600;
+    transition:.25s;
+}
+
+.support-btn:hover{
+    background:rgba(255,255,255,.08);
+    transform:translateY(-2px);
+
+}
 /* Hamburger — hidden on desktop */
 .menu-toggle {
     display: none;
