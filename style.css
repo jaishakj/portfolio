@@ -274,18 +274,19 @@ body.theme-fade * {
     padding:12px 20px;
     border:1px solid rgba(255,255,255,.18);
     border-radius:12px;
-    background:transparent;
-    color:var(--text-color);
+    background: #FFD83D;   /* Yellow */
+    color: #111111;
     text-decoration:none;
     font-weight:600;
     transition:.25s;
 }
 
 .support-btn:hover{
-    background:rgba(255,255,255,.08);
+    background: #FFE45C;
     transform:translateY(-2px);
-
+    box-shadow: 0 8px 20px rgba(255, 216, 61, 0.35);
 }
+
 /* Hamburger — hidden on desktop */
 .menu-toggle {
     display: none;
