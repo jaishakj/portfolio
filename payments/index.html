@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support My Work — Retro Payments</title>
+  <meta name="description" content="Support my work via UPI. Pay instantly with Google Pay, PhonePe, Paytm, or BHIM.">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Main retro card container -->
+  <main class="card" role="main" aria-labelledby="page-heading">
+
+    <!-- Top icon -->
+    <div class="card__icon" aria-hidden="true">💸</div>
+
+    <!-- Heading + subtitle -->
+    <h1 class="card__heading" id="page-heading">Support My Work</h1>
+    <p class="card__subtitle">Choose your favorite payment app.</p>
+
+    <!-- UPI ID field -->
+    <section class="upi-box" aria-label="UPI ID">
+      <label class="upi-box__label" for="upi-input">UPI ID</label>
+
+      <div class="upi-box__field">
+        <input
+          type="text"
+          id="upi-input"
+          class="upi-box__input"
+          value="YOUR_UPI_ID"
+          readonly
+          aria-readonly="true"
+          aria-label="UPI ID, read only"
+        >
+        <button
+          type="button"
+          id="copy-btn"
+          class="upi-box__copy"
+          aria-label="Copy UPI ID to clipboard"
+          title="Copy UPI ID"
+        >
+          <!-- Simple inline copy icon (SVG, pixel-style) -->
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
+            <rect x="8" y="8" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+            <rect x="4" y="4" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Payment app buttons -->
+    <section class="pay-buttons" aria-label="Payment options">
+      <button type="button" class="btn btn--primary" data-upi-link="upi://pay?pa=YOUR_UPI_ID">
+        Pay with Any UPI App
+      </button>
+
+      <button type="button" class="btn btn--gpay" data-upi-link="gpay://upi/pay?pa=YOUR_UPI_ID">
+        Google Pay
+      </button>
+
+      <button type="button" class="btn btn--phonepe" data-upi-link="phonepe://pay?pa=YOUR_UPI_ID">
+        PhonePe
+      </button>
+
+      <button type="button" class="btn btn--paytm" data-upi-link="paytmmp://pay?pa=YOUR_UPI_ID">
+        Paytm
+      </button>
+
+      <button type="button" class="btn btn--bhim" data-upi-link="bhim://upi/pay?pa=YOUR_UPI_ID">
+        BHIM
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="card__footer">
+      Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span>
+    </footer>
+
+  </main>
+
+  <!-- Toast notification (hidden by default, announced to screen readers) -->
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
