@@ -174,6 +174,13 @@ body.theme-fade * {
     overflow: hidden; /* clips logo chip + progress bar to the curve */
 }
 
+.logo svg {
+    width: 170px;
+    height: auto;
+    display: block;
+    color: #111;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -182,12 +189,6 @@ body.theme-fade * {
     border-radius: 18px;
     background: #efe2c2;
     color: #f5e6c8;
-}
-
-.logo svg {
-    height: 38px;
-    width: auto;
-    color: #111;
 }
 
 .logo-img {
