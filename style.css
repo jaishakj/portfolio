@@ -255,8 +255,9 @@ body.theme-fade * {
 }
 
 .logo-img {
-    height: 2.8rem;
+    height: 40px;
     width: auto;
+    display: block;
 }
 
 /* Theme toggle — round chip, icon crossfades */
