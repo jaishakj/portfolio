@@ -175,16 +175,19 @@ body.theme-fade * {
 }
 
 .logo {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 1.3rem;
-    color: var(--nav-chip-text);
-    background: var(--nav-chip-bg);
-    padding: 0 2rem;
     display: flex;
     align-items: center;
-    text-decoration: none;
-    border-right: 3px solid var(--nav-border);
+    padding: 8px 12px;
+    border: 2px solid #111;
+    border-radius: 18px;
+    background: #efe2c2;
+    color: #f5e6c8;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
 .nav-links {
@@ -246,18 +249,6 @@ body.theme-fade * {
     text-decoration: none;
     display: flex;
     align-items: center;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.logo-img {
-    height: 40px;
-    width: auto;
-    display: block;
 }
 
 /* Theme toggle — round chip, icon crossfades */
