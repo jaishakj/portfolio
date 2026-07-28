@@ -184,6 +184,12 @@ body.theme-fade * {
     color: #f5e6c8;
 }
 
+.logo svg {
+    height: 38px;
+    width: auto;
+    color: #111;
+}
+
 .logo-img {
     height: 40px;
     width: auto;
