@@ -13,6 +13,7 @@
   var copyBtn = document.getElementById('copy-btn');
   var toast = document.getElementById('toast');
   var payButtons = document.querySelectorAll('[data-upi-link]');
+  var canvas = document.getElementById('dot-canvas');
 
   var FALLBACK_URL = 'https://play.google.com/store/search?q=upi%20payment&c=apps';
   var FALLBACK_DELAY_MS = 800;
@@ -126,4 +127,136 @@
       }
     });
   });
+
+  // ---------- Interactive dot-grid background ----------
+  /**
+   * Renders a grid of dots on a full-viewport canvas. Dots near the cursor
+   * are pushed away and smoothly ease back to their origin, giving a
+   * flexible, fluid feel as the pointer moves.
+   */
+  function initDotGrid() {
+    if (!canvas) return;
+
+    var ctx = canvas.getContext('2d');
+    var dots = [];
+    var spacing = 26;          // distance between dots (CSS px)
+    var influenceRadius = 130; // how far the cursor's push effect reaches
+    var maxPush = 12;          // maximum displacement in px
+    var ease = 0.12;           // how quickly dots move toward their target
+    var dpr = window.devicePixelRatio || 1;
+
+    var mouse = { x: -9999, y: -9999 };
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reads the current dot color from CSS custom properties.
+    function getDotColor() {
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue('--dot-color')
+        .trim() || 'rgba(26, 26, 26, 0.35)';
+    }
+
+    // Sizes the canvas to the viewport and rebuilds the dot grid.
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      buildGrid();
+    }
+
+    // Builds the origin grid of dots based on current viewport size.
+    function buildGrid() {
+      dots = [];
+      var cols = Math.ceil(window.innerWidth / spacing) + 1;
+      var rows = Math.ceil(window.innerHeight / spacing) + 1;
+
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          dots.push({
+            ox: c * spacing, // origin x
+            oy: r * spacing, // origin y
+            x: c * spacing,  // current x
+            y: r * spacing   // current y
+          });
+        }
+      }
+    }
+
+    // Advances each dot toward its cursor-influenced target, then draws it.
+    function draw() {
+      var color = getDotColor();
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      ctx.fillStyle = color;
+
+      for (var i = 0; i < dots.length; i++) {
+        var dot = dots[i];
+        var dx = dot.ox - mouse.x;
+        var dy = dot.oy - mouse.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+
+        var targetX = dot.ox;
+        var targetY = dot.oy;
+
+        if (dist < influenceRadius) {
+          var strength = (1 - dist / influenceRadius) * maxPush;
+          var angle = Math.atan2(dy, dx);
+          targetX = dot.ox + Math.cos(angle) * strength;
+          targetY = dot.oy + Math.sin(angle) * strength;
+        }
+
+        // Smoothly ease current position toward the target (lerp).
+        dot.x += (targetX - dot.x) * ease;
+        dot.y += (targetY - dot.y) * ease;
+
+        ctx.beginPath();
+        ctx.arc(dot.x, dot.y, 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    // ---------- Pointer tracking ----------
+    window.addEventListener('mousemove', function (event) {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    });
+
+    window.addEventListener('mouseleave', function () {
+      mouse.x = -9999;
+      mouse.y = -9999;
+    });
+
+    // Support touch devices: treat a touch move like a cursor position.
+    window.addEventListener('touchmove', function (event) {
+      if (event.touches && event.touches.length > 0) {
+        mouse.x = event.touches[0].clientX;
+        mouse.y = event.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', resize);
+
+    resize();
+
+    // Respect reduced-motion preference: draw a static grid, no animation loop.
+    if (reducedMotion) {
+      draw = function () {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        ctx.fillStyle = getDotColor();
+        for (var i = 0; i < dots.length; i++) {
+          ctx.beginPath();
+          ctx.arc(dots[i].ox, dots[i].oy, 1.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      };
+      draw();
+    } else {
+      draw();
+    }
+  }
+
+  initDotGrid();
 })();
