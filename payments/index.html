@@ -11,8 +11,23 @@
 </head>
 <body>
 
+  <!-- Interactive dot-grid background canvas (reacts to cursor movement) -->
+  <canvas id="dot-canvas" aria-hidden="true"></canvas>
+
   <!-- Main retro card container -->
   <main class="card" role="main" aria-labelledby="page-heading">
+
+    <!-- Print-style registration / crop marks at each corner -->
+    <span class="crop crop--tl" aria-hidden="true"></span>
+    <span class="crop crop--tr" aria-hidden="true"></span>
+    <span class="crop crop--bl" aria-hidden="true"></span>
+    <span class="crop crop--br" aria-hidden="true"></span>
+
+    <!-- ISO-style verification badge -->
+    <div class="badge" aria-hidden="true">
+      <span class="badge__ring">✓</span>
+      <span class="badge__text">QA<br>PASS</span>
+    </div>
 
     <!-- Top icon -->
     <div class="card__icon" aria-hidden="true">💸</div>
@@ -20,6 +35,14 @@
     <!-- Heading + subtitle -->
     <h1 class="card__heading" id="page-heading">Support My Work</h1>
     <p class="card__subtitle">Choose your favorite payment app.</p>
+
+    <!-- Technical metadata strip (decorative, spec-sheet aesthetic) -->
+    <div class="spec-strip" aria-hidden="true">
+      <span>CMYK [FOGRA39]</span>
+      <span>POINT_SIZE: 120PT</span>
+      <span>X_HEIGHT: 5.2MM</span>
+      <span>1:1.618</span>
+    </div>
 
     <!-- UPI ID field -->
     <section class="upi-box" aria-label="UPI ID">
@@ -30,7 +53,7 @@
           type="text"
           id="upi-input"
           class="upi-box__input"
-          value="mrj457@upi"
+          value="YOUR_UPI_ID"
           readonly
           aria-readonly="true"
           aria-label="UPI ID, read only"
@@ -57,7 +80,7 @@
         Pay with Any UPI App
       </button>
 
-      <button type="button" class="btn btn--gpay" data-upi-link="gpay://upi/pay?pa=jaishak1219@okicici">
+      <button type="button" class="btn btn--gpay" data-upi-link="gpay://upi/pay?pa=YOUR_UPI_ID">
         Google Pay
       </button>
 
@@ -69,15 +92,21 @@
         Paytm
       </button>
 
-      <button type="button" class="btn btn--bhim" data-upi-link="bhim://upi/pay?pa=mrj457@upi">
+      <button type="button" class="btn btn--bhim" data-upi-link="bhim://upi/pay?pa=YOUR_UPI_ID">
         BHIM
       </button>
     </section>
+
+    <!-- Human-made pill badge -->
+    <div class="pill" aria-hidden="true">MADE BY HUMANS</div>
 
     <!-- Footer -->
     <footer class="card__footer">
       Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span>
     </footer>
+
+    <!-- Rotated copyright stamp, print-registration style -->
+    <div class="stamp" aria-hidden="true">© 2026 · REF 0x4F2A</div>
 
   </main>
 
