@@ -1,77 +1,47 @@
 /* ============================================
-   RETRO UI PAYMENT PAGE — STYLESHEET
-   Design language inspired by retroui.dev:
-   thick black borders, pastel fills, hard
-   drop shadows, chunky rounded buttons.
+   PAYMENT PAGE — STYLESHEET
+   Stark monochrome, brutalist/technical design:
+   pure black + white, razor-thin borders, sharp
+   corners, blueprint-style corner metadata.
    ============================================ */
 
 /* ---------- CSS Variables (Design Tokens) ---------- */
 :root {
-  /* Paper / surface colors */
-  --color-bg: #fdf3e7;
-  --color-card: #fffaf0;
-  --color-border: #1a1a1a;
-  --color-text: #1a1a1a;
-  --color-subtitle: #55524d;
-
-  /* Pastel accents */
-  --color-pink: #ffc9de;
-  --color-blue: #bfe3ff;
-  --color-yellow: #ffe9a8;
-  --color-green: #c5f0c0;
-  --color-purple: #e3ccff;
-  --color-cyan: #c3f3ee;
-
-  /* Shadows (hard pixel-style offset shadow) */
-  --shadow-sm: 3px 3px 0 var(--color-border);
-  --shadow-md: 5px 5px 0 var(--color-border);
-  --shadow-lg: 8px 8px 0 var(--color-border);
+  /* Surfaces */
+  --color-bg: #0a0a0a;
+  --color-card: #0a0a0a;
+  --color-border: #ffffff;
+  --color-border-dim: rgba(255, 255, 255, 0.2);
+  --color-text: #ffffff;
+  --color-subtitle: rgba(255, 255, 255, 0.55);
+  --color-meta: rgba(255, 255, 255, 0.5);
 
   /* Borders */
-  --border-thick: 3px solid var(--color-border);
-  --radius-md: 14px;
-  --radius-sm: 10px;
+  --border-hair: 1px solid var(--color-border-dim);
+  --border-solid: 1px solid var(--color-border);
+  --radius: 2px;
 
   /* Motion */
   --transition-fast: 120ms ease;
   --transition-med: 220ms ease;
 
   /* Toast */
-  --color-toast-bg: #1a1a1a;
-  --color-toast-text: #fffaf0;
+  --color-toast-bg: #ffffff;
+  --color-toast-text: #0a0a0a;
 
-  /* Typography: heavy serif for display, monospace for technical metadata */
+  /* Typography */
   --font-display: Georgia, "Times New Roman", "Noto Serif", serif;
   --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", ui-monospace, "Space Mono", Menlo, Consolas, monospace;
 
-  /* Dot-grid canvas colors */
-  --dot-color: rgba(26, 26, 26, 0.35);
+  /* Dot-grid canvas */
+  --dot-color: rgba(255, 255, 255, 0.18);
 }
 
-@media (prefers-color-scheme: dark) {
+/* No separate light/dark branch — the design is intentionally
+   monochrome in both modes; only the dot opacity nudges slightly. */
+@media (prefers-color-scheme: light) {
   :root {
-    --dot-color: rgba(245, 240, 250, 0.28);
-  }
-}
-
-/* ---------- Dark Mode Overrides ---------- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1c1a22;
-    --color-card: #26232c;
-    --color-border: #f5f0fa;
-    --color-text: #f5f0fa;
-    --color-subtitle: #c9c4d2;
-
-    --color-pink: #7a4a63;
-    --color-blue: #3f5b73;
-    --color-yellow: #7a6a3a;
-    --color-green: #3c6b46;
-    --color-purple: #5a4578;
-    --color-cyan: #386868;
-
-    --color-toast-bg: #f5f0fa;
-    --color-toast-text: #1c1a22;
+    --dot-color: rgba(255, 255, 255, 0.14);
   }
 }
 
@@ -88,14 +58,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
   background-color: var(--color-bg);
   font-family: var(--font-mono);
   color: var(--color-text);
   overflow-x: hidden;
 }
 
-/* Full-viewport canvas holding the interactive dot grid, sits behind the card */
+/* Full-viewport canvas holding the interactive dot grid, sits behind everything */
 #dot-canvas {
   position: fixed;
   inset: 0;
@@ -105,7 +74,6 @@ body {
   display: block;
 }
 
-/* Screen-reader only utility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -118,93 +86,144 @@ body {
   border: 0;
 }
 
-/* ---------- Retro Card ---------- */
-.card {
+/* ---------- Full-bleed technical frame ---------- */
+.frame {
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 420px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+/* Corner metadata — blueprint-style annotations at the outer margins */
+.frame__meta {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--color-meta);
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.frame__meta--tl { top: 20px; left: 24px; text-align: left; }
+.frame__meta--tr { top: 20px; right: 24px; text-align: right; }
+.frame__meta--bl { bottom: 20px; left: 24px; text-align: left; }
+.frame__meta--br { bottom: 20px; right: 24px; text-align: right; }
+
+/* Crop / registration marks at the true viewport corners */
+.crop {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.crop::before,
+.crop::after {
+  content: "";
+  position: absolute;
+  background-color: var(--color-border-dim);
+}
+
+.crop::before { width: 100%; height: 1px; top: 50%; transform: translateY(-50%); }
+.crop::after  { height: 100%; width: 1px; left: 50%; transform: translateX(-50%); }
+
+.crop--tl { top: 16px; left: 16px; }
+.crop--tr { top: 16px; right: 16px; }
+.crop--bl { bottom: 16px; left: 16px; }
+.crop--br { bottom: 16px; right: 16px; }
+
+/* ---------- Card ---------- */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
   background-color: var(--color-card);
-  border: var(--border-thick);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  padding: 32px 28px;
+  border: var(--border-hair);
+  border-radius: var(--radius);
+  padding: 40px 28px;
   text-align: center;
-  transition: transform var(--transition-med), box-shadow var(--transition-med);
 }
 
 .card__icon {
-  font-size: 40px;
-  line-height: 1;
-  margin-bottom: 8px;
+  color: var(--color-text);
+  margin-bottom: 12px;
   display: inline-block;
-  animation: bounce-in 500ms ease;
 }
 
 .card__heading {
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 800;
-  margin: 8px 0 4px;
   letter-spacing: 0.2px;
+  margin: 0 0 6px;
+  text-transform: uppercase;
 }
 
 .card__subtitle {
-  margin: 0 0 14px;
-  font-size: 12px;
-  font-weight: bold;
+  margin: 0 0 20px;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: var(--color-subtitle);
 }
 
-/* Technical metadata strip: tight leading, blocked into a rectangle */
+/* Technical metadata strip inside the card — kept small, dim, framing */
 .spec-strip {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 4px 10px;
-  margin: 0 0 22px;
+  gap: 4px 12px;
+  margin: 0 0 24px;
   padding: 8px 0;
-  border-top: 1px dashed var(--color-text);
-  border-bottom: 1px dashed var(--color-text);
+  border-top: var(--border-hair);
+  border-bottom: var(--border-hair);
   font-family: var(--font-mono);
   font-size: 9px;
-  font-weight: 700;
-  line-height: 1.1;
+  font-weight: 600;
+  line-height: 1.2;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--color-subtitle);
+  color: var(--color-meta);
+  opacity: 0.5;
 }
 
 .card__footer {
-  margin-top: 26px;
-  font-size: 13px;
+  margin-top: 22px;
+  font-size: 12px;
   color: var(--color-subtitle);
 }
 
 /* ---------- UPI Input Box ---------- */
 .upi-box {
   text-align: left;
-  margin-bottom: 24px;
+  margin-bottom: 22px;
 }
 
 .upi-box__label {
   display: block;
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: 6px;
+  color: var(--color-subtitle);
 }
 
 .upi-box__field {
   display: flex;
   align-items: stretch;
-  border: var(--border-thick);
-  border-radius: var(--radius-sm);
-  background-color: var(--color-yellow);
-  box-shadow: var(--shadow-sm);
+  border: var(--border-hair);
+  border-radius: var(--radius);
+  background-color: transparent;
   overflow: hidden;
 }
 
@@ -215,8 +234,8 @@ body {
   background: transparent;
   padding: 12px 14px;
   font-family: inherit;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--color-text);
   cursor: default;
 }
@@ -230,26 +249,27 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 46px;
+  width: 44px;
   border: none;
-  border-left: var(--border-thick);
-  background-color: var(--color-pink);
+  border-left: var(--border-hair);
+  background-color: transparent;
   color: var(--color-text);
   cursor: pointer;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
 .upi-box__copy:hover {
-  background-color: var(--color-purple);
+  background-color: var(--color-text);
+  color: var(--color-bg);
 }
 
 .upi-box__copy:active {
-  transform: scale(0.9);
+  transform: scale(0.92);
 }
 
 .upi-box__copy:focus-visible,
 .btn:focus-visible {
-  outline: 3px dashed var(--color-text);
+  outline: 1px dashed var(--color-text);
   outline-offset: 2px;
 }
 
@@ -257,40 +277,37 @@ body {
 .pay-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .btn {
   font-family: inherit;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: var(--color-text);
+  background-color: transparent;
   padding: 14px 16px;
-  border: var(--border-thick);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  border: var(--border-hair);
+  border-radius: var(--radius);
   cursor: pointer;
   transition:
-    transform var(--transition-fast),
-    box-shadow var(--transition-fast),
-    background-color var(--transition-fast);
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
+/* Brutalist hover: invert to solid white / black text */
 .btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-md);
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  border-color: var(--color-text);
 }
 
 .btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 var(--color-border);
+  transform: translate(0.5px, 0.5px);
 }
-
-.btn--primary   { background-color: var(--color-green); }
-.btn--gpay      { background-color: var(--color-blue); }
-.btn--phonepe   { background-color: var(--color-purple); }
-.btn--paytm     { background-color: var(--color-cyan); }
-.btn--bhim      { background-color: var(--color-pink); }
 
 /* ---------- Toast Notification ---------- */
 .toast {
@@ -300,12 +317,13 @@ body {
   transform: translate(-50%, 20px);
   background-color: var(--color-toast-bg);
   color: var(--color-toast-text);
-  border: var(--border-thick);
-  border-radius: var(--radius-sm);
+  border: var(--border-solid);
+  border-radius: var(--radius);
   padding: 10px 18px;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: var(--shadow-sm);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--transition-med), transform var(--transition-med);
@@ -317,100 +335,20 @@ body {
   transform: translate(-50%, 0);
 }
 
-/* ---------- Print-style Crop / Registration Marks ---------- */
-.crop {
-  position: absolute;
-  width: 16px;
-  height: 16px;
-  pointer-events: none;
-}
-
-.crop::before,
-.crop::after {
-  content: "";
-  position: absolute;
-  background-color: var(--color-text);
-}
-
-/* Horizontal + vertical strokes forming an L / registration mark */
-.crop::before { width: 100%; height: 2px; top: 50%; transform: translateY(-50%); }
-.crop::after  { height: 100%; width: 2px; left: 50%; transform: translateX(-50%); }
-
-.crop--tl { top: -8px; left: -8px; }
-.crop--tr { top: -8px; right: -8px; }
-.crop--bl { bottom: -8px; left: -8px; }
-.crop--br { bottom: -8px; right: -8px; }
-
-/* ---------- ISO-style Verification Badge ---------- */
-.badge {
-  position: absolute;
-  top: -18px;
-  right: -18px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: var(--color-green);
-  border: var(--border-thick);
-  box-shadow: var(--shadow-sm);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  transform: rotate(8deg);
-}
-
-.badge__ring {
-  font-size: 16px;
-  line-height: 1;
-}
-
-.badge__text {
-  font-family: var(--font-mono);
-  font-size: 7px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  line-height: 1.1;
-  text-align: center;
-}
-
 /* ---------- Made-by-humans pill badge ---------- */
 .pill {
   display: inline-block;
-  margin-top: 22px;
+  margin-top: 20px;
   padding: 5px 14px;
   font-family: var(--font-mono);
   font-size: 9px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  background-color: var(--color-blue);
-  border: 2px solid var(--color-text);
+  background-color: transparent;
+  color: var(--color-text);
+  border: var(--border-solid);
   border-radius: 999px;
-  box-shadow: var(--shadow-sm);
-}
-
-/* ---------- Rotated copyright stamp ---------- */
-.stamp {
-  position: absolute;
-  bottom: 10px;
-  right: -14px;
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  color: var(--color-subtitle);
-  border: 1px solid var(--color-subtitle);
-  border-radius: 6px;
-  padding: 3px 6px;
-  transform: rotate(-6deg);
-  opacity: 0.75;
-}
-
-/* ---------- Animations ---------- */
-@keyframes bounce-in {
-  0%   { transform: scale(0.4); opacity: 0; }
-  60%  { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -422,33 +360,29 @@ body {
 
 /* ---------- Responsive ---------- */
 @media (max-width: 480px) {
+  .frame {
+    padding: 32px 16px;
+  }
+
   .card {
-    padding: 24px 18px;
-    border-radius: 12px;
+    padding: 28px 20px;
   }
 
   .card__heading {
-    font-size: 22px;
+    font-size: 21px;
   }
 
   .btn {
-    font-size: 14px;
+    font-size: 12px;
     padding: 13px 14px;
   }
 
-  .badge {
-    width: 46px;
-    height: 46px;
-    top: -14px;
-    right: -14px;
+  .frame__meta {
+    font-size: 8px;
   }
 
   .spec-strip {
     font-size: 8px;
     gap: 3px 8px;
-  }
-
-  .stamp {
-    right: -8px;
   }
 }
