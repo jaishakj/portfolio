@@ -248,6 +248,17 @@ body.theme-fade * {
     align-items: center;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 2.8rem;
+    width: auto;
+}
+
 /* Theme toggle — round chip, icon crossfades */
 .theme-toggle {
     width: 40px;
