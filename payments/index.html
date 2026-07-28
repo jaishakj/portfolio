@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support My Work — Retro Payments</title>
+  <title>Support My Work — Payments</title>
   <meta name="description" content="Support my work via UPI. Pay instantly with Google Pay, PhonePe, Paytm, or BHIM.">
-
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,106 +12,104 @@
   <!-- Interactive dot-grid background canvas (reacts to cursor movement) -->
   <canvas id="dot-canvas" aria-hidden="true"></canvas>
 
-  <!-- Main retro card container -->
-  <main class="card" role="main" aria-labelledby="page-heading">
+  <!-- Full-bleed technical frame — corners carry blueprint-style metadata -->
+  <div class="frame">
 
-    <!-- Print-style registration / crop marks at each corner -->
+    <span class="frame__meta frame__meta--tl" aria-hidden="true">45.5245&deg; N<br>122.6841&deg; W</span>
+    <span class="frame__meta frame__meta--tr" aria-hidden="true">REV. 03<br>FIG. 01</span>
+    <span class="frame__meta frame__meta--bl" aria-hidden="true">SCALE 1:1.618<br>UNITS: MM</span>
+    <span class="frame__meta frame__meta--br" aria-hidden="true">&copy; 2026<br>REF 0x4F2A</span>
+
     <span class="crop crop--tl" aria-hidden="true"></span>
     <span class="crop crop--tr" aria-hidden="true"></span>
     <span class="crop crop--bl" aria-hidden="true"></span>
     <span class="crop crop--br" aria-hidden="true"></span>
 
-    <!-- ISO-style verification badge -->
-    <div class="badge" aria-hidden="true">
-      <span class="badge__ring">✓</span>
-      <span class="badge__text">QA<br>PASS</span>
-    </div>
+    <!-- Main card -->
+    <main class="card" role="main" aria-labelledby="page-heading">
 
-    <!-- Top icon -->
-    <div class="card__icon" aria-hidden="true">💸</div>
+      <!-- Wireframe icon (replaces emoji) -->
+      <svg class="card__icon" viewBox="0 0 64 64" width="48" height="48" aria-hidden="true" focusable="false">
+        <rect x="6" y="18" width="52" height="34" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="6" y1="27" x2="58" y2="27" stroke="currentColor" stroke-width="1.5"/>
+        <line x1="14" y1="40" x2="30" y2="40" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="48" cy="40" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
 
-    <!-- Heading + subtitle -->
-    <h1 class="card__heading" id="page-heading">Support My Work</h1>
-    <p class="card__subtitle">Choose your favorite payment app.</p>
+      <h1 class="card__heading" id="page-heading">Support My Work</h1>
+      <p class="card__subtitle">Choose your favorite payment app.</p>
 
-    <!-- Technical metadata strip (decorative, spec-sheet aesthetic) -->
-    <div class="spec-strip" aria-hidden="true">
-      <span>CMYK [FOGRA39]</span>
-      <span>POINT_SIZE: 120PT</span>
-      <span>X_HEIGHT: 5.2MM</span>
-      <span>1:1.618</span>
-    </div>
-
-    <!-- UPI ID field -->
-    <section class="upi-box" aria-label="UPI ID">
-      <label class="upi-box__label" for="upi-input">UPI ID</label>
-
-      <div class="upi-box__field">
-        <input
-          type="text"
-          id="upi-input"
-          class="upi-box__input"
-          value="YOUR_UPI_ID"
-          readonly
-          aria-readonly="true"
-          aria-label="UPI ID, read only"
-        >
-        <button
-          type="button"
-          id="copy-btn"
-          class="upi-box__copy"
-          aria-label="Copy UPI ID to clipboard"
-          title="Copy UPI ID"
-        >
-          <!-- Simple inline copy icon (SVG, pixel-style) -->
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">
-            <rect x="8" y="8" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
-            <rect x="4" y="4" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"/>
-          </svg>
-        </button>
+      <!-- Technical metadata strip, framed like a blueprint annotation -->
+      <div class="spec-strip" aria-hidden="true">
+        <span>CMYK [FOGRA39]</span>
+        <span>POINT_SIZE: 120PT</span>
+        <span>X_HEIGHT: 5.2MM</span>
       </div>
-    </section>
 
-    <!-- Payment app buttons -->
-    <section class="pay-buttons" aria-label="Payment options">
-      <button type="button" class="btn btn--primary" data-upi-link="upi://pay?pa=YOUR_UPI_ID">
-        Pay with Any UPI App
-      </button>
+      <!-- UPI ID field -->
+      <section class="upi-box" aria-label="UPI ID">
+        <label class="upi-box__label" for="upi-input">UPI ID</label>
 
-      <button type="button" class="btn btn--gpay" data-upi-link="gpay://upi/pay?pa=YOUR_UPI_ID">
-        Google Pay
-      </button>
+        <div class="upi-box__field">
+          <input
+            type="text"
+            id="upi-input"
+            class="upi-box__input"
+            value="YOUR_UPI_ID"
+            readonly
+            aria-readonly="true"
+            aria-label="UPI ID, read only"
+          >
+          <button
+            type="button"
+            id="copy-btn"
+            class="upi-box__copy"
+            aria-label="Copy UPI ID to clipboard"
+            title="Copy UPI ID"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+              <rect x="8" y="8" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <rect x="4" y="4" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </button>
+        </div>
+      </section>
 
-      <button type="button" class="btn btn--phonepe" data-upi-link="phonepe://pay?pa=YOUR_UPI_ID">
-        PhonePe
-      </button>
+      <!-- Payment app buttons -->
+      <section class="pay-buttons" aria-label="Payment options">
+        <button type="button" class="btn" data-upi-link="upi://pay?pa=YOUR_UPI_ID">
+          Pay with Any UPI App
+        </button>
 
-      <button type="button" class="btn btn--paytm" data-upi-link="paytmmp://pay?pa=YOUR_UPI_ID">
-        Paytm
-      </button>
+        <button type="button" class="btn" data-upi-link="gpay://upi/pay?pa=YOUR_UPI_ID">
+          Google Pay
+        </button>
 
-      <button type="button" class="btn btn--bhim" data-upi-link="bhim://upi/pay?pa=YOUR_UPI_ID">
-        BHIM
-      </button>
-    </section>
+        <button type="button" class="btn" data-upi-link="phonepe://pay?pa=YOUR_UPI_ID">
+          PhonePe
+        </button>
 
-    <!-- Human-made pill badge -->
-    <div class="pill" aria-hidden="true">MADE BY HUMANS</div>
+        <button type="button" class="btn" data-upi-link="paytmmp://pay?pa=YOUR_UPI_ID">
+          Paytm
+        </button>
 
-    <!-- Footer -->
-    <footer class="card__footer">
-      Made with <span aria-hidden="true">❤️</span><span class="sr-only">love</span>
-    </footer>
+        <button type="button" class="btn" data-upi-link="bhim://upi/pay?pa=YOUR_UPI_ID">
+          BHIM
+        </button>
+      </section>
 
-    <!-- Rotated copyright stamp, print-registration style -->
-    <div class="stamp" aria-hidden="true">© 2026 · REF 0x4F2A</div>
+      <div class="pill" aria-hidden="true">MADE BY HUMANS</div>
 
-  </main>
+      <footer class="card__footer">
+        Made with <span aria-hidden="true">&hearts;</span><span class="sr-only">love</span>
+      </footer>
 
-  <!-- Toast notification (hidden by default, announced to screen readers) -->
+    </main>
+  </div>
+
+  <!-- Toast notification -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <!-- JavaScript -->
   <script src="script.js"></script>
 </body>
 </html>
