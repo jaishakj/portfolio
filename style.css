@@ -924,42 +924,77 @@ body.is-loaded .load-reveal[data-load-delay="4"] { transition-delay: 0.36s; }
 /* Contact */
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 1.5rem;
 }
 
 .contact-card {
-    background: var(--surface-alt);
-    border: var(--border-w) solid var(--ink);
-    border-radius: 20px;
-    padding: 1.5rem;
-    text-align: center;
-    box-shadow: 6px 6px 0 var(--shadow-c);
-}
-
-.contact-icon {
-    margin-bottom: 1rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.contact-card h4 {
-    font-family: 'Anton', sans-serif;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--ink);
-}
-
-.contact-card a {
-    color: var(--text);
+    gap: 1.1rem;
+    background: var(--cream);
+    border: var(--border);
+    border-radius: 16px;
+    padding: 1.1rem 1.4rem;
+    box-shadow: 6px 6px 0 var(--black);
+    position: relative;
+    overflow: hidden;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.contact-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--card-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 10px 10px 0 var(--black);
+}
+
+.contact-card:hover::after {
+    transform: scaleX(1);
+}
+
+.contact-icon-tile {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-accent);
+    box-shadow: inset 0 0 0 2px rgba(0,0,0,0.15);
+}
+
+.contact-icon-tile svg {
+    width: 26px;
+    height: 26px;
+}
+
+.contact-text h4 {
+    font-family: 'Anton', sans-serif;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.2rem;
+    color: var(--black);
+}
+
+.contact-text span {
+    font-size: 0.82rem;
+    color: #444;
     word-break: break-word;
 }
-
-.contact-card a:hover { color: var(--green); }
 
 /* Footer */
 footer {
