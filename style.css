@@ -486,6 +486,19 @@ body.is-loaded .load-reveal[data-load-delay="4"] { transition-delay: 0.36s; }
 
 .section-divider svg { width: 100%; height: 60px; display: block; }
 
+.section-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.section-icon{
+    width:28px;
+    height:28px;
+    color:#111;
+    flex-shrink:0;
+}
+
 .divider-path { stroke: var(--ink); }
 
 .divider-path.is-drawn {
