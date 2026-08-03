@@ -337,6 +337,18 @@ if (isFinePointer && !prefersReducedMotion) {
   });
 }
 
+const flipCard = document.getElementById('profileCard');
+if (flipCard) {
+    const toggleFlip = () => {
+        const flipped = flipCard.classList.toggle('is-flipped');
+        flipCard.setAttribute('aria-pressed', String(flipped));
+    };
+    flipCard.addEventListener('click', toggleFlip);
+    flipCard.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFlip(); }
+    });
+}
+
 /* ----------------------------------------------------------
    11. IN-PAGE NAVIGATION — move keyboard focus with the scroll
    ---------------------------------------------------------- */
