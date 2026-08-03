@@ -239,40 +239,65 @@
                         </a>
                     </div>
 
-                    <div class="info-card load-reveal press" data-load-delay="4">
-                        <div class="card-header">
-                            <span class="card-icon" aria-hidden="true">
-                                <svg class="card-icon-svg"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <path d="M3 9a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2l0 -9"/>
-                                    <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"/>
-                                    <path d="M12 12l0 .01"/>
-                                    <path d="M3 13a20 20 0 0 0 18 0"/>
-                                </svg>
-                            </span>
-                            
-                            <span class="card-label">PROFESSIONAL PROFILE</span>
-                        </div>
-                        <p class="card-text">AI Engineer specializing in ML, deep learning &amp; full-stack development. Building intelligent systems with Python, TensorFlow &amp; modern frameworks.</p>
-                        <div class="card-footer">
-                            <a href="#contact" class="download-btn press">
-                                <span>CONTACT ME</span>
-                                <span class="arrow" aria-hidden="true">↓</span>
-                            </a>
-                            <div class="location">
-                                <span class="location-dot" aria-hidden="true"></span>
-                                <span>Chennai, India</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <div class="info-card flip-card" id="profileCard" role="button" tabindex="0" aria-pressed="false" aria-label="Toggle professional and developer view">
+                        <div class="flip-inner">
+
+        <!-- FRONT: Professional -->
+        <div class="flip-face flip-front">
+            <div class="card-header">
+                <span class="card-icon" aria-hidden="true">
+                    <svg class="card-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 7m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"/>
+                        <path d="M8 7v-2a2 2 0 0 1 2 -2h4a2 2 0 0 1 2 2v2"/>
+                        <path d="M12 12l0 .01"/>
+                        <path d="M3 13a20 20 0 0 0 18 0"/>
+                    </svg>
+                </span>
+                <span class="card-label">PROFESSIONAL PROFILE</span>
+            </div>
+
+            <p class="card-text">Building AI systems that solve real-world problems—from computer vision pipelines to RAG applications.</p>
+
+            <div class="stat-row">
+                <span class="stat-pill">🚀 7+ Projects</span>
+                <span class="stat-pill">🤖 3 AI Systems</span>
+                <span class="stat-pill">🛠️ 15+ Technologies</span>
+                <span class="stat-pill stat-live">🟢 Open to Work</span>
+            </div>
+
+            <span class="flip-hint">Click to flip →</span>
+        </div>
+
+        <!-- BACK: Developer Personality -->
+        <div class="flip-face flip-back">
+            <div class="card-header">
+                <span class="card-icon" aria-hidden="true">
+                    <svg class="card-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M8 9l-4 3l4 3"/>
+                        <path d="M16 9l4 3l-4 3"/>
+                        <path d="M12 6l-2 12"/>
+                    </svg>
+                </span>
+                <span class="card-label">DEV MODE</span>
+            </div>
+
+            <p class="card-text dev-quote">Studied Software Engineering just to become the condom between Claude Code and Prod.</p>
+            <p class="card-text dev-quote-sub">I spend more time arguing with LLMs than with people—and surprisingly, the LLMs usually lose.</p>
+
+            <div class="terminal-badges">
+                <span class="term-badge">git commit -m "works on my machine"</span>
+                <span class="term-badge">sudo make coffee</span>
+                <span class="term-badge">AI &gt; Boilerplate</span>
+                <span class="term-badge">Ship &gt; Perfect<span class="term-cursor"></span></span>
+            </div>
+
+            <span class="flip-hint">← Back to professional</span>
+        </div>
+
+    </div>
+</div>
 
                 <div class="hero-right load-reveal" data-load-delay="2">
                     <div class="image-card main-card" data-parallax>
