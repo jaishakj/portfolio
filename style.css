@@ -699,6 +699,111 @@ body.is-loaded .load-reveal[data-load-delay="4"] { transition-delay: 0.36s; }
     border: 2px solid var(--on-accent);
 }
 
+/* ===== Flip Card ===== */
+.flip-card { cursor: pointer; padding: 0; overflow: hidden; }
+
+.flip-inner { position: relative; min-height: 260px; }
+
+.flip-face {
+    padding: 2rem;
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.6s ease, color 0.6s ease;
+}
+
+.flip-front { position: relative; opacity: 1; transform: translateY(0); }
+.flip-back {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    background: #14120f;
+    color: #f2ede0;
+    border-radius: 16px;
+}
+
+.flip-card.is-flipped .flip-front {
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+}
+
+.flip-card.is-flipped .flip-back {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.flip-card.is-flipped { background: #14120f; border-color: #FFE031; }
+
+.flip-back .card-icon-svg { color: #FFE031; transition: transform 0.5s ease; }
+.flip-card.is-flipped .card-icon-svg { transform: rotate(8deg) scale(1.1); }
+
+.flip-back .card-label { color: #FFE031; }
+
+.stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.2rem 0;
+}
+
+.stat-pill {
+    background: var(--black);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.stat-live { background: #1a7a3d; }
+
+.dev-quote { font-weight: 600; margin-bottom: 0.8rem; }
+.dev-quote-sub { color: #b8b0a0; font-size: 0.9rem; margin-bottom: 1.2rem; }
+
+.terminal-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.term-badge {
+    background: #0a0a08;
+    border: 1px solid #FFE031;
+    color: #FFE031;
+    padding: 0.5rem 0.9rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    width: fit-content;
+}
+
+.term-cursor {
+    display: inline-block;
+    width: 7px;
+    height: 14px;
+    background: #FFE031;
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.flip-hint {
+    display: block;
+    margin-top: 1.2rem;
+    font-size: 0.75rem;
+    opacity: 0.5;
+    letter-spacing: 0.05em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .flip-face, .flip-card { transition: none !important; }
+}
 /* ==========================================================
    SECTIONS
    ========================================================== */
