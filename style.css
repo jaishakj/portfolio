@@ -821,6 +821,19 @@ body.is-loaded .load-reveal[data-load-delay="4"] { transition-delay: 0.36s; }
     background: var(--cream);
 }
 
+.stack-domain {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.domain-icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--black);
+}
+
 .stack-techs {
     padding: 1.2rem 1.5rem;
     display: flex;
