@@ -360,3 +360,12 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     target.focus({ preventScroll: true });
   });
 });
+
+document.querySelectorAll('.proficiency-grid').forEach(el => {
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); }
+        });
+    }, { threshold: 0.3 });
+    obs.observe(el);
+});
