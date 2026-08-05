@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selected Works — jaishakj</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+
+  <!-- Drafting Frame + Signal Rail -->
+  <div class="draft-frame" aria-hidden="true"></div>
+  <div class="signal-rail" aria-hidden="true"><span class="signal-tick" id="signal-tick"></span></div>
+
+  <!-- Pinned Minimal Header / Progress -->
+  <header class="showcase-nav">
+    <div class="showcase-nav__inner">
+      <span class="showcase-nav__brand">7 SELECTED WORKS</span>
+      <div class="showcase-nav__counter">
+        <span id="current-index">01</span><span class="faint">/07</span>
+      </div>
+      <a href="https://github.com/jaishakj" target="_blank" rel="noopener" class="showcase-nav__github">
+        <span>GitHub Profile</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+      </a>
+    </div>
+    <div class="scroll-progress-bar" id="scroll-progress"></div>
+  </header>
+
+  <main class="showcase">
+
+    <!-- PROJECT 01: Support RAG Chatbot -->
+    <section class="section" id="p1" data-color="#4d7cfe" data-index="01">
+      <div class="section__sticky">
+        <div class="section__meta">
+          <div class="project-pill">01 · RAG & VECTOR SEARCH</div>
+          <h2 class="project-title">Support RAG<br><span class="gradient-text blue">Chatbot</span></h2>
+          <p class="project-description">
+            Sub-second knowledge retrieval powering generative answers. Leverages Pinecone vector indexing with LangChain orchestration and Gemini 1.5 Pro to deliver precise, hallucination-free support responses.
+          </p>
+          <div class="tech-stack">
+            <span>LangChain</span><span>Pinecone</span><span>Gemini 1.5 Pro</span><span>FastAPI</span><span>React</span>
+          </div>
+          <a href="https://github.com/jaishakj/Support-RAG-Chatbot" target="_blank" rel="noopener" class="action-btn">
+            Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="section__interactive">
+          <div class="demo-card glass-panel">
+            <div class="card-bar">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+              <span class="card-bar-title">rag-pipeline.engine</span>
+            </div>
+            <div class="chat-viewport" id="rag-chat">
+              <div class="chat-bubble user">How do I configure custom webhook endpoints?</div>
+              <div class="chat-bubble system thinking" id="rag-status">
+                <span class="spinner"></span> Vectorizing query & querying Pinecone...
+              </div>
+            </div>
+            <div class="chat-controls">
+              <button class="chat-btn active" data-query="webhook">Webhook Setup</button>
+              <button class="chat-btn" data-query="auth">OAuth Token</button>
+              <button class="chat-btn" data-query="rate">Rate Limits</button>
+            </div>
+            <div class="metrics-row">
+              <div class="metric"><span class="metric-val" data-target="942">0</span><span class="metric-lbl">Docs Vectorized</span></div>
+              <div class="metric"><span class="metric-val" data-target="98.4">0</span><span class="metric-lbl">% Cosine Match</span></div>
+              <div class="metric"><span class="metric-val" data-target="320">0</span><span class="metric-lbl">ms Latency</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 02: AI Video Summarisation -->
+    <section class="section" id="p2" data-color="#ffb000" data-index="02">
+      <div class="section__sticky">
+        <div class="section__meta">
+          <div class="project-pill amber">02 · COMPUTER VISION + MULTIMODAL</div>
+          <h2 class="project-title">AI Video<br><span class="gradient-text amber">Summarisation</span></h2>
+          <p class="project-description">
+            Dual-model neural pipeline combining YOLOv5 real-time spatial object tracking with BLIP visual question answering. Synthesizes long-form video streams into concise textual summaries.
+          </p>
+          <div class="tech-stack">
+            <span>YOLOv5</span><span>BLIP</span><span>PyTorch</span><span>OpenCV</span><span>FastAPI</span>
+          </div>
+          <a href="https://github.com/jaishakj/Ai-Powered-Video-Summarisation-Multiple-Models" target="_blank" rel="noopener" class="action-btn amber">
+            Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="section__interactive">
+          <div class="demo-card glass-panel">
+            <div class="vision-stage">
+              <div class="vision-viewport">
+                <div class="yolo-box box-1"><span class="yolo-tag">Vehicle 98.4%</span></div>
+                <div class="yolo-box box-2"><span class="yolo-tag">Pedestrian 94.1%</span></div>
+                <div class="radar-line"></div>
+              </div>
+              <div class="blip-stream">
+                <div class="blip-badge">BLIP Dynamic Caption</div>
+                <div class="blip-text" id="blip-caption">"A city crosswalk with passing traffic during sunset"</div>
+              </div>
+            </div>
+            <div class="pipeline-track">
+              <div class="p-step active">Ingest</div>
+              <div class="p-step active">YOLO Detect</div>
+              <div class="p-step active">BLIP Describe</div>
+              <div class="p-step active">LLM Fuse</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 03: Netflix Content Dashboard -->
+    <section class="section" id="p3" data-color="#e50914" data-index="03">
+      <div class="section__sticky">
+        <div class="section__meta">
+          <div class="project-pill red">03 · INTERACTIVE DATA ANALYTICS</div>
+          <h2 class="project-title">Netflix Catalog<br><span class="gradient-text red">Analytics</span></h2>
+          <p class="project-description">
+            Comprehensive exploratory analytics platform mapping 8,800+ titles from 1925 to 2021. Features high-performance interactive Recharts breakdowns by genre shift, rating distributions, and global production origin.
+          </p>
+          <div class="tech-stack">
+            <span>React</span><span>Recharts</span><span>Tailwind</span><span>TypeScript</span>
+          </div>
+          <a href="https://github.com/jaishakj/netflix-content-analysis-dashboard" target="_blank" rel="noopener" class="action-btn red">
+            Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="section__interactive">
+          <div class="demo-card glass-panel">
+            <div class="chart-header">
+              <span class="chart-title" id="chart-title">Global Title Growth (2010–2021)</span>
+              <div class="chart-tabs">
+                <button class="chart-tab active" data-type="growth">Growth</button>
+                <button class="chart-tab" data-type="genres">Genres</button>
+                <button class="chart-tab" data-type="ratings">Ratings</button>
+              </div>
+            </div>
+            <div class="chart-bars-container" id="chart-bars">
+              <!-- Animated via JS -->
+            </div>
+            <div class="chart-stats-grid">
+              <div class="c-stat"><strong>8,807</strong><span>Total Movies & Shows</span></div>
+              <div class="c-stat"><strong>77</strong><span>Unique Categories</span></div>
+              <div class="c-stat"><strong>111</strong><span>Countries Represented</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 04: Infrared Palm Eye Visualizer -->
+    <section class="section" id="p4" data-color="#ff5c3d" data-index="04">
+      <div class="section__sticky">
+        <div class="section__meta">
+          <div class="project-pill crimson">04 · REAL-TIME COMPUTER VISION</div>
+          <h2 class="project-title">Infrared Palm<br><span class="gradient-text crimson">Visualizer</span></h2>
+          <p class="project-description">
+            Biometric optical hand tracking engine using MediaPipe landmark extraction. Overlays thermal-spectrum contours and an animated center-palm optical element streamed via FastAPI.
+          </p>
+          <div class="tech-stack">
+            <span>MediaPipe</span><span>OpenCV</span><span>FastAPI</span><span>WebSockets</span>
+          </div>
+          <a href="https://github.com/jaishakj/Infrared-palm-eye-Hand-Visualizer" target="_blank" rel="noopener" class="action-btn crimson">
+            Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="section__interactive">
+          <div class="demo-card glass-panel center-content">
+            <div class="ir-hand-canvas-wrap">
+              <canvas id="ir-canvas" width="360" height="320"></canvas>
+              <div class="ir-hud">
+                <span class="hud-item"><span class="dot-live"></span> 30 FPS</span>
+                <span class="hud-item">21 LANDMARKS</span>
+                <span class="hud-item">IR THERMAL MODE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 05: Web3 Landing Page -->
+    <section class="section" id="p5" data-color="#8b5cf6" data-index="05">
+      <div class="section__sticky">
+        <div class="section__meta">
+          <div class="project-pill purple">05 · HIGH-PERFORMANCE WEB DESIGN</div>
+          <h2 class="project-title">EOS Web3<br><span class="gradient-text purple">Ecosystem</span></h2>
+          <p class="project-description">
+            Ultra-modern landing interface built on React 19 and Tailwind v4. Features hardware-accelerated hero video integration, dynamic glassmorphic card depth, and scroll-linked spatial transforms.
+          </p>
+          <div class="tech-stack">
+            <span>React 19</span><span>TypeScript</span><span>Vite</span><span>Tailwind v4</span><span>EOS</span>
+          </div>
+          <a href="https://github.com/jaishakj/Web3-Landing-page" target="_blank" rel="noopener" class="action-btn purple">
+            Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="section__interactive">
+          <div class="demo-card glass-panel center-content">
+            <div class="web3-interactive-card" id="web3-card">
+              <div class="web3-card-inner">
+                <div class="web3-chip">EOS PROTOCOL V2</div>
+                <div class="web3-nodes">
+                  <div class="node-item glow"><span>Staking Node</span><strong>14.2% APY</strong></div>
+                  <div class="node-item"><span>Bridge Pool</span><strong>$42.8M TVL</strong></div>
+                  <div class="node-item glow"><span>Zero-Knowledge</span><strong>Active</strong></div>
+                </div>
+                <div class="web3-card-footer">
+                  <span>Scroll/Tilt Interactive</span>
+                  <div class="web3-status-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 06: Strange Attractor Visualiser -->
+    <section class="section" id="p6" data-color="#3fe0ff" data-index="06">
+      <div class="section__sticky">
+        <div class="section__meta">
+          <div class="project-pill cyan">06 · 3D MATHEMATICAL SIMULATION</div>
+          <h2 class="project-title">Strange Attractor<br><span class="gradient-text cyan">3D Renderer</span></h2>
+          <p class="project-description">
+            High-density 3D orbit visualizer rendering up to 80,000 trajectory points for Lorenz, Rössler, Aizawa, and Chen chaotic differential systems in real time.
+          </p>
+          <div class="tech-stack">
+            <span>Three.js</span><span>WebGL</span><span>Streamlit</span><span>Python</span>
+          </div>
+          <a href="https://github.com/jaishakj/Strange-Attractor-Visualiser" target="_blank" rel="noopener" class="action-btn cyan">
+            Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="section__interactive">
+          <div class="demo-card glass-panel center-content">
+            <div class="attractor-wrap">
+              <canvas id="attractor-canvas-3d"></canvas>
+              <div class="attractor-controls">
+                <button class="sys-btn active" data-sys="lorenz">Lorenz</button>
+                <button class="sys-btn" data-sys="rossler">Rössler</button>
+                <button class="sys-btn" data-sys="aizawa">Aizawa</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECT 07: Three-Body Simulation -->
+    <section class="section" id="p7" data-color="#4ad970" data-index="07">
+      <div class="section__sticky">
+        <div class="section__meta">
+          <div class="project-pill green">07 · NUMERICAL PHYSICS ENGINE</div>
+          <h2 class="project-title">Three-Body<br><span class="gradient-text green">Simulation</span></h2>
+          <p class="project-description">
+            Precision N-body gravitational simulator utilizing adaptive Runge-Kutta-Fehlberg (RKF45) integration to accurately map chaotic three-body celestial mechanics without energy drift.
+          </p>
+          <div class="tech-stack">
+            <span>RKF45 Integrator</span><span>Newtonian Gravity</span><span>Canvas API</span>
+          </div>
+          <a href="https://github.com/jaishakj/Three-Body-Simulation-RKF45-Accurate" target="_blank" rel="noopener" class="action-btn green">
+            Repository <span class="arrow">&rarr;</span>
+          </a>
+        </div>
+
+        <div class="section__interactive">
+          <div class="demo-card glass-panel center-content">
+            <div class="threebody-wrap">
+              <canvas id="threebody-canvas-2d"></canvas>
+              <div class="threebody-legend">
+                <span class="legend-dot body-a">Body A (1.5M)</span>
+                <span class="legend-dot body-b">Body B (1.2M)</span>
+                <span class="legend-dot body-c">Body C (1.0M)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
