@@ -369,3 +369,25 @@ document.querySelectorAll('.proficiency-grid').forEach(el => {
     }, { threshold: 0.3 });
     obs.observe(el);
 });
+
+/* ================= SOUND TOGGLE (external audio file) ================= */
+(function () {
+    const btn = document.getElementById('sound-toggle');
+    const audio = document.getElementById('bg-audio');
+    if (!btn || !audio) return;
+
+    audio.volume = 0.35;
+    let playing = false;
+
+    btn.addEventListener('click', () => {
+        playing = !playing;
+        if (playing) {
+            audio.play().catch(() => { playing = false; });
+        } else {
+            audio.pause();
+        }
+        btn.textContent = playing ? 'SND ON' : 'SND OFF';
+        btn.classList.toggle('on', playing);
+        btn.setAttribute('aria-pressed', String(playing));
+    });
+})();
