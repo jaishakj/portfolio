@@ -1409,3 +1409,31 @@ body.has-custom-cursor button {
     opacity:0;
     pointer-events:none;
 }
+
+/* ---------- sound toggle ---------- */
+#sound-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 500;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    padding: 10px 16px;
+    border: 2px solid var(--black);
+    color: var(--black);
+    background: var(--cream);
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: transform 0.2s ease, background 0.3s ease, color 0.3s ease;
+}
+
+#sound-toggle:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+#sound-toggle.on {
+    background: var(--yellow);
+}
