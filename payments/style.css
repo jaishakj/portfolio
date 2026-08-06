@@ -202,39 +202,32 @@ body {
   color: var(--color-subtitle);
 }
 
-/* ===========================
-   QR CODE
-=========================== */
-
-.qr-section{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    margin:26px 0;
+/* ---------- QR Code Box ---------- */
+.qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 24px;
 }
 
-.qr-image{
-    width:180px;
-    height:180px;
-
-    display:block;
-    object-fit:contain;
-
-    background:#fff;
-
-    padding:12px;
-
-    border:1.5px solid rgba(255,255,255,.18);
-
-    transition:
-        transform .25s ease,
-        border-color .25s ease;
+.qr-box__image {
+  display: block;
+  width: 160px;
+  height: 160px;
+  object-fit: contain;
+  background-color: #ffffff;
+  padding: 8px;
+  border: var(--border-hair);
+  border-radius: var(--radius);
 }
 
-.qr-image:hover{
-    transform:scale(1.02);
-    border-color:#ffffff;
+.qr-box__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-subtitle);
 }
 
 /* ---------- UPI Input Box ---------- */
@@ -419,5 +412,10 @@ body {
   .spec-strip {
     font-size: 8px;
     gap: 3px 8px;
+  }
+
+  .qr-box__image {
+    width: 128px;
+    height: 128px;
   }
 }
