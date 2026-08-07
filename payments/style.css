@@ -326,6 +326,10 @@ body {
     border-color var(--transition-fast);
 }
 
+.btn__icon {
+  flex-shrink: 0;
+}
+
 /* Brutalist hover: invert to solid white / black text */
 .btn:hover {
   background-color: var(--color-text);
@@ -366,7 +370,7 @@ body {
 /* ---------- Security note ---------- */
 .security-note {
   margin: 16px 0 0;
-  font-size: 10.5px;
+  font-size: 8.5px;
   line-height: 1.5;
   color: var(--color-subtitle);
   opacity: 0.7;
