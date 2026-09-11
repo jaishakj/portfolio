@@ -1,0 +1,95 @@
+/* ==========================================================
+   Design tokens — Jaishak J portfolio v2
+   Palette: Dark Void / Liquid Lava / Gluon Grey / Slate Grey /
+   Dusty Grey / Snow. Dark mode is the deliberate default —
+   not an inverted afterthought.
+   ========================================================== */
+
+:root {
+  /* ---- raw palette (reference only — components use semantic tokens) ---- */
+  --raw-dark-void: #151419;
+  --raw-liquid-lava: #F56E0F;
+  --raw-gluon-grey: #1B1B1E;
+  --raw-slate-grey: #262626;
+  --raw-dusty-grey: #878787;
+  --raw-snow: #FBFBFB;
+
+  /* ---- semantic tokens: DARK (default) ---- */
+  --color-bg: var(--raw-dark-void);
+  --color-bg-alt: var(--raw-gluon-grey);
+  --color-surface: var(--raw-gluon-grey);
+  --color-surface-strong: var(--raw-slate-grey);
+  --color-ink: var(--raw-snow);
+  --color-text: var(--raw-snow);
+  --color-text-muted: var(--raw-dusty-grey);
+  --color-accent: var(--raw-liquid-lava);
+  --color-accent-soft: rgba(245, 110, 15, 0.14);
+  --color-on-accent: #151419;
+  --color-border: #34333a;
+  --color-shadow: rgba(0, 0, 0, 0.55);
+
+  /* ---- type ---- */
+  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* ---- motion ---- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-brutal: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.2s;
+  --dur-base: 0.4s;
+  --dur-slow: 0.7s;
+
+  /* ---- radii ---- */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* ---- spacing scale ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* ---- layout ---- */
+  --nav-h: 64px;
+  --content-max: 1280px;
+  --edge-pad: clamp(1.25rem, 4vw, 3rem);
+}
+
+:root[data-theme='light'] {
+  --color-bg: var(--raw-snow);
+  --color-bg-alt: #F1F0EE;
+  --color-surface: #FFFFFF;
+  --color-surface-strong: #F1F0EE;
+  --color-ink: var(--raw-dark-void);
+  --color-text: var(--raw-dark-void);
+  --color-text-muted: #6B6B6B;
+  --color-accent: var(--raw-liquid-lava);
+  --color-accent-soft: rgba(245, 110, 15, 0.1);
+  --color-on-accent: #151419;
+  --color-border: #E4E2DD;
+  --color-shadow: rgba(21, 20, 25, 0.16);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --color-bg: var(--raw-snow);
+    --color-bg-alt: #F1F0EE;
+    --color-surface: #FFFFFF;
+    --color-surface-strong: #F1F0EE;
+    --color-ink: var(--raw-dark-void);
+    --color-text: var(--raw-dark-void);
+    --color-text-muted: #6B6B6B;
+    --color-accent-soft: rgba(245, 110, 15, 0.1);
+    --color-border: #E4E2DD;
+    --color-shadow: rgba(21, 20, 25, 0.16);
+  }
+}

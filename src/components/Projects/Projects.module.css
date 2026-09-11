@@ -1,0 +1,34 @@
+.grid {
+  display: grid;
+  gap: var(--space-8);
+}
+
+@media (min-width: 720px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.moreRow {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-12);
+}
+
+.moreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-strong);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-ink);
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: transform var(--dur-fast) var(--ease-out-expo),
+              border-color var(--dur-fast) ease;
+}
+
+.moreBtn:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+}

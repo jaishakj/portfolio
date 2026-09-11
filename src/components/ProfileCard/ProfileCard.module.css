@@ -1,0 +1,181 @@
+.card {
+  perspective: 1600px;
+  cursor: pointer;
+}
+
+.inner {
+  position: relative;
+  min-height: 250px;
+  transform-style: preserve-3d;
+  transition: transform 0.7s var(--ease-brutal);
+}
+
+.flipped { transform: rotateY(180deg); }
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  background: var(--raw-dark-void);
+  color: var(--raw-snow);
+  border: 1px solid var(--color-accent);
+  /* the reference badge silhouette: flat top/bottom/left, right edge
+     tapers to a point at vertical center — a "flag/ribbon" cut, not a
+     corner cut. */
+  clip-path: polygon(
+    0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%
+  );
+  padding: var(--space-6) var(--space-8) var(--space-6) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 6px 6px 0 var(--color-shadow);
+}
+
+.back {
+  border-color: var(--raw-dusty-grey);
+  transform: rotateY(180deg);
+}
+
+/* small rotated accent diamond, top-right — echoes the reference's red tag */
+.diamond {
+  position: absolute;
+  top: 14px;
+  right: 34px;
+  width: 9px;
+  height: 9px;
+  background: var(--color-accent);
+  transform: rotate(45deg);
+}
+
+.diamondAlt { background: var(--raw-dusty-grey); }
+
+.topRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: var(--space-3);
+}
+
+.iconTile {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.iconTileAlt { background: var(--raw-dusty-grey); }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--raw-dusty-grey);
+}
+
+.title {
+  font-family: 'Axera Round', var(--font-display);
+  font-weight: 700;
+  font-size: 1.55rem;
+  letter-spacing: 0.01em;
+  color: var(--raw-snow);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.barcode {
+  height: 12px;
+  margin-bottom: var(--space-4);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--raw-dusty-grey) 0px,
+    var(--raw-dusty-grey) 2px,
+    transparent 2px,
+    transparent 4px,
+    var(--raw-dusty-grey) 4px,
+    var(--raw-dusty-grey) 5px,
+    transparent 5px,
+    transparent 9px
+  );
+  opacity: 0.5;
+  max-width: 180px;
+}
+
+.text {
+  font-size: 0.92rem;
+  color: var(--raw-snow);
+  margin-bottom: auto;
+  max-width: 46ch;
+}
+
+.subtext {
+  color: var(--raw-dusty-grey);
+  font-size: 0.86rem;
+  margin-top: 0.6rem;
+  max-width: 46ch;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: var(--space-6);
+}
+
+.readout {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  padding: 0.28rem 0.6rem;
+  background: rgba(245, 110, 15, 0.08);
+}
+
+.live { display: inline-flex; align-items: center; gap: 0.35rem; }
+.dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #4CAF7D;
+  box-shadow: 0 0 6px #4CAF7D;
+}
+
+.terminal {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: var(--space-6);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+}
+
+.terminal span {
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  padding: 0.32rem 0.6rem;
+  width: fit-content;
+  background: rgba(245, 110, 15, 0.06);
+}
+
+.cursorBlink {
+  display: inline-block;
+  width: 6px;
+  height: 11px;
+  background: var(--color-accent);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }

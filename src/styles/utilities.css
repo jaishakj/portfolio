@@ -1,0 +1,54 @@
+/* Tactile button language shared across the app.
+   idle: hard offset shadow. hover: shadow deepens, surface lifts.
+   active: surface collapses toward the shadow (press feel). */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 0.85rem;
+  border: 1.5px solid var(--color-ink);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-shadow);
+  transform: translate(0, 0);
+  transition: transform 0.35s var(--ease-spring),
+              box-shadow 0.35s var(--ease-spring);
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--color-shadow); }
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 var(--color-shadow);
+  transition-duration: 0.12s;
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  border-color: var(--color-accent);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--color-surface-strong);
+  color: var(--color-text);
+}
+
+.tag svg { flex-shrink: 0; }
+
+.card {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 6px 6px 0 var(--color-shadow);
+}

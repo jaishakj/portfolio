@@ -1,0 +1,44 @@
+.marquee {
+  overflow: hidden;
+  background: var(--color-ink);
+  padding-block: var(--space-3);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: scroll 26s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .track { animation-play-state: paused; }
+
+.group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.item {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  padding-inline: var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  white-space: nowrap;
+}
+
+.dot { color: var(--color-accent); }
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; }
+}

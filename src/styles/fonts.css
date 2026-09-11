@@ -1,0 +1,10 @@
+/* Axera Round — download from https://www.dafont.com/axera-round.font
+   (free for personal + commercial use) and place the .ttf at
+   public/fonts/AxeraRound.ttf — this path is exact, don't rename. */
+@font-face {
+  font-family: 'Axera Round';
+  src: url('/fonts/AxeraRound.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

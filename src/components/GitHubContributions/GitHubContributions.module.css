@@ -1,0 +1,38 @@
+.wrap {
+  padding: var(--space-8);
+}
+
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.title {
+  font-family: 'Axera Round', var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--color-ink);
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-accent);
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 0 var(--color-shadow));
+}
+
+.fallback {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.fallback a { color: var(--color-accent); text-decoration: underline; }

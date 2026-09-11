@@ -1,0 +1,113 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  width: 108px;
+  position: relative;
+}
+
+.link {
+  position: absolute;
+  left: -18px;
+  top: 48px;
+  width: 18px;
+  height: 1.5px;
+  background: repeating-linear-gradient(
+    90deg, var(--color-accent) 0 3px, transparent 3px 6px
+  );
+}
+
+.dial {
+  position: relative;
+  width: 96px;
+  height: 96px;
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+}
+
+.spin {
+  transform-origin: 60px 60px;
+  animation: spin 14s linear infinite;
+}
+
+.spinSlow {
+  transform-origin: 60px 60px;
+  animation: spin 26s linear infinite reverse;
+}
+
+.static .spin,
+.static .spinSlow { animation: none; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+}
+
+.gear {
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  animation: spin 5s linear infinite;
+  transform-origin: center;
+  margin-bottom: 2px;
+}
+
+.static .gear { animation: none; }
+
+.time {
+  font-family: 'Orbitron', var(--font-mono);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.seconds {
+  font-size: 0.6rem;
+  color: var(--color-text-muted);
+  margin-left: 2px;
+}
+
+.sync {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.06em;
+  color: var(--color-accent);
+  margin-top: 2px;
+}
+
+.tick {
+  position: absolute;
+  width: 2px;
+  height: 5px;
+  background: var(--color-accent);
+}
+.tick[data-pos='top'] { top: 0; left: 50%; transform: translateX(-50%); }
+.tick[data-pos='bottom'] { bottom: 0; left: 50%; transform: translateX(-50%); }
+.tick[data-pos='left'] { left: 0; top: 50%; transform: translateY(-50%) rotate(90deg); }
+.tick[data-pos='right'] { right: 0; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+.caption {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 860px) {
+  .wrap { display: none; }
+}

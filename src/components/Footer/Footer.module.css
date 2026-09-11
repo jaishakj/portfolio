@@ -1,0 +1,12 @@
+.footer {
+  padding: var(--space-8) var(--edge-pad);
+  text-align: center;
+  background: var(--color-ink);
+  color: var(--color-bg);
+}
+
+.footer p {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  opacity: 0.7;
+}

@@ -1,0 +1,17 @@
+.header {
+  margin-bottom: var(--space-12);
+}
+
+.title {
+  font-family: 'Axera Round', var(--font-display);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+
+.underline {
+  display: block;
+  width: 64px;
+  height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
