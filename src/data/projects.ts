@@ -66,4 +66,13 @@ export const projects: Project[] = [
     technologies: ['JavaScript'],
     github: 'https://github.com/jaishakj/Majit-frontend',
   },
+  {
+    id: 'netflix-content-analysis',
+    number: '07',
+    title: 'Netflix Content Analysis Dashboard',
+    description:
+      "Interactive dashboard analyzing Netflix's global content catalog (1925–2021) — genre distribution, ratings, release trends, top countries, and directors.",
+    technologies: ['React', 'Recharts', 'JavaScript'],
+    github: 'https://github.com/jaishakj/netflix-content-analysis-dashboard',
+  },
 ];

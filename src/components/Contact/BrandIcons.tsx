@@ -49,3 +49,24 @@ export function TelegramIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function MediumIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path d="M4 6.5c0-.3-.1-.5-.3-.7L2.2 4.2V4h5.2l4 8.8L15 4h5v.2l-1.3 1.2c-.1.1-.2.3-.2.5v10.2c0 .2 0 .4.2.5l1.3 1.2v.2h-6.4v-.2l1.3-1.3c.1-.1.2-.3.2-.5V8.3l-3.7 9.5h-.5L6.6 8.3v6.4c0 .3.1.6.3.9l1.7 2v.2H3.6v-.2l1.7-2c.2-.3.3-.5.3-.9V6.5z" />
+    </svg>
+  );
+}
+
+export function LemmyIcon(props: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <circle cx="12" cy="13" r="7.5" />
+      <circle cx="8.3" cy="7" r="2.6" />
+      <circle cx="15.7" cy="7" r="2.6" />
+      <circle cx="9.3" cy="12.5" r="1.3" fill="#fff" />
+      <circle cx="14.7" cy="12.5" r="1.3" fill="#fff" />
+      <path d="M9.5 16.5c.8.7 1.7 1 2.5 1s1.7-.3 2.5-1" stroke="#fff" strokeWidth="1" fill="none" strokeLinecap="round" />
+    </svg>
+  );
+}

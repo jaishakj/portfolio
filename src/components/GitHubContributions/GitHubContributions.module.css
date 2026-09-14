@@ -27,6 +27,7 @@
 .chart {
   width: 100%;
   height: auto;
+  aspect-ratio: 53 / 7;
   filter: drop-shadow(0 2px 0 var(--color-shadow));
 }
 

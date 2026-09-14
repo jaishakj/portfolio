@@ -33,7 +33,7 @@ export function ProfileCard() {
             <span className={styles.eyebrow}>PROFILE / JJ-2025</span>
           </div>
 
-          <h3 className={styles.title}>PROFESSIONAL</h3>
+          <p className={styles.title}>PROFESSIONAL</p>
           <span className={styles.subtitle}>AI Engineer · Open to Work</span>
 
           <div className={styles.barcode} aria-hidden="true" />
@@ -62,7 +62,7 @@ export function ProfileCard() {
             <span className={styles.eyebrow}>RUNTIME / DEV</span>
           </div>
 
-          <h3 className={styles.title}>DEV MODE</h3>
+          <p className={styles.title}>DEV MODE</p>
           <span className={styles.subtitle}>Status: caffeinated</span>
 
           <div className={styles.barcode} aria-hidden="true" />
