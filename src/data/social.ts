@@ -71,7 +71,7 @@ export const socialLinks: SocialLink[] = [
     // TODO: replace with your real Medium profile URL and @handle
     label: 'Medium',
     value: '@jaishakj (placeholder — confirm handle)',
-    href: 'https://medium.com/@jaishakj',
+    href: 'https://medium.com/@jaishak',
     icon: MediumIcon,
   },
   {
