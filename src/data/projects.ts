@@ -75,4 +75,14 @@ export const projects: Project[] = [
     technologies: ['React', 'Recharts', 'JavaScript'],
     github: 'https://github.com/jaishakj/netflix-content-analysis-dashboard',
   },
+  {
+    id: 'jobtrakt',
+    number: '08',
+    title: 'JobTrakt',
+    description:
+      'A personal job-search workspace for tracking applications, scheduling follow-ups, and reviewing weekly search summaries. Spring Boot API with a PostgreSQL-backed job queue (row locking, retries, dead-letter handling), JWT auth, and a React/TypeScript dashboard.',
+    technologies: ['Java', 'Spring Boot', 'PostgreSQL', 'React', 'TypeScript'],
+    github: 'https://github.com/jaishakj/JobTrakt',
+    featured: true,
+  },
 ];

@@ -10,7 +10,13 @@ export type SkillDomain = {
 export const skillDomains: SkillDomain[] = [
   {
     domain: 'Languages',
-    skills: [{ name: 'Python' }, { name: 'JavaScript' }, { name: 'HTML/CSS' }, { name: 'SQL' }],
+    skills: [
+      { name: 'Python' },
+      { name: 'Java' },
+      { name: 'JavaScript' },
+      { name: 'HTML/CSS' },
+      { name: 'SQL' },
+    ],
   },
   {
     domain: 'AI & Machine Learning',

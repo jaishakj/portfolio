@@ -31,6 +31,46 @@ const Python: Icon = (p: IconProps) => (
   </svg>
 );
 
+const Java: Icon = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" {...p}>
+    {/* steam */}
+    <path
+      fill="none"
+      stroke="#f58219"
+      strokeWidth="1.1"
+      strokeLinecap="round"
+      d="M10.5 2c-1 1.2-1 2 0 2.8.9.7.9 1.5 0 2.2M14 2c-1 1.2-1 2 0 2.8.9.7.9 1.5 0 2.2"
+    />
+    {/* cup handle */}
+    <path
+      fill="none"
+      stroke="#5382a1"
+      strokeWidth="1.3"
+      d="M16.5 10.5H18a2 2 0 0 1 0 4h-1.5"
+    />
+    {/* cup body */}
+    <path
+      fill="#5382a1"
+      d="M5.5 9h11c.55 0 1 .45 1 1 0 2.5-1.9 4.5-4.3 4.5H9.8C7.4 14.5 5.5 12.5 5.5 10c0-.55.45-1 1-1z"
+    />
+    {/* saucer / base swoosh */}
+    <path
+      fill="none"
+      stroke="#f58219"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      d="M8 16.3c-1.3.6-1.3 1.4 0 2 2.2.9 7.8.9 10 0 1.3-.6 1.3-1.4 0-2"
+    />
+    <path
+      fill="none"
+      stroke="#f58219"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      d="M9 19c-.8.4-.8 1 0 1.4 1.7.7 5.3.7 7 0 .8-.4.8-1 0-1.4"
+    />
+  </svg>
+);
+
 const JavaScript: Icon = (p: IconProps) => (
   <svg viewBox="0 0 24 24" {...p}>
     <rect width="24" height="24" rx="4" fill="#F7DF1E" />
@@ -144,6 +184,33 @@ const ShadcnUI: Icon = (p: IconProps) => (
   </svg>
 );
 
+const TypeScript: Icon = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" {...p}>
+    <rect width="24" height="24" rx="4" fill="#3178C6" />
+    <path
+      fill="#fff"
+      d="M13.5 9.5v1.6h-2.7v7.4H8.9v-7.4H6.2V9.5h7.3zm3.9 9.2c-.7 0-1.3-.1-1.8-.4-.5-.3-.9-.6-1.1-1.1l1.3-.8c.3.5.8.8 1.5.8.5 0 .9-.2.9-.6 0-.4-.4-.6-1.2-.9l-.5-.2c-1.2-.5-1.9-1.1-1.9-2.4 0-1.2 1-2.1 2.4-2.1.9 0 1.6.3 2.1.9l-1.2.9c-.3-.3-.6-.5-1-.5-.4 0-.7.2-.7.5 0 .4.3.5 1 .8l.5.2c1.4.6 2.1 1.2 2.1 2.5 0 1.5-1.2 2.3-2.4 2.3z"
+    />
+  </svg>
+);
+
+const SpringBoot: Icon = (p: IconProps) => (
+  <svg viewBox="0 0 24 24" {...p}>
+    <circle cx="12" cy="12" r="10" fill="#6DB33F" />
+    <path
+      fill="#fff"
+      d="M17 7.3c-2.3 2.9-6.2 3.2-9 5.2-1.6 1.1-2 3.1-1.7 4-.1-.5 0-1.1.8-1.6.1.4.4.9.9 1.1-.2-1.1.2-2.1 1-2.6.1.3.3.6.6.8-.1-.9.4-1.7 1.2-2.1 1.9-1 4.8-.7 6.1-2.9.5-.8.6-1.9.1-2.9z"
+    />
+    <path
+      fill="none"
+      stroke="#fff"
+      strokeWidth="0.9"
+      strokeLinecap="round"
+      d="M8 19c2-4 5-6 8-7.5"
+    />
+  </svg>
+);
+
 const Npm: Icon = (p: IconProps) => (
   <svg viewBox="0 0 24 24" {...p}>
     <rect width="24" height="24" rx="3" fill="#CB3837" />
@@ -249,6 +316,7 @@ const ShellCommandsIcon: Icon = TerminalIcon;
 
 export const techIcons: Record<string, Icon> = {
   Python,
+  Java,
   JavaScript,
   'HTML/CSS': HTML5,
   SQL: SQLIcon,
@@ -275,6 +343,8 @@ export const techIcons: Record<string, Icon> = {
   'Express.js': ExpressJS,
   'Shadcn UI': ShadcnUI,
   npm: Npm,
+  TypeScript,
+  'Spring Boot': SpringBoot,
   Vercel,
   Cloudflare,
   'VS Code': VSCode,

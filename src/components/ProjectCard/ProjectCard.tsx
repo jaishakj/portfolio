@@ -1,4 +1,4 @@
-import { ArrowUpRight, Video, MessagesSquare, Orbit, Users, Layers, BarChart3 } from 'lucide-react';
+import { ArrowUpRight, Video, MessagesSquare, Orbit, Users, Layers, BarChart3, Briefcase } from 'lucide-react';
 import type { Project } from '../../data/projects';
 import { Reveal } from '../Reveal/Reveal';
 import { GitHubIcon } from '../Contact/BrandIcons';
@@ -13,6 +13,7 @@ const BANNER_ICONS: Record<string, typeof Video> = {
   'prisoners-dilemma': Users,
   'majit-frontend': Layers,
   'netflix-content-analysis': BarChart3,
+  jobtrakt: Briefcase,
 };
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
