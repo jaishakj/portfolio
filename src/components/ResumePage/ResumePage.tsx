@@ -1,35 +1,35 @@
 import { useEffect, useRef, useState } from 'react';
 import { Download } from 'lucide-react';
 import styles from './ResumePage.module.css';
+import { RadiantLines } from './RadiantLines';
 
 export function ResumePage() {
-  const scrollerRef = useRef<HTMLElement | null>(null);
-  const previousScrollTop = useRef(0);
+  const previousScrollY = useRef(0);
   const idleTimer = useRef<number | undefined>(undefined);
   const [tilt, setTilt] = useState(0);
 
-  useEffect(() => () => window.clearTimeout(idleTimer.current), []);
+  useEffect(() => {
+    previousScrollY.current = window.scrollY;
+    const handleWindowScroll = () => {
+      const direction = Math.sign(window.scrollY - previousScrollY.current);
+      if (direction) setTilt(direction * 0.2);
+      previousScrollY.current = window.scrollY;
+      window.clearTimeout(idleTimer.current);
+      idleTimer.current = window.setTimeout(() => setTilt(0), 180);
+    };
 
-  const handleScroll = () => {
-    const scroller = scrollerRef.current;
-    if (!scroller) return;
-
-    const direction = Math.sign(scroller.scrollTop - previousScrollTop.current);
-    if (direction) setTilt(direction * 0.45);
-    previousScrollTop.current = scroller.scrollTop;
-
-    window.clearTimeout(idleTimer.current);
-    idleTimer.current = window.setTimeout(() => setTilt(0), 180);
-  };
+    window.addEventListener('scroll', handleWindowScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleWindowScroll);
+      window.clearTimeout(idleTimer.current);
+    };
+  }, []);
 
   return (
-    <section
-      ref={scrollerRef}
-      className={styles.folio}
-      onScroll={handleScroll}
-      aria-label="Resume"
-      tabIndex={0}
-    >
+    <main className={styles.folio}>
+      <div className={styles.background} aria-hidden="true">
+        <RadiantLines />
+      </div>
       <article
         id="resume-content"
         className={styles.sheet}
@@ -183,6 +183,6 @@ export function ResumePage() {
           </a>
         </footer>
       </article>
-    </section>
+    </main>
   );
 }

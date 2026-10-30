@@ -27,6 +27,10 @@ function App() {
     return () => window.removeEventListener('hashchange', syncView);
   }, []);
 
+  useEffect(() => {
+    if (isResume) window.scrollTo(0, 0);
+  }, [isResume]);
+
   return (
     <>
       {loading && (
