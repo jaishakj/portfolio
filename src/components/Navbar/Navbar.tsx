@@ -145,6 +145,17 @@ export function Navbar({ logoRevealed }: Props) {
                 </li>
               );
             })}
+            <li role="none">
+              <a
+                href="#resume"
+                role="menuitem"
+                className={activeId === 'resume' ? styles.active : ''}
+                aria-current={activeId === 'resume' ? 'true' : undefined}
+                onClick={() => setPanelOpen(false)}
+              >
+                Resume
+              </a>
+            </li>
           </ul>
         </div>
 
