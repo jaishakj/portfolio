@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Loader } from './components/Loader/Loader';
 import { Navbar } from './components/Navbar/Navbar';
 import { Hero } from './components/Hero/Hero';
@@ -12,12 +12,20 @@ import { GitHubContributions } from './components/GitHubContributions/GitHubCont
 import { Contact } from './components/Contact/Contact';
 import { Footer } from './components/Footer/Footer';
 import { CustomCursor } from './components/CustomCursor/CustomCursor';
+import { ResumePage } from './components/ResumePage/ResumePage';
 import { useLenis } from './hooks/useLenis';
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [logoRevealed, setLogoRevealed] = useState(false);
+  const [isResume, setIsResume] = useState(() => window.location.hash === '#resume');
   useLenis();
+
+  useEffect(() => {
+    const syncView = () => setIsResume(window.location.hash === '#resume');
+    window.addEventListener('hashchange', syncView);
+    return () => window.removeEventListener('hashchange', syncView);
+  }, []);
 
   return (
     <>
@@ -26,52 +34,58 @@ function App() {
       )}
       <div className="grain" />
       <CustomCursor />
-      <a href="#main" className="skip-link">
+      <a href={isResume ? '#resume-content' : '#main'} className="skip-link">
         Skip to content
       </a>
 
       <Navbar logoRevealed={logoRevealed} />
 
-      <main id="main">
-        <Hero />
-        <Marquee />
+      {isResume ? (
+        <ResumePage />
+      ) : (
+        <>
+          <main id="main">
+            <Hero />
+            <Marquee />
 
-        <section id="education" className="section">
-          <div className="container">
-            <SectionHeader title="Education & Experience" />
-            <div style={{ display: 'grid', gap: '3rem' }}>
-              <Education />
-              <Experience />
-            </div>
-          </div>
-        </section>
+            <section id="education" className="section">
+              <div className="container">
+                <SectionHeader title="Education & Experience" />
+                <div style={{ display: 'grid', gap: '3rem' }}>
+                  <Education />
+                  <Experience />
+                </div>
+              </div>
+            </section>
 
-        <section id="skills" className="section">
-          <div className="container">
-            <SectionHeader title="Technical Skills" />
-            <TechStack />
-            <div style={{ marginTop: '3rem' }}>
-              <GitHubContributions />
-            </div>
-          </div>
-        </section>
+            <section id="skills" className="section">
+              <div className="container">
+                <SectionHeader title="Technical Skills" />
+                <TechStack />
+                <div style={{ marginTop: '3rem' }}>
+                  <GitHubContributions />
+                </div>
+              </div>
+            </section>
 
-        <section id="projects" className="section">
-          <div className="container">
-            <SectionHeader title="Featured Projects" />
-            <Projects />
-          </div>
-        </section>
+            <section id="projects" className="section">
+              <div className="container">
+                <SectionHeader title="Featured Projects" />
+                <Projects />
+              </div>
+            </section>
 
-        <section id="contact" className="section" style={{ borderBottom: 'none' }}>
-          <div className="container">
-            <SectionHeader title="Let's Connect" />
-            <Contact />
-          </div>
-        </section>
-      </main>
+            <section id="contact" className="section" style={{ borderBottom: 'none' }}>
+              <div className="container">
+                <SectionHeader title="Let's Connect" />
+                <Contact />
+              </div>
+            </section>
+          </main>
 
-      <Footer />
+          <Footer />
+        </>
+      )}
     </>
   );
 }

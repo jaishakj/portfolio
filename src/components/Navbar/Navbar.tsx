@@ -15,11 +15,24 @@ type Props = {
 
 export function Navbar({ logoRevealed }: Props) {
   const progressRef = useScrollProgress<HTMLDivElement>();
-  const [activeId, setActiveId] = useState('home');
+  const [activeId, setActiveId] = useState(() =>
+    window.location.hash === '#resume' ? 'resume' : 'home'
+  );
   const [panelOpen, setPanelOpen] = useState(false);
   const navRef = useRef<HTMLDivElement | null>(null);
 
-  const activeItem = navItems.find((item) => item.href.slice(1) === activeId) ?? navItems[0];
+  const activeItem = activeId === 'resume'
+    ? { label: 'Resume', href: '#resume' }
+    : navItems.find((item) => item.href.slice(1) === activeId) ?? navItems[0];
+
+  useEffect(() => {
+    const syncActiveView = () => {
+      if (window.location.hash === '#resume') setActiveId('resume');
+      else if (!window.location.hash) setActiveId('home');
+    };
+    window.addEventListener('hashchange', syncActiveView);
+    return () => window.removeEventListener('hashchange', syncActiveView);
+  }, []);
 
   // Scrollspy — unchanged core logic, with one reliability fix: the last
   // section can never satisfy the "-55% bottom" margin once the page runs
@@ -139,7 +152,7 @@ export function Navbar({ logoRevealed }: Props) {
           <MusicPlayer src="/assets/Sleeping-City.mp3" />
           <ThemeToggle />
           <Magnetic strength={8}>
-            <a href="/assets/resume.pdf" target="_blank" rel="noreferrer" className={styles.resumeBtn}>
+            <a href="#resume" className={styles.resumeBtn}>
               Resume
             </a>
           </Magnetic>
