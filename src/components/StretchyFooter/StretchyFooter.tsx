@@ -1,0 +1,225 @@
+// Adapted from the 23rd Stretchy Footer registry component for this Vite app.
+// https://github.com/radiumcoders/23rd.dev/tree/main/registry/stretchy-footer
+"use client"
+
+import {
+  useEffect,
+  useRef,
+  useSyncExternalStore,
+  type ReactNode,
+  type RefObject,
+} from "react"
+import { createPortal } from "react-dom"
+import styles from "./StretchyFooter.module.css"
+
+import {
+  createStretchyFooter,
+  DEFAULT_BLUR,
+  DEFAULT_COLORS,
+  DEFAULT_COLUMNS,
+  DEFAULT_DAMPING,
+  DEFAULT_GLOW,
+  DEFAULT_MAX_STRETCH,
+  DEFAULT_STIFFNESS,
+  type StretchyFooterInstance,
+  type StretchyFooterOptions,
+} from "./StretchyFooterVanilla"
+
+export {
+  DEFAULT_BLUR,
+  DEFAULT_COLORS,
+  DEFAULT_COLUMNS,
+  DEFAULT_DAMPING,
+  DEFAULT_GLOW,
+  DEFAULT_MAX_STRETCH,
+  DEFAULT_STIFFNESS,
+  playStretchyFooterDemo,
+  STRETCHY_FOOTER_PLAY,
+} from "./StretchyFooterVanilla"
+export type {
+  StretchyFooterInstance,
+  StretchyFooterOptions,
+  StretchyFooterPlayDetail,
+} from "./StretchyFooterVanilla"
+
+export type StretchyFooterProps = StretchyFooterOptions & {
+  className?: string
+  /**
+   * Page content inside the overflow scroller.
+   * Ignored when `scrollRef` / `windowScroll` paint overlay-only.
+   */
+  children?: ReactNode
+  /**
+   * External scroll container. When set, this component only paints the
+   * aurora overlay and binds overscroll to that element.
+   * When omitted (and `windowScroll` is false), this component *is* the scroller.
+   */
+  scrollRef?: RefObject<HTMLElement | null>
+  /**
+   * Bind overscroll to the window and paint a fixed bottom aurora.
+   * Use on full pages instead of a nested scroller.
+   */
+  windowScroll?: boolean
+  /**
+   * Element that lifts with the stretch (CSS selector).
+   * Used with `windowScroll` / `scrollRef`. Default `[data-stretchy-page]`.
+   */
+  contentSelector?: string
+  /** Accessible label for the scroll region. */
+  label?: string
+}
+
+const noopSubscribe = () => () => {}
+
+/**
+ * Dia-style stretchy overflow: overscroll past the bottom and a rainbow
+ * aurora stretches up from the floor while the page lifts with it, then
+ * springs back with a wobble. Honors `prefers-reduced-motion`.
+ */
+export function StretchyFooter({
+  className,
+  children,
+  scrollRef,
+  windowScroll = false,
+  contentSelector = "[data-stretchy-page]",
+  maxStretch = DEFAULT_MAX_STRETCH,
+  colors = DEFAULT_COLORS,
+  stiffness = DEFAULT_STIFFNESS,
+  damping = DEFAULT_DAMPING,
+  columns = DEFAULT_COLUMNS,
+  blur = DEFAULT_BLUR,
+  glow = DEFAULT_GLOW,
+  flip = false,
+  rotate = 0,
+  label = "Stretchy overflow",
+  demoId,
+}: StretchyFooterProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const instanceRef = useRef<StretchyFooterInstance | null>(null)
+  // The window aurora portals to <body>, which only exists on the client.
+  const onClient = useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false
+  )
+  const portalHost = windowScroll && onClient ? document.body : null
+  const rootClassName = [styles.windowRoot, className].filter(Boolean).join(" ")
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    const scroller = windowScroll
+      ? window
+      : (scrollRef?.current ?? scrollerRef.current)
+    if (!canvas || !scroller) return
+    const content =
+      windowScroll || scrollRef ? contentSelector : contentRef.current
+    instanceRef.current = createStretchyFooter(
+      { canvas, scroller, content },
+      {
+        maxStretch,
+        colors,
+        stiffness,
+        damping,
+        columns,
+        blur,
+        glow,
+        flip,
+        rotate,
+        demoId,
+      }
+    )
+    return () => {
+      instanceRef.current?.destroy()
+      instanceRef.current = null
+    }
+    // Options stream in through setOptions; only the wiring remounts.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [windowScroll, scrollRef, contentSelector, portalHost])
+
+  useEffect(() => {
+    instanceRef.current?.setOptions({
+      maxStretch,
+      colors,
+      stiffness,
+      damping,
+      columns,
+      blur,
+      glow,
+      flip,
+      rotate,
+      demoId,
+    })
+  }, [
+    maxStretch,
+    colors,
+    stiffness,
+    damping,
+    columns,
+    blur,
+    glow,
+    flip,
+    rotate,
+    demoId,
+  ])
+
+  const aurora = (
+    <div
+      aria-hidden
+      className={styles.aurora}
+      style={{ height: maxStretch }}
+    >
+      <canvas ref={canvasRef} className={styles.canvas} />
+    </div>
+  )
+
+  if (windowScroll) {
+    if (!portalHost) return null
+    // Portal so `fixed` stays on the viewport; the lifted page is
+    // transformed and would otherwise pin it to the content.
+    return createPortal(
+      <div
+        data-slot="stretchy-footer"
+        className={rootClassName}
+        style={{ height: maxStretch }}
+      >
+        {aurora}
+      </div>,
+      portalHost
+    )
+  }
+
+  if (scrollRef) {
+    return (
+      <div
+        data-slot="stretchy-footer"
+        className={[styles.externalRoot, className].filter(Boolean).join(" ")}
+        style={{ height: maxStretch }}
+      >
+        {aurora}
+      </div>
+    )
+  }
+
+  // The aurora sits beside the scroller, not in it, so it stays on the
+  // viewport floor instead of scrolling away with the content.
+  return (
+    <div
+      data-slot="stretchy-footer"
+      className={[styles.container, className].filter(Boolean).join(" ")}
+    >
+      <div
+        ref={scrollerRef}
+        role="region"
+        aria-label={label}
+        className={styles.scroller}
+      >
+        <div ref={contentRef} className={styles.content}>
+          {children}
+        </div>
+      </div>
+      {aurora}
+    </div>
+  )
+}

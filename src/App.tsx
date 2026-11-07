@@ -13,7 +13,18 @@ import { Contact } from './components/Contact/Contact';
 import { Footer } from './components/Footer/Footer';
 import { CustomCursor } from './components/CustomCursor/CustomCursor';
 import { ResumePage } from './components/ResumePage/ResumePage';
+import { StretchyFooter } from './components/StretchyFooter/StretchyFooter';
 import { useLenis } from './hooks/useLenis';
+
+const STRETCHY_FOOTER_COLORS = [
+  '#ffdfc0',
+  '#ff9b61',
+  '#f56e0f',
+  '#e45019',
+  '#a12f22',
+  '#54191d',
+  '#151419',
+];
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -48,46 +59,49 @@ function App() {
         <ResumePage />
       ) : (
         <>
-          <main id="main">
-            <Hero />
-            <Marquee />
+          <div data-stretchy-page>
+            <main id="main">
+              <Hero />
+              <Marquee />
 
-            <section id="education" className="section">
-              <div className="container">
-                <SectionHeader title="Education & Experience" />
-                <div className="section-split">
-                  <Education />
-                  <Experience />
+              <section id="education" className="section">
+                <div className="container">
+                  <SectionHeader title="Education & Experience" />
+                  <div className="section-split">
+                    <Education />
+                    <Experience />
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section id="skills" className="section">
-              <div className="container">
-                <SectionHeader title="Technical Skills" />
-                <TechStack />
-                <div className="section-followup">
-                  <GitHubContributions />
+              <section id="skills" className="section">
+                <div className="container">
+                  <SectionHeader title="Technical Skills" />
+                  <TechStack />
+                  <div className="section-followup">
+                    <GitHubContributions />
+                  </div>
                 </div>
-              </div>
-            </section>
+              </section>
 
-            <section id="projects" className="section">
-              <div className="container">
-                <SectionHeader title="Featured Projects" />
-                <Projects />
-              </div>
-            </section>
+              <section id="projects" className="section">
+                <div className="container">
+                  <SectionHeader title="Featured Projects" />
+                  <Projects />
+                </div>
+              </section>
 
-            <section id="contact" className="section section-last">
-              <div className="container">
-                <SectionHeader title="Let's Connect" />
-                <Contact />
-              </div>
-            </section>
-          </main>
+              <section id="contact" className="section section-last">
+                <div className="container">
+                  <SectionHeader title="Let's Connect" />
+                  <Contact />
+                </div>
+              </section>
+            </main>
 
-          <Footer />
+            <Footer />
+          </div>
+          <StretchyFooter windowScroll colors={STRETCHY_FOOTER_COLORS} />
         </>
       )}
     </>
