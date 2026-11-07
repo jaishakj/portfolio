@@ -1,3 +1,12 @@
+.ribbon {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9996;
+}
+
 .dot {
   position: fixed;
   top: 0;
@@ -32,7 +41,7 @@
 }
 
 @media (pointer: coarse) {
-  .dot, .ring { display: none; }
+  .ribbon, .dot, .ring { display: none; }
 }
 
-@media print { .dot, .ring { display: none; } }
+@media print { .ribbon, .dot, .ring { display: none; } }
