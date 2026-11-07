@@ -5,9 +5,10 @@ import { TechnoGauge } from '../ProfileCard/TechnoGauge';
 import { Magnetic } from '../Magnetic/Magnetic';
 import { GitHubIcon, LinkedInIcon } from '../Contact/BrandIcons';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+import { Mascot } from '../Mascot/Mascot';
 import styles from './Hero.module.css';
 
-const PORTRAITS = ['/assets/anime1.png', '/assets/anime2.png'];
+const PHOTO_PORTRAIT = '/assets/anime2.png';
 const TICK_ON = '/assets/switch-on.mp3';
 const TICK_OFF = '/assets/switch-off.mp3';
 
@@ -32,7 +33,7 @@ export function Hero() {
 
   const flipPortrait = () => {
     setPortraitIndex((i) => {
-      const next = (i + 1) % PORTRAITS.length;
+      const next = (i + 1) % 2;
       const sound = next === 1 ? tickOnRef.current : tickOffRef.current;
       sound?.play().catch(() => {
         /* autoplay/permission failure — swap the image silently */
@@ -99,13 +100,25 @@ export function Hero() {
 
           <div ref={imageRef} className={styles.right}>
             <div className={styles.imageFrame}>
-              <img
-                src={PORTRAITS[portraitIndex]}
-                alt={portraitIndex === 0 ? 'Illustrated portrait of Jaishak J' : 'Portrait photograph of Jaishak J'}
-                width={1280}
-                height={1280}
-                fetchPriority="high"
-              />
+              {portraitIndex === 0 ? (
+                <div className={styles.mascotStage}>
+                  <Mascot
+                    directions="/mascots/user-directions.webp"
+                    reactions="/mascots/user-reactions.webp"
+                    size={280}
+                    label="Jaishak's animated mascot"
+                    className={styles.mascot}
+                  />
+                </div>
+              ) : (
+                <img
+                  src={PHOTO_PORTRAIT}
+                  alt="Portrait photograph of Jaishak J"
+                  width={1280}
+                  height={1280}
+                  fetchPriority="high"
+                />
+              )}
             </div>
 
             <Magnetic strength={4}>
@@ -113,7 +126,7 @@ export function Hero() {
                 type="button"
                 role="switch"
                 aria-checked={portraitIndex === 1}
-                aria-label="Switch portrait"
+                aria-label="Switch between mascot and portrait photo"
                 className={styles.switch}
                 onClick={flipPortrait}
                 data-cursor-hover
