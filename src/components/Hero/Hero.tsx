@@ -3,7 +3,7 @@ import gsap from 'gsap';
 import { ProfileCard } from '../ProfileCard/ProfileCard';
 import { TechnoGauge } from '../ProfileCard/TechnoGauge';
 import { Magnetic } from '../Magnetic/Magnetic';
-import { GitHubIcon } from '../Contact/BrandIcons';
+import { GitHubIcon, LinkedInIcon } from '../Contact/BrandIcons';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 import styles from './Hero.module.css';
 
@@ -62,29 +62,33 @@ export function Hero() {
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.left}>
+            <p className={styles.eyebrow}>JAISHAK J <span>· Chennai, India</span></p>
             <h1 ref={titleRef} className={styles.title}>
-              <span>Build the</span>
-              <span>future with</span>
-              <span className={styles.accentLine}>AI Engineering.</span>
+              <span>I build</span>
+              <span>AI systems &</span>
+              <span className={styles.accentLine}>useful software.</span>
             </h1>
 
             <div className={styles.badgeRow}>
-              <Magnetic strength={16}>
-                <a
-                  href="https://github.com/jaishakj"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={styles.badge}
-                  aria-label="Visit GitHub profile"
-                  data-cursor-hover
-                >
-                  <GitHubIcon width={22} height={22} />
-                </a>
-              </Magnetic>
               <p className={styles.tagline}>
-                AI Engineer specializing in machine learning, computer vision, and
-                full-stack development.
+                AI Engineer working across machine learning, computer vision, and
+                full-stack development—from early experiments to usable products.
               </p>
+            </div>
+
+            <div className={styles.ctaRow}>
+              <a href="#projects" className={styles.primaryAction}>Explore projects <span aria-hidden="true">↗</span></a>
+              <a href="#resume" className={styles.secondaryAction}>View résumé</a>
+              <a href="mailto:jaishak.dev@gmail.com" className={styles.contactAction}>Get in touch</a>
+            </div>
+
+            <div className={styles.socialRow} aria-label="Professional profiles">
+              <a href="https://github.com/jaishakj" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+                <GitHubIcon width={17} height={17} /> <span>GitHub</span>
+              </a>
+              <a href="https://www.linkedin.com/in/jaishakj" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+                <LinkedInIcon width={17} height={17} /> <span>LinkedIn</span>
+              </a>
             </div>
 
             <div className={styles.profileRow}>
@@ -95,7 +99,13 @@ export function Hero() {
 
           <div ref={imageRef} className={styles.right}>
             <div className={styles.imageFrame}>
-              <img src={PORTRAITS[portraitIndex]} alt="Illustrated portrait of Jaishak J" />
+              <img
+                src={PORTRAITS[portraitIndex]}
+                alt={portraitIndex === 0 ? 'Illustrated portrait of Jaishak J' : 'Portrait photograph of Jaishak J'}
+                width={1280}
+                height={1280}
+                fetchPriority="high"
+              />
             </div>
 
             <Magnetic strength={4}>

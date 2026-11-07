@@ -1,19 +1,13 @@
-Missing binary assets — drop these in before deploying:
+# Portfolio assets
 
-- anime1.png            (hero portrait, default state)
-- anime2.png            (hero portrait, shown after flipping the switch)
-- switch-on.mp3         (short tick sound — plays when the portrait switch flips to position 02)
-- switch-off.mp3        (short tick sound — plays when it flips back to position 01)
-- resume.pdf            (linked from the navbar "Resume" button)
-- Sleeping-City.mp3     (background track for the music player)
-- og-cover.png          (1200x630 social share image, referenced in index.html meta tags)
+The site uses the following files:
 
-No longer used (safe to delete):
-- jaishak-logo.jpg      (navbar now renders "Jaishak" as styled text, not this image)
+- `anime1.png` and `anime2.png` for the portrait switch in the hero.
+- `switch-on.mp3` and `switch-off.mp3` for its optional sound effects.
+- `Sleeping-City.mp3` for the user-controlled music player.
+- `Jaishak-J-Resume.pdf` as the current résumé download, aligned with the shared portfolio data.
+- `og-cover.svg` from the public root for social sharing metadata.
 
-Also add to /public root (not /public/assets):
-- favicon-16x16.png, favicon-32x32.png, apple-touch-icon.png
+The original `resume.pdf` and `resume_new.pdf` files are retained as source copies. The website links to the updated résumé above and also provides browser print-to-PDF.
 
-Also needed — the Axera Round font (used on section headers + the profile card title):
-- Download the free .ttf from https://www.dafont.com/axera-round.font
-- Place it at exactly: public/fonts/AxeraRound.ttf
+Favicons are stored in the `public` root. The Axera Round font is stored at `public/fonts/AxeraRound.ttf`.

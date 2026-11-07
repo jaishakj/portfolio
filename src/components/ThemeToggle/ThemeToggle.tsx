@@ -1,10 +1,12 @@
 import { Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../../hooks/useTheme';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 import styles from './ThemeToggle.module.css';
 
 export function ThemeToggle() {
   const { theme, toggle } = useTheme();
+  const reducedMotion = useReducedMotion();
   const isDark = theme === 'dark';
 
   return (
@@ -18,10 +20,10 @@ export function ThemeToggle() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={theme}
-          initial={{ rotate: -90, opacity: 0 }}
+          initial={reducedMotion ? false : { rotate: -90, opacity: 0 }}
           animate={{ rotate: 0, opacity: 1 }}
-          exit={{ rotate: 90, opacity: 0 }}
-          transition={{ duration: 0.25 }}
+          exit={reducedMotion ? { opacity: 0 } : { rotate: 90, opacity: 0 }}
+          transition={{ duration: reducedMotion ? 0 : 0.25 }}
           className={styles.icon}
         >
           {isDark ? <Moon size={16} /> : <Sun size={16} />}

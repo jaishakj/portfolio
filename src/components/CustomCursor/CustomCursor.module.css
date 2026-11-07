@@ -34,3 +34,5 @@
 @media (pointer: coarse) {
   .dot, .ring { display: none; }
 }
+
+@media print { .dot, .ring { display: none; } }

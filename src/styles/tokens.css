@@ -28,6 +28,64 @@
   --color-border: #34333a;
   --color-shadow: rgba(0, 0, 0, 0.55);
 
+  /* Material 3 semantic roles, mapped to the portfolio's existing palette. */
+  --md-sys-color-primary: var(--color-accent);
+  --md-sys-color-on-primary: var(--color-on-accent);
+  --md-sys-color-primary-container: #542b17;
+  --md-sys-color-on-primary-container: #ffdccc;
+  --md-sys-color-secondary: #d5bcae;
+  --md-sys-color-on-secondary: #392a22;
+  --md-sys-color-secondary-container: #514138;
+  --md-sys-color-on-secondary-container: #f3dfd3;
+  --md-sys-color-tertiary: #c7c2e8;
+  --md-sys-color-on-tertiary: #302d4b;
+  --md-sys-color-tertiary-container: #48455f;
+  --md-sys-color-on-tertiary-container: #e5e0ff;
+  --md-sys-color-error: #ffb4ab;
+  --md-sys-color-on-error: #690005;
+  --md-sys-color-error-container: #93000a;
+  --md-sys-color-on-error-container: #ffdad6;
+  --md-sys-color-surface: var(--color-bg);
+  --md-sys-color-surface-dim: #151419;
+  --md-sys-color-surface-bright: #3b383f;
+  --md-sys-color-surface-container-lowest: #100f13;
+  --md-sys-color-surface-container-low: #19181d;
+  --md-sys-color-surface-container: var(--color-surface);
+  --md-sys-color-surface-container-high: var(--color-surface-strong);
+  --md-sys-color-surface-container-highest: #343238;
+  --md-sys-color-on-surface: var(--color-text);
+  --md-sys-color-on-surface-variant: var(--color-text-muted);
+  --md-sys-color-inverse-surface: #e6e1e6;
+  --md-sys-color-inverse-on-surface: #313034;
+  --md-sys-color-inverse-primary: #9b4300;
+  --md-sys-color-outline: #aaa3a0;
+  --md-sys-color-outline-variant: var(--color-border);
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-duration-medium: 300ms;
+  --md-sys-typescale-display-large-font: var(--font-display);
+  --md-sys-typescale-display-large-size: clamp(3rem, 7.2vw, 6.25rem);
+  --md-sys-typescale-display-large-weight: 400;
+  --md-sys-typescale-display-large-line-height: .96;
+  --md-sys-typescale-display-large-tracking: -.025em;
+  --md-sys-typescale-headline-medium-font: var(--font-display);
+  --md-sys-typescale-headline-medium-size: clamp(2rem, 4.5vw, 3.25rem);
+  --md-sys-typescale-headline-medium-weight: 400;
+  --md-sys-typescale-headline-medium-line-height: 1.04;
+  --md-sys-typescale-body-large-font: var(--font-body);
+  --md-sys-typescale-body-large-size: 1rem;
+  --md-sys-typescale-body-large-weight: 400;
+  --md-sys-typescale-body-large-line-height: 1.55;
+  --md-sys-typescale-label-medium-font: var(--font-mono);
+  --md-sys-typescale-label-medium-size: .75rem;
+  --md-sys-typescale-label-medium-weight: 500;
+  --md-sys-typescale-label-medium-tracking: .04em;
+
   /* ---- type ---- */
   --font-display: 'Anton', 'Arial Narrow', sans-serif;
   --font-body: 'Inter', -apple-system, sans-serif;
@@ -78,6 +136,31 @@
   --color-on-accent: #151419;
   --color-border: #E4E2DD;
   --color-shadow: rgba(21, 20, 25, 0.16);
+  --md-sys-color-primary-container: #ffdbca;
+  --md-sys-color-on-primary-container: #341100;
+  --md-sys-color-secondary: #6c5b52;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #f5ded2;
+  --md-sys-color-on-secondary-container: #251911;
+  --md-sys-color-tertiary: #5b5877;
+  --md-sys-color-on-tertiary: #ffffff;
+  --md-sys-color-tertiary-container: #e3dfff;
+  --md-sys-color-on-tertiary-container: #191633;
+  --md-sys-color-error: #ba1a1a;
+  --md-sys-color-on-error: #ffffff;
+  --md-sys-color-error-container: #ffdad6;
+  --md-sys-color-on-error-container: #410002;
+  --md-sys-color-surface-dim: #dedbd7;
+  --md-sys-color-surface-bright: #fbf9f6;
+  --md-sys-color-surface-container-lowest: #ffffff;
+  --md-sys-color-surface-container-low: #f7f5f2;
+  --md-sys-color-surface-container-high: #e9e7e4;
+  --md-sys-color-surface-container-highest: #e3e1de;
+  --md-sys-color-on-surface-variant: #5b5a5d;
+  --md-sys-color-outline: #777579;
+  --md-sys-color-inverse-surface: #303034;
+  --md-sys-color-inverse-on-surface: #f3f0f3;
+  --md-sys-color-inverse-primary: #ffb68d;
 }
 
 @media (prefers-color-scheme: light) {
@@ -92,5 +175,30 @@
     --color-accent-soft: rgba(245, 110, 15, 0.1);
     --color-border: #E4E2DD;
     --color-shadow: rgba(21, 20, 25, 0.16);
+    --md-sys-color-primary-container: #ffdbca;
+    --md-sys-color-on-primary-container: #341100;
+    --md-sys-color-secondary: #6c5b52;
+    --md-sys-color-on-secondary: #ffffff;
+    --md-sys-color-secondary-container: #f5ded2;
+    --md-sys-color-on-secondary-container: #251911;
+    --md-sys-color-tertiary: #5b5877;
+    --md-sys-color-on-tertiary: #ffffff;
+    --md-sys-color-tertiary-container: #e3dfff;
+    --md-sys-color-on-tertiary-container: #191633;
+    --md-sys-color-error: #ba1a1a;
+    --md-sys-color-on-error: #ffffff;
+    --md-sys-color-error-container: #ffdad6;
+    --md-sys-color-on-error-container: #410002;
+    --md-sys-color-surface-dim: #dedbd7;
+    --md-sys-color-surface-bright: #fbf9f6;
+    --md-sys-color-surface-container-lowest: #ffffff;
+    --md-sys-color-surface-container-low: #f7f5f2;
+    --md-sys-color-surface-container-high: #e9e7e4;
+    --md-sys-color-surface-container-highest: #e3e1de;
+    --md-sys-color-on-surface-variant: #5b5a5d;
+    --md-sys-color-outline: #777579;
+    --md-sys-color-inverse-surface: #303034;
+    --md-sys-color-inverse-on-surface: #f3f0f3;
+    --md-sys-color-inverse-primary: #ffb68d;
   }
 }

@@ -21,7 +21,10 @@ export function Contact() {
                 <span className={styles.circle}>
                   <Icon width={22} height={22} />
                 </span>
-                <span className={styles.label}>{link.label}</span>
+                <span className={styles.copy}>
+                  <span className={styles.label}>{link.label}</span>
+                  <span className={styles.value}>{link.value}</span>
+                </span>
               </a>
             </Magnetic>
           </Reveal>

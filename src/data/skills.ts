@@ -26,6 +26,7 @@ export const skillDomains: SkillDomain[] = [
       { name: 'PyTorch' },
       { name: 'NLP' },
       { name: 'Computer Vision' },
+      { name: 'OpenCV' },
       { name: 'LLM' },
       { name: 'Prompt Engineering' },
       { name: 'AI Automation' },

@@ -48,7 +48,7 @@
 .chrome span:first-child { background: var(--color-accent); }
 
 .logo {
-  font-family: 'Orbitron', var(--font-display);
+  font-family: var(--font-display);
   font-weight: 900;
   font-size: 1.15rem;
   letter-spacing: 0.02em;
@@ -89,6 +89,7 @@
 }
 
 .sectionTrigger {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -149,11 +150,14 @@
 
 .panel a {
   display: block;
-  padding: 0.5rem 0.7rem;
+  min-height: 44px;
+  padding: 0.65rem 0.7rem;
   border-radius: 6px;
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
   transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
 }
 
@@ -189,8 +193,8 @@
 
 .menuToggle {
   display: none;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-sm);
@@ -214,6 +218,8 @@
 @media (prefers-reduced-motion: reduce) {
   .panel { transition: opacity 0.01ms; }
 }
+
+@media print { .header { display: none; } }
 
 @media (max-width: 860px) {
   .chrome { display: none; }

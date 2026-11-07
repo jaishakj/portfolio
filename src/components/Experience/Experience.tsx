@@ -8,7 +8,7 @@ export function Experience() {
     <div className={styles.list}>
       {experience.map((item) => (
         <Reveal key={item.id}>
-          <div className={`card ${styles.item}`}>
+          <article className={`card ${styles.item}`}>
             <div className={styles.icon}>
               <Briefcase size={20} />
             </div>
@@ -22,7 +22,7 @@ export function Experience() {
                 ))}
               </ul>
             </div>
-          </div>
+          </article>
         </Reveal>
       ))}
     </div>

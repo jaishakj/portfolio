@@ -20,6 +20,8 @@ export function Navbar({ logoRevealed }: Props) {
   );
   const [panelOpen, setPanelOpen] = useState(false);
   const navRef = useRef<HTMLDivElement | null>(null);
+  const sectionTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const menuToggleRef = useRef<HTMLButtonElement | null>(null);
 
   const activeItem = activeId === 'resume'
     ? { label: 'Resume', href: '#resume' }
@@ -29,6 +31,7 @@ export function Navbar({ logoRevealed }: Props) {
     const syncActiveView = () => {
       if (window.location.hash === '#resume') setActiveId('resume');
       else if (!window.location.hash) setActiveId('home');
+      setPanelOpen(false);
     };
     window.addEventListener('hashchange', syncActiveView);
     return () => window.removeEventListener('hashchange', syncActiveView);
@@ -73,23 +76,27 @@ export function Navbar({ logoRevealed }: Props) {
   // Escape closes the panel (desktop expand or mobile menu, same component).
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setPanelOpen(false);
+      if (e.key === 'Escape' && panelOpen) {
+        setPanelOpen(false);
+        if (window.matchMedia('(max-width: 860px)').matches) menuToggleRef.current?.focus();
+        else sectionTriggerRef.current?.focus();
+      }
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, []);
+  }, [panelOpen]);
 
   // Click outside closes it — necessary now that it's a floating panel
   // rather than an always-visible link row.
   useEffect(() => {
     if (!panelOpen) return;
-    const onClick = (e: MouseEvent) => {
+    const onClick = (e: PointerEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setPanelOpen(false);
       }
     };
-    document.addEventListener('mousedown', onClick);
-    return () => document.removeEventListener('mousedown', onClick);
+    document.addEventListener('pointerdown', onClick);
+    return () => document.removeEventListener('pointerdown', onClick);
   }, [panelOpen]);
 
   return (
@@ -115,9 +122,10 @@ export function Navbar({ logoRevealed }: Props) {
           <button
             type="button"
             className={styles.sectionTrigger}
+            ref={sectionTriggerRef}
             onClick={() => setPanelOpen((v) => !v)}
-            aria-haspopup="menu"
             aria-expanded={panelOpen}
+            aria-controls="section-navigation"
             aria-label="Section navigation"
           >
             <span className={styles.sectionDot} aria-hidden="true" />
@@ -126,18 +134,18 @@ export function Navbar({ logoRevealed }: Props) {
           </button>
 
           <ul
+            id="section-navigation"
             className={`${styles.panel} ${panelOpen ? styles.panelOpen : ''}`}
-            role="menu"
+            aria-label="Sections"
           >
             {navItems.map((item) => {
               const isActive = item.href.slice(1) === activeId;
               return (
-                <li key={item.href} role="none">
+                <li key={item.href}>
                   <a
                     href={item.href}
-                    role="menuitem"
                     className={isActive ? styles.active : ''}
-                    aria-current={isActive ? 'true' : undefined}
+                    aria-current={isActive ? 'location' : undefined}
                     onClick={() => setPanelOpen(false)}
                   >
                     {item.label}
@@ -145,12 +153,11 @@ export function Navbar({ logoRevealed }: Props) {
                 </li>
               );
             })}
-            <li role="none">
+            <li>
               <a
                 href="#resume"
-                role="menuitem"
                 className={activeId === 'resume' ? styles.active : ''}
-                aria-current={activeId === 'resume' ? 'true' : undefined}
+                aria-current={activeId === 'resume' ? 'page' : undefined}
                 onClick={() => setPanelOpen(false)}
               >
                 Resume
@@ -170,8 +177,10 @@ export function Navbar({ logoRevealed }: Props) {
           <button
             type="button"
             className={styles.menuToggle}
+            ref={menuToggleRef}
             onClick={() => setPanelOpen((v) => !v)}
             aria-expanded={panelOpen}
+            aria-controls="section-navigation"
             aria-label={panelOpen ? 'Close menu' : 'Open menu'}
           >
             {panelOpen ? <X size={18} /> : <Menu size={18} />}

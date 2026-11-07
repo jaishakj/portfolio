@@ -1,0 +1,144 @@
+.preview {
+  position: relative;
+  min-height: 220px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+  padding: 1.5rem;
+  background:
+    radial-gradient(ellipse at 78% 15%, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 48%),
+    var(--md-sys-color-surface-container-low);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+
+.preview::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .16;
+  background-image: linear-gradient(var(--md-sys-color-outline-variant) 1px, transparent 1px), linear-gradient(90deg, var(--md-sys-color-outline-variant) 1px, transparent 1px);
+  background-size: 30px 30px;
+  mask-image: linear-gradient(145deg, black, transparent 82%);
+}
+
+.previewLabel {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-full);
+  background: color-mix(in srgb, var(--md-sys-color-surface) 86%, transparent);
+  color: var(--md-sys-color-on-surface-variant);
+  padding: 4px 9px;
+  font: 500 .58rem/1.2 var(--font-mono);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.canvas {
+  width: min(100%, 440px);
+  min-height: 162px;
+  display: grid;
+  place-items: center;
+  color: var(--md-sys-color-primary);
+}
+
+.videoFrame, .chatFrame, .attractorFrame, .orbitFrame, .gameFrame, .codeFrame, .dashboardFrame, .workflowFrame {
+  width: 100%;
+  min-height: 162px;
+  overflow: hidden;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--md-sys-color-outline-variant) 78%, transparent);
+  border-radius: var(--md-sys-shape-corner-large);
+  background: color-mix(in srgb, var(--md-sys-color-surface) 88%, transparent);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--color-shadow) 65%, transparent), 0 1px 0 color-mix(in srgb, var(--color-ink) 6%, transparent) inset;
+  backdrop-filter: blur(12px);
+}
+
+.frameTop, .chatHead, .plotLabel, .plotAxis, .orbitReadout, .gameFooter, .chartLegend, .workflowFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  color: var(--md-sys-color-on-surface-variant);
+  font: 500 .57rem/1.3 var(--font-mono);
+  letter-spacing: .06em;
+}
+
+.frameTop > span:first-child, .chatHead > span:first-child { width: 6px; height: 6px; border-radius: 50%; background: var(--md-sys-color-primary); }
+.frameTop > span:last-child, .chatHead > span:last-child, .plotLabel > span, .plotAxis > span:last-child, .orbitReadout b, .gameFooter > span, .chartLegend > span:last-child, .workflowFooter > span { color: var(--md-sys-color-primary); }
+
+.scene {
+  position: relative;
+  height: 94px;
+  margin: 10px 0 8px;
+  overflow: hidden;
+  border-radius: var(--md-sys-shape-corner-medium);
+  background: linear-gradient(155deg, #30343b 0%, #191a20 55%, #53351f 140%);
+}
+.scene::before, .scene::after { content: ''; position: absolute; background: rgba(255,255,255,.16); }
+.scene::before { width: 120%; height: 1px; left: -8%; bottom: 24px; transform: rotate(-7deg); }
+.scene::after { width: 54px; height: 54px; right: 22%; bottom: 20px; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; background: transparent; }
+.detection { position: absolute; z-index: 1; width: 34px; height: 50px; left: 47%; top: 17px; border: 1px solid var(--md-sys-color-primary); border-radius: 2px; }
+.detectionLabel { position: absolute; z-index: 1; left: 47%; top: 5px; padding: 2px 4px; background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); font: 500 .5rem var(--font-mono); }
+.caption { display: flex; align-items: center; gap: 8px; color: var(--md-sys-color-on-surface-variant); font: .61rem var(--font-mono); }
+.caption > span { width: 4px; height: 4px; border-radius: 50%; background: var(--md-sys-color-primary); }
+
+.chatHead { padding-bottom: 9px; border-bottom: 1px solid var(--md-sys-color-outline-variant); }
+.chatHead > span:last-child { margin-left: auto; font-size: .52rem; }
+.question, .answer { width: fit-content; max-width: 84%; padding: 7px 10px; border-radius: 10px; font-size: .64rem; line-height: 1.35; }
+.question { margin: 12px 0 7px auto; background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.answer { background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface); }
+.source { margin-top: 6px; color: var(--md-sys-color-primary); font: .53rem var(--font-mono); }
+
+.plotLabel { margin-bottom: 6px; }
+.attractorFrame svg { display: block; width: 100%; height: 112px; color: var(--md-sys-color-primary); filter: drop-shadow(0 0 7px color-mix(in srgb, var(--md-sys-color-primary) 42%, transparent)); }
+.plotAxis { font-size: .52rem; }
+
+.orbitPlot { position: relative; height: 110px; margin: 0 auto; width: min(100%, 290px); }
+.orbitPathOne, .orbitPathTwo { position: absolute; inset: 8px 45px; border: 1px solid color-mix(in srgb, var(--md-sys-color-primary) 62%, transparent); border-radius: 50%; transform: rotate(-26deg); }
+.orbitPathTwo { inset: 22px 24px; border-color: color-mix(in srgb, var(--md-sys-color-tertiary) 48%, transparent); transform: rotate(22deg); }
+.bodyOne, .bodyTwo, .bodyThree { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--md-sys-color-primary); box-shadow: 0 0 18px color-mix(in srgb, var(--md-sys-color-primary) 48%, transparent); }
+.bodyOne { left: 35%; top: 55%; }.bodyTwo { left: 67%; top: 25%; width: 7px; height: 7px; background: var(--md-sys-color-tertiary); }.bodyThree { left: 62%; top: 70%; width: 5px; height: 5px; background: var(--md-sys-color-secondary); }
+.orbitReadout { font-size: .51rem; }
+
+.gameTable { display: grid; grid-template-columns: 1fr 1fr; margin: 14px auto 12px; max-width: 260px; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-small); overflow: hidden; text-align: center; }
+.gameTable > * { padding: 7px 5px; border-right: 1px solid var(--md-sys-color-outline-variant); border-bottom: 1px solid var(--md-sys-color-outline-variant); font: 500 .55rem var(--font-mono); }
+.gameTable > :nth-child(2n) { border-right: 0; }.gameTable > :nth-last-child(-n+2) { border-bottom: 0; }
+.gameTable > span { color: var(--md-sys-color-on-surface-variant); font-size: .48rem; }.gameTable > b { color: var(--md-sys-color-on-surface); font-weight: 500; }.gameTable > i { color: var(--md-sys-color-primary); font-style: normal; }
+.gameFooter { font-size: .52rem; }
+
+.codeFrame { position: relative; }
+.codeLines { display: grid; gap: 8px; width: 70%; margin: 22px auto 10px; }
+.codeLines span { height: 5px; width: 74%; border-radius: 9px; background: var(--md-sys-color-outline-variant); }
+.codeLines span:nth-child(2), .codeLines span:nth-child(4) { width: 92%; margin-left: 16px; background: color-mix(in srgb, var(--md-sys-color-tertiary) 54%, var(--md-sys-color-outline-variant)); }
+.codeLines span:nth-child(3) { width: 56%; margin-left: 32px; background: color-mix(in srgb, var(--md-sys-color-primary) 50%, var(--md-sys-color-outline-variant)); }
+.codeNote { position: absolute; right: 12px; bottom: 10px; color: var(--md-sys-color-on-surface-variant); font: .5rem var(--font-mono); }
+
+.dashMetrics { display: flex; gap: 8px; margin-top: 12px; }
+.dashMetrics > span, .workflowMetrics > span { flex: 1; display: grid; gap: 4px; padding: 7px; border: 1px solid var(--md-sys-color-outline-variant); border-radius: var(--md-sys-shape-corner-small); color: var(--md-sys-color-on-surface-variant); font: .48rem var(--font-mono); }
+.dashMetrics b, .workflowMetrics b { color: var(--md-sys-color-on-surface); font-size: .54rem; font-weight: 500; }
+.chartBars { height: 54px; display: flex; align-items: end; gap: 7px; padding: 8px 12px 0; border-bottom: 1px solid var(--md-sys-color-outline-variant); }
+.chartBars i { flex: 1; height: 25%; background: color-mix(in srgb, var(--md-sys-color-primary) 58%, transparent); border-radius: 3px 3px 0 0; }
+.chartBars i:nth-child(3n) { height: 66%; }.chartBars i:nth-child(4n) { height: 44%; }.chartBars i:nth-child(5n) { height: 84%; }
+.chartLegend { margin-top: 8px; font-size: .48rem; }
+
+.workflowMetrics { display: flex; gap: 7px; margin-top: 12px; }
+.workflowRows { display: grid; gap: 6px; margin: 10px 0; }
+.workflowRows i { height: 7px; width: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--md-sys-color-outline-variant) 0 29%, transparent 29% 34%, var(--md-sys-color-outline-variant) 34% 60%, transparent 60% 65%, var(--md-sys-color-outline-variant) 65% 84%, transparent 84%); }
+.workflowRows i:first-child { background: linear-gradient(90deg, color-mix(in srgb, var(--md-sys-color-primary) 56%, transparent) 0 29%, transparent 29% 34%, var(--md-sys-color-outline-variant) 34% 60%, transparent 60% 65%, var(--md-sys-color-outline-variant) 65% 84%, transparent 84%); }
+.workflowFooter { font-size: .48rem; }
+
+@media (max-width: 520px) {
+  .preview { min-height: 190px; padding: 1.1rem; }
+  .canvas, .videoFrame, .chatFrame, .attractorFrame, .orbitFrame, .gameFrame, .codeFrame, .dashboardFrame, .workflowFrame { min-height: 144px; }
+  .previewLabel { top: 8px; right: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preview *, .preview *::before, .preview *::after { scroll-behavior: auto; }
+}

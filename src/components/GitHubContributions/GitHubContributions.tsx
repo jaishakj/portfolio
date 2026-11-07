@@ -9,6 +9,7 @@ const CHART_URL = `https://ghchart.rshah.org/f56e0f/${USERNAME}`;
 
 export function GitHubContributions() {
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <Reveal className="card">
@@ -25,23 +26,29 @@ export function GitHubContributions() {
           </a>
         </div>
 
-        {failed ? (
-          <p className={styles.fallback}>
-            Couldn&apos;t load the live chart —{' '}
-            <a href={`https://github.com/${USERNAME}`} target="_blank" rel="noreferrer">
-              view contributions on GitHub
-            </a>
-            .
-          </p>
-        ) : (
-          <img
-            src={CHART_URL}
-            alt={`${USERNAME}'s GitHub contribution graph`}
-            className={styles.chart}
-            loading="lazy"
-            onError={() => setFailed(true)}
-          />
-        )}
+        <div className={styles.chartFrame} aria-busy={!failed && !loaded}>
+          {!loaded && !failed && <p className={styles.loading} role="status">Loading contribution calendar…</p>}
+          {failed ? (
+            <p className={styles.fallback}>
+              The contribution calendar is unavailable.{' '}
+              <a href={`https://github.com/${USERNAME}`} target="_blank" rel="noreferrer">
+                View the GitHub profile
+              </a>
+              .
+            </p>
+          ) : (
+            <img
+              src={CHART_URL}
+              alt={`Contribution calendar for ${USERNAME} on GitHub`}
+              className={`${styles.chart} ${loaded ? styles.chartLoaded : ''}`}
+              loading="lazy"
+              width="1060"
+              height="132"
+              onLoad={() => setLoaded(true)}
+              onError={() => setFailed(true)}
+            />
+          )}
+        </div>
       </div>
     </Reveal>
   );

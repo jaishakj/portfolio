@@ -8,22 +8,20 @@ export function Education() {
     <div className={styles.list}>
       {education.map((item) => (
         <Reveal key={item.id}>
-          <div className={`card ${styles.item}`}>
+          <article className={`card ${styles.item}`}>
             <div className={styles.icon}>
               <GraduationCap size={20} />
             </div>
             <div>
               <h3 className={styles.degree}>{item.degree}</h3>
-              <p className={styles.institution}>
-                {item.institution} · {item.affiliation}
-              </p>
+              <p className={styles.institution}>{item.institution}{item.affiliation ? ` · ${item.affiliation}` : ''}</p>
               <div className={styles.meta}>
                 <span>{item.period}</span>
                 <span className={styles.sep}>—</span>
                 <span>{item.detail}</span>
               </div>
             </div>
-          </div>
+          </article>
         </Reveal>
       ))}
     </div>

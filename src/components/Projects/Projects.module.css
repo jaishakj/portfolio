@@ -1,11 +1,10 @@
 .grid {
   display: grid;
-  gap: var(--space-8);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 
-@media (min-width: 720px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
-}
+@media (max-width: 620px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 
 .moreRow {
   display: flex;
@@ -32,3 +31,5 @@
   border-color: var(--color-accent);
   transform: translateY(-2px);
 }
+
+.moreBtn:focus-visible { outline-offset: 4px; }

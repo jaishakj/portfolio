@@ -7,16 +7,21 @@
 .item {
   display: flex;
   gap: var(--space-4);
-  padding: var(--space-6);
+  padding: clamp(1rem, 2vw, 1.5rem);
   align-items: flex-start;
+  height: 100%;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-surface-container-low);
+  box-shadow: none;
 }
 
 .icon {
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
+  border-radius: var(--md-sys-shape-corner-medium);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,12 +31,12 @@
 .degree {
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--color-ink);
+  color: var(--md-sys-color-on-surface);
   margin-bottom: 0.3rem;
 }
 
 .institution {
-  color: var(--color-text-muted);
+  color: var(--md-sys-color-on-surface-variant);
   font-size: 0.9rem;
   margin-bottom: 0.6rem;
 }
@@ -39,7 +44,7 @@
 .meta {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--color-accent);
+  color: var(--md-sys-color-primary);
   display: flex;
   gap: 0.5rem;
 }

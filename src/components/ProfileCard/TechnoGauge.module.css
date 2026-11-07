@@ -68,7 +68,7 @@
 .static .gear { animation: none; }
 
 .time {
-  font-family: 'Orbitron', var(--font-mono);
+  font-family: var(--font-mono);
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--color-ink);

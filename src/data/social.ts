@@ -7,8 +7,6 @@ import {
   MastodonIcon,
   DiscordIcon,
   TelegramIcon,
-  MediumIcon,
-  LemmyIcon,
 } from '../components/Contact/BrandIcons';
 
 export type SocialLink = {
@@ -66,19 +64,5 @@ export const socialLinks: SocialLink[] = [
     value: '@Jaishakj',
     href: 'https://t.me/Jaishakj',
     icon: TelegramIcon,
-  },
-  {
-    // TODO: replace with your real Medium profile URL and @handle
-    label: 'Medium',
-    value: '@jaishakj (placeholder — confirm handle)',
-    href: 'https://medium.com/@jaishak',
-    icon: MediumIcon,
-  },
-  {
-    // TODO: replace with your real Lemmy instance + username
-    label: 'Lemmy',
-    value: '@jaishakj@lemmy.world (placeholder — confirm instance)',
-    href: 'https://lemmy.world/u/jaishakj',
-    icon: LemmyIcon,
   },
 ];

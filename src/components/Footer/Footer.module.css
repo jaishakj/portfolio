@@ -1,6 +1,9 @@
 .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   padding: var(--space-8) var(--edge-pad);
-  text-align: center;
   background: var(--color-ink);
   color: var(--color-bg);
 }
@@ -10,3 +13,9 @@
   font-family: var(--font-mono);
   opacity: 0.7;
 }
+
+.links { display: flex; gap: 1rem; }
+.links a { color: var(--color-bg); font: 500 .72rem var(--font-mono); text-decoration: underline; text-underline-offset: 4px; opacity: .72; }
+.links a:hover, .links a:focus-visible { opacity: 1; }
+
+@media (max-width: 600px) { .footer { align-items: flex-start; flex-direction: column; } }

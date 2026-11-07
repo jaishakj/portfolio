@@ -8,22 +8,15 @@ export function ProfileCard() {
   const toggle = () => setFlipped((v) => !v);
 
   return (
-    <div
+    <button
+      type="button"
       className={styles.card}
-      role="button"
-      tabIndex={0}
       aria-pressed={flipped}
       aria-label="Toggle professional and developer view"
       onClick={toggle}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggle();
-        }
-      }}
     >
       <div className={`${styles.inner} ${flipped ? styles.flipped : ''}`}>
-        <div className={styles.face}>
+        <div className={styles.face} aria-hidden={flipped}>
           <span className={styles.diamond} aria-hidden="true" />
 
           <div className={styles.topRow}>
@@ -45,14 +38,14 @@ export function ProfileCard() {
 
           <div className={styles.footer}>
             <span className={styles.readout}>7+ PROJECTS</span>
-            <span className={styles.readout}>3 AI SYSTEMS</span>
+            <span className={styles.readout}>AI / CV / WEB</span>
             <span className={`${styles.readout} ${styles.live}`}>
               <span className={styles.dot} /> ACTIVE
             </span>
           </div>
         </div>
 
-        <div className={`${styles.face} ${styles.back}`}>
+        <div className={`${styles.face} ${styles.back}`} aria-hidden={!flipped}>
           <span className={`${styles.diamond} ${styles.diamondAlt}`} aria-hidden="true" />
 
           <div className={styles.topRow}>
@@ -84,6 +77,6 @@ export function ProfileCard() {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

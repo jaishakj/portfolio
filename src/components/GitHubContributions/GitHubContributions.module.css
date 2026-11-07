@@ -24,16 +24,33 @@
   color: var(--color-accent);
 }
 
+.chartFrame {
+  position: relative;
+  min-height: 132px;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-medium);
+  background: var(--md-sys-color-surface-container-low);
+}
+
 .chart {
   width: 100%;
-  height: auto;
-  aspect-ratio: 53 / 7;
-  filter: drop-shadow(0 2px 0 var(--color-shadow));
+  height: 132px;
+  object-fit: fill;
+  opacity: 0;
+  transition: opacity var(--dur-base) ease;
+  filter: saturate(.9);
 }
+.chartLoaded { opacity: 1; }
+.loading { padding: 1rem; color: var(--md-sys-color-on-surface-variant); font: .7rem var(--font-mono); }
 
 .fallback {
   color: var(--color-text-muted);
   font-size: 0.9rem;
 }
 
-.fallback a { color: var(--color-accent); text-decoration: underline; }
+.fallback a { color: var(--md-sys-color-primary); text-decoration: underline; text-underline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) { .chart { transition: none; } }

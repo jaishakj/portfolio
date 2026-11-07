@@ -38,7 +38,7 @@ export function useLenis() {
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
-    // Web fonts (Orbitron, Anton, Axera Round) swap in after ScrollTrigger
+    // Web fonts (Anton, Axera Round) swap in after ScrollTrigger
     // has already measured everything against the fallback-font layout.
     // On narrow/mobile viewports especially, that swap changes text height
     // enough to throw trigger positions off — a refresh once fonts settle

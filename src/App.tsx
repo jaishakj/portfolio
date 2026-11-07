@@ -55,7 +55,7 @@ function App() {
             <section id="education" className="section">
               <div className="container">
                 <SectionHeader title="Education & Experience" />
-                <div style={{ display: 'grid', gap: '3rem' }}>
+                <div className="section-split">
                   <Education />
                   <Experience />
                 </div>
@@ -66,7 +66,7 @@ function App() {
               <div className="container">
                 <SectionHeader title="Technical Skills" />
                 <TechStack />
-                <div style={{ marginTop: '3rem' }}>
+                <div className="section-followup">
                   <GitHubContributions />
                 </div>
               </div>
@@ -79,7 +79,7 @@ function App() {
               </div>
             </section>
 
-            <section id="contact" className="section" style={{ borderBottom: 'none' }}>
+            <section id="contact" className="section section-last">
               <div className="container">
                 <SectionHeader title="Let's Connect" />
                 <Contact />

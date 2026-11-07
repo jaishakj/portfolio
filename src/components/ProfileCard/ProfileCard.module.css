@@ -1,4 +1,8 @@
 .card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  text-align: left;
   perspective: 1600px;
   cursor: pointer;
 }
