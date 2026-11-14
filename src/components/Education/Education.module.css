@@ -1,3 +1,29 @@
+.ledger {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.ledgerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.ledgerCategory {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.ledgerIndex {
+  color: var(--color-text-muted);
+}
+
 .list {
   display: flex;
   flex-direction: column;
@@ -5,48 +31,60 @@
 }
 
 .item {
-  display: flex;
-  gap: var(--space-4);
-  padding: clamp(1rem, 2vw, 1.5rem);
-  align-items: flex-start;
-  height: 100%;
-  border: 1px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-corner-large);
-  background: var(--md-sys-color-surface-container-low);
-  box-shadow: none;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  transition: border-color var(--dur-fast) ease, background-color var(--dur-fast) ease;
 }
 
-.icon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--md-sys-shape-corner-medium);
-  background: var(--md-sys-color-primary-container);
-  color: var(--md-sys-color-primary);
+.item:hover {
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-hover);
+}
+
+.topRow {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+}
+
+.period {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.metric {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-bg-alt);
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border);
 }
 
 .degree {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--md-sys-color-on-surface);
-  margin-bottom: 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-ink);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
 }
 
 .institution {
-  color: var(--md-sys-color-on-surface-variant);
-  font-size: 0.9rem;
-  margin-bottom: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
 }
 
-.meta {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--md-sys-color-primary);
-  display: flex;
-  gap: 0.5rem;
+.affiliation {
+  color: var(--color-text-subtle);
 }
-
-.sep { color: var(--color-text-muted); }

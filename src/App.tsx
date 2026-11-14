@@ -23,7 +23,7 @@ const STRETCHY_FOOTER_COLORS = [
   '#e45019',
   '#a12f22',
   '#54191d',
-  '#151419',
+  '#0d0d11',
 ];
 
 function App() {
@@ -66,7 +66,12 @@ function App() {
 
               <section id="education" className="section">
                 <div className="container">
-                  <SectionHeader title="Education & Experience" />
+                  <SectionHeader
+                    number="01"
+                    eyebrow="BACKGROUND &amp; PRACTICE"
+                    title="Education &amp; Experience"
+                    subtitle="Academic training in Artificial Intelligence &amp; Data Science, paired with production ML and analytics engineering."
+                  />
                   <div className="section-split">
                     <Education />
                     <Experience />
@@ -76,7 +81,12 @@ function App() {
 
               <section id="skills" className="section">
                 <div className="container">
-                  <SectionHeader title="Technical Skills" />
+                  <SectionHeader
+                    number="02"
+                    eyebrow="COMPETENCIES &amp; ECOSYSTEM"
+                    title="Technical Stack &amp; Architecture"
+                    subtitle="Core programming languages, machine learning frameworks, data infrastructure, and modern deployment tooling."
+                  />
                   <TechStack />
                   <div className="section-followup">
                     <GitHubContributions />
@@ -86,14 +96,24 @@ function App() {
 
               <section id="projects" className="section">
                 <div className="container">
-                  <SectionHeader title="Featured Projects" />
+                  <SectionHeader
+                    number="03"
+                    eyebrow="ENGINEERED WORK"
+                    title="Featured Projects"
+                    subtitle="Applied AI pipelines, mathematical simulations, full-stack systems, and game-theoretic models."
+                  />
                   <Projects />
                 </div>
               </section>
 
               <section id="contact" className="section section-last">
                 <div className="container">
-                  <SectionHeader title="Let's Connect" />
+                  <SectionHeader
+                    number="04"
+                    eyebrow="DIRECT COMMUNICATION"
+                    title="Get In Touch"
+                    subtitle="Available for full-time AI Engineering, applied ML, and full-stack software development opportunities."
+                  />
                   <Contact />
                 </div>
               </section>

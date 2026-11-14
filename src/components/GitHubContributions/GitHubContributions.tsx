@@ -1,10 +1,10 @@
 import { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
 import { Reveal } from '../Reveal/Reveal';
+import { GitHubIcon } from '../Contact/BrandIcons';
 import styles from './GitHubContributions.module.css';
 
 const USERNAME = 'jaishakj';
-// Public chart service — takes a hex color (no #) and a GitHub username,
-// returns an SVG contribution calendar rendered in that color.
 const CHART_URL = `https://ghchart.rshah.org/f56e0f/${USERNAME}`;
 
 export function GitHubContributions() {
@@ -12,29 +12,38 @@ export function GitHubContributions() {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <Reveal className="card">
+    <Reveal className={styles.container}>
       <div className={styles.wrap}>
         <div className={styles.header}>
-          <h3 className={styles.title}>GitHub Activity</h3>
+          <div className={styles.titleGroup}>
+            <span className={styles.eyebrow}>ACTIVITY //</span>
+            <h3 className={styles.title}>GitHub Contribution Stream</h3>
+          </div>
           <a
             href={`https://github.com/${USERNAME}`}
             target="_blank"
             rel="noreferrer"
             className={styles.link}
+            aria-label={`Visit @${USERNAME} on GitHub`}
           >
-            @{USERNAME}
+            <GitHubIcon width={14} height={14} />
+            <span>@{USERNAME}</span>
+            <ArrowUpRight size={13} aria-hidden="true" />
           </a>
         </div>
 
         <div className={styles.chartFrame} aria-busy={!failed && !loaded}>
-          {!loaded && !failed && <p className={styles.loading} role="status">Loading contribution calendar…</p>}
+          {!loaded && !failed && (
+            <p className={styles.loading} role="status">
+              Loading commit matrix from GitHub…
+            </p>
+          )}
           {failed ? (
             <p className={styles.fallback}>
-              The contribution calendar is unavailable.{' '}
+              Live contribution calendar service unreachable.{' '}
               <a href={`https://github.com/${USERNAME}`} target="_blank" rel="noreferrer">
-                View the GitHub profile
+                View repositories directly on GitHub <span aria-hidden="true">↗</span>
               </a>
-              .
             </p>
           ) : (
             <img

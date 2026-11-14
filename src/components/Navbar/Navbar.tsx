@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { navItems } from '../../data/navigation';
 import { useScrollProgress } from '../../hooks/useScrollProgress';
 import { ThemeToggle } from '../ThemeToggle/ThemeToggle';
@@ -9,7 +9,6 @@ import { LogoMark } from './LogoMark';
 import styles from './Navbar.module.css';
 
 type Props = {
-  /** True once the intro's flying logo has landed here — controls the reveal. */
   logoRevealed: boolean;
 };
 
@@ -18,29 +17,21 @@ export function Navbar({ logoRevealed }: Props) {
   const [activeId, setActiveId] = useState(() =>
     window.location.hash === '#resume' ? 'resume' : 'home'
   );
-  const [panelOpen, setPanelOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement | null>(null);
-  const sectionTriggerRef = useRef<HTMLButtonElement | null>(null);
   const menuToggleRef = useRef<HTMLButtonElement | null>(null);
-
-  const activeItem = activeId === 'resume'
-    ? { label: 'Resume', href: '#resume' }
-    : navItems.find((item) => item.href.slice(1) === activeId) ?? navItems[0];
 
   useEffect(() => {
     const syncActiveView = () => {
       if (window.location.hash === '#resume') setActiveId('resume');
       else if (!window.location.hash) setActiveId('home');
-      setPanelOpen(false);
+      setMenuOpen(false);
     };
     window.addEventListener('hashchange', syncActiveView);
     return () => window.removeEventListener('hashchange', syncActiveView);
   }, []);
 
-  // Scrollspy — unchanged core logic, with one reliability fix: the last
-  // section can never satisfy the "-55% bottom" margin once the page runs
-  // out of scroll room, so it never got marked active. Falling back to it
-  // when the user is within a few px of the document's bottom.
+  // IntersectionObserver scrollspy
   useEffect(() => {
     const sections = navItems
       .map((item) => document.querySelector(item.href))
@@ -52,14 +43,14 @@ export function Navbar({ logoRevealed }: Props) {
           if (entry.isIntersecting) setActiveId(entry.target.id);
         });
       },
-      { rootMargin: '-40% 0px -55% 0px' }
+      { rootMargin: '-35% 0px -55% 0px' }
     );
 
     sections.forEach((s) => observer.observe(s));
 
     const onScroll = () => {
       const atBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 6;
       if (atBottom) {
         const last = navItems[navItems.length - 1];
         setActiveId(last.href.slice(1));
@@ -73,81 +64,105 @@ export function Navbar({ logoRevealed }: Props) {
     };
   }, []);
 
-  // Escape closes the panel (desktop expand or mobile menu, same component).
+  // Keyboard escape
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && panelOpen) {
-        setPanelOpen(false);
-        if (window.matchMedia('(max-width: 860px)').matches) menuToggleRef.current?.focus();
-        else sectionTriggerRef.current?.focus();
+      if (e.key === 'Escape' && menuOpen) {
+        setMenuOpen(false);
+        menuToggleRef.current?.focus();
       }
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [panelOpen]);
+  }, [menuOpen]);
 
-  // Click outside closes it — necessary now that it's a floating panel
-  // rather than an always-visible link row.
+  // Click outside to close
   useEffect(() => {
-    if (!panelOpen) return;
+    if (!menuOpen) return;
     const onClick = (e: PointerEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
-        setPanelOpen(false);
+        setMenuOpen(false);
       }
     };
     document.addEventListener('pointerdown', onClick);
     return () => document.removeEventListener('pointerdown', onClick);
-  }, [panelOpen]);
+  }, [menuOpen]);
 
   return (
     <header className={styles.header}>
       <nav className={styles.nav} aria-label="Primary" ref={navRef}>
-        <div className={styles.chrome} aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </div>
-
-        <a href="#home" className={styles.logo}>
+        <a href="#home" className={styles.logo} aria-label="Jaishak J homepage">
           <span
             data-navbar-logo-target
             className={`${styles.logoMark} ${logoRevealed ? styles.logoMarkRevealed : ''}`}
           >
             <LogoMark />
           </span>
-          Jaishak
+          <span className={styles.logoText}>
+            JAISHAK J
+            <span className={styles.logoSub}>// AI SYSTEMS</span>
+          </span>
         </a>
 
-        <div className={styles.sectionControl}>
+        {/* Desktop inline nav links */}
+        <div className={styles.desktopLinks} role="navigation" aria-label="Desktop menu">
+          {navItems.map((item) => {
+            const isActive = item.href.slice(1) === activeId;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className={`${styles.desktopLink} ${isActive ? styles.desktopLinkActive : ''}`}
+                aria-current={isActive ? 'location' : undefined}
+              >
+                {isActive && <span className={styles.activeDot} aria-hidden="true" />}
+                {item.label}
+              </a>
+            );
+          })}
+        </div>
+
+        {/* Right side controls */}
+        <div className={styles.actions}>
+          <MusicPlayer src="/assets/Sleeping-City.mp3" />
+          <ThemeToggle />
+          <Magnetic strength={6}>
+            <a href="#resume" className={styles.resumeBtn}>
+              Résumé
+            </a>
+          </Magnetic>
+
           <button
             type="button"
-            className={styles.sectionTrigger}
-            ref={sectionTriggerRef}
-            onClick={() => setPanelOpen((v) => !v)}
-            aria-expanded={panelOpen}
-            aria-controls="section-navigation"
-            aria-label="Section navigation"
+            className={styles.menuToggle}
+            ref={menuToggleRef}
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav-panel"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           >
-            <span className={styles.sectionDot} aria-hidden="true" />
-            <span className={styles.sectionLabel}>{activeItem.label}</span>
-            <ChevronDown size={13} className={panelOpen ? styles.chevronOpen : ''} />
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
+        </div>
 
-          <ul
-            id="section-navigation"
-            className={`${styles.panel} ${panelOpen ? styles.panelOpen : ''}`}
-            aria-label="Sections"
-          >
+        {/* Mobile slide-down menu */}
+        <div
+          id="mobile-nav-panel"
+          className={`${styles.mobilePanel} ${menuOpen ? styles.mobilePanelOpen : ''}`}
+          aria-hidden={!menuOpen}
+        >
+          <ul className={styles.mobileList}>
             {navItems.map((item) => {
               const isActive = item.href.slice(1) === activeId;
               return (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className={isActive ? styles.active : ''}
+                    className={`${styles.mobileLink} ${isActive ? styles.mobileLinkActive : ''}`}
                     aria-current={isActive ? 'location' : undefined}
-                    onClick={() => setPanelOpen(false)}
+                    onClick={() => setMenuOpen(false)}
                   >
+                    <span className={styles.mobileLinkDot} />
                     {item.label}
                   </a>
                 </li>
@@ -156,35 +171,15 @@ export function Navbar({ logoRevealed }: Props) {
             <li>
               <a
                 href="#resume"
-                className={activeId === 'resume' ? styles.active : ''}
+                className={`${styles.mobileLink} ${activeId === 'resume' ? styles.mobileLinkActive : ''}`}
                 aria-current={activeId === 'resume' ? 'page' : undefined}
-                onClick={() => setPanelOpen(false)}
+                onClick={() => setMenuOpen(false)}
               >
-                Resume
+                <span className={styles.mobileLinkDot} />
+                Résumé
               </a>
             </li>
           </ul>
-        </div>
-
-        <div className={styles.actions}>
-          <MusicPlayer src="/assets/Sleeping-City.mp3" />
-          <ThemeToggle />
-          <Magnetic strength={8}>
-            <a href="#resume" className={styles.resumeBtn}>
-              Resume
-            </a>
-          </Magnetic>
-          <button
-            type="button"
-            className={styles.menuToggle}
-            ref={menuToggleRef}
-            onClick={() => setPanelOpen((v) => !v)}
-            aria-expanded={panelOpen}
-            aria-controls="section-navigation"
-            aria-label={panelOpen ? 'Close menu' : 'Open menu'}
-          >
-            {panelOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
         </div>
 
         <div ref={progressRef} className={styles.progress} aria-hidden="true" />

@@ -6,7 +6,7 @@
   z-index: 1000;
   display: flex;
   justify-content: center;
-  padding: calc(var(--space-4) + env(safe-area-inset-top)) max(var(--edge-pad), env(safe-area-inset-right)) 0 max(var(--edge-pad), env(safe-area-inset-left));
+  padding: calc(var(--space-3) + env(safe-area-inset-top)) max(var(--edge-pad), env(safe-area-inset-right)) 0 max(var(--edge-pad), env(safe-area-inset-left));
 }
 
 .nav {
@@ -16,56 +16,35 @@
   height: var(--nav-h);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-4);
   padding-inline: var(--space-4);
-  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
-  backdrop-filter: blur(14px);
-  /* retro control-panel chrome: a slim outer border plus a faint inset
-     top highlight, like a beveled hardware panel — restrained, not glossy */
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow:
-    0 1px 0 0 color-mix(in srgb, var(--color-ink) 6%, transparent) inset,
-    0 6px 20px var(--color-shadow);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 24px -2px var(--color-shadow);
+  transition: border-color var(--dur-fast) ease;
 }
 
-/* small decorative chrome dots — muted palette, deliberately not
-   macOS traffic-light colors, so this reads as "panel", not "clone" */
-.chrome {
-  display: flex;
-  gap: 5px;
-  flex-shrink: 0;
-  padding-left: 2px;
+.nav:hover {
+  border-color: var(--color-border-strong);
 }
-
-.chrome span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-border);
-}
-
-.chrome span:first-child { background: var(--color-accent); }
 
 .logo {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-size: 1.15rem;
-  letter-spacing: 0.02em;
-  font-style: italic;
-  color: var(--color-ink);
-  flex-shrink: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.65rem;
+  color: var(--color-ink);
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
 .logoMark {
   display: inline-flex;
-  height: 20px;
+  height: 22px;
   width: auto;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
 }
 
 .logoMark svg {
@@ -73,109 +52,79 @@
   width: auto;
 }
 
-.logoMarkRevealed { opacity: 1; }
-
-@media (prefers-reduced-motion: reduce) {
-  .logoMark { transition: none; }
+.logoMarkRevealed {
+  opacity: 1;
 }
 
-/* ---------- current-section control ---------- */
-
-.sectionControl {
-  position: relative;
-  flex: 1;
+.logoText {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
-.sectionTrigger {
-  min-height: 44px;
+.logoSub {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+  margin-top: 1px;
+}
+
+/* Desktop Links */
+.desktopLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--color-bg-alt);
+  padding: 0.3rem 0.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.desktopLink {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 0.9rem;
-  border-radius: var(--radius-sm);
-  background: var(--color-surface-strong);
-  border: 1px solid var(--color-border);
-  color: var(--color-ink);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--dur-fast) ease, background-color var(--dur-fast) ease;
 }
 
-.sectionTrigger:hover { border-color: var(--color-accent); }
+.desktopLink:hover {
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
 
-.sectionDot {
-  width: 6px;
-  height: 6px;
+.desktopLinkActive {
+  color: var(--color-ink);
+  background: var(--color-surface);
+  font-weight: 600;
+  box-shadow: 0 1px 4px var(--color-shadow);
+}
+
+.activeDot {
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--color-accent);
-  flex-shrink: 0;
 }
 
-.sectionTrigger svg {
-  transition: transform 0.2s var(--ease-out-expo);
-  color: var(--color-text-muted);
-}
-
-.chevronOpen { transform: rotate(180deg); }
-
-.panel {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translate(-50%, -6px) scale(0.98);
-  transform-origin: top center;
-  min-width: 168px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  box-shadow: 0 10px 26px var(--color-shadow);
-  padding: 0.35rem;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.16s var(--ease-out-expo),
-              transform 0.16s var(--ease-out-expo),
-              visibility 0.16s;
-}
-
-.panelOpen {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-  transform: translate(-50%, 0) scale(1);
-}
-
-.panel a {
-  display: block;
-  min-height: 44px;
-  padding: 0.65rem 0.7rem;
-  border-radius: 6px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--color-text-muted);
-  display: flex;
-  align-items: center;
-  transition: background var(--dur-fast) ease, color var(--dur-fast) ease;
-}
-
-.panel a:hover { background: var(--color-surface-strong); color: var(--color-text); }
-
-.panel a.active {
-  color: var(--color-ink);
-  background: var(--color-accent-soft);
-  border-left: 2px solid var(--color-accent);
-  padding-left: calc(0.7rem - 2px);
-}
-
-/* ---------- right-side actions (unchanged components, reused) ---------- */
-
+/* Actions */
 .actions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 0.65rem;
   flex-shrink: 0;
 }
 
@@ -183,76 +132,147 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1.1rem;
-  border-radius: var(--radius-sm);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-xs);
   background: var(--color-accent);
   color: var(--color-on-accent);
-  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--color-accent);
+  transition: background-color var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+
+.resumeBtn:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  transform: translateY(-1px);
 }
 
 .menuToggle {
   display: none;
-  width: 44px;
-  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-sm);
-  background: var(--color-surface-strong);
+  background: var(--color-bg-alt);
   border: 1px solid var(--color-border);
   color: var(--color-ink);
+  cursor: pointer;
 }
 
+.menuToggle:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* Progress bar */
 .progress {
   position: absolute;
   bottom: -1px;
-  left: 6%;
-  right: 6%;
+  left: 0;
+  right: 0;
   height: 2px;
   background: var(--color-accent);
-  border-radius: 2px;
   transform-origin: left;
   transform: scaleX(0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .panel { transition: opacity 0.01ms; }
+/* Mobile Panel */
+.mobilePanel {
+  display: none;
 }
 
-@media print { .header { display: none; } }
+@media print {
+  .header { display: none; }
+}
 
 @media (max-width: 860px) {
-  .chrome { display: none; }
-
-  /* Per spec, "current section visible" is a desktop requirement — on
-     mobile we fall back to the hamburger only, same as the pre-existing
-     pattern, which also resolves what would otherwise be a real
-     horizontal-overflow bug (logo + pill + actions doesn't fit ~375px). */
-  .sectionTrigger { display: none; }
-  .sectionControl { flex: 1; }
-
-  .panel {
-    position: fixed;
-    left: var(--edge-pad);
-    right: var(--edge-pad);
-    top: calc(var(--nav-h) + var(--space-4) + env(safe-area-inset-top) + 10px);
-    width: auto;
-    min-width: 0;
-    transform: translateY(-6px) scale(0.99);
+  .desktopLinks {
+    display: none;
   }
-  .panelOpen { transform: translateY(0) scale(1); }
 
-  .resumeBtn { display: none; }
-  .menuToggle { display: flex; }
-  .actions { gap: var(--space-2); }
+  .resumeBtn {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+
+  .mobilePanel {
+    display: block;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 12px 36px var(--color-shadow);
+    padding: 0.75rem;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity var(--dur-fast) var(--ease-out-expo),
+                transform var(--dur-fast) var(--ease-out-expo),
+                visibility var(--dur-fast);
+  }
+
+  .mobilePanelOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mobileList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mobileLink {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-xs);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
+  }
+
+  .mobileLinkDot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-border-strong);
+    transition: background-color var(--dur-fast) ease;
+  }
+
+  .mobileLink:hover,
+  .mobileLinkActive {
+    background: var(--color-bg-alt);
+    color: var(--color-ink);
+  }
+
+  .mobileLinkActive .mobileLinkDot {
+    background: var(--color-accent);
+  }
 }
 
 @media (max-width: 420px) {
-  .logo { font-size: 1rem; }
-}
-
-@media (max-width: 360px) {
-  .nav { gap: var(--space-2); padding-inline: var(--space-3); }
-  .actions { gap: var(--space-1); }
-  .actions > :first-child { display: none; }
+  .logoSub {
+    display: none;
+  }
 }

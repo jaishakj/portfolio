@@ -1,68 +1,115 @@
-/* Tactile button language shared across the app.
-   idle: hard offset shadow. hover: shadow deepens, surface lifts.
-   active: surface collapses toward the shadow (press feel). */
+/* ==========================================================
+   Shared Utility & Component Classes — Swiss Creative Engineering
+   Tactile, architectural, precise.
+   ========================================================== */
 
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.7rem 1.4rem;
-  border-radius: var(--radius-pill);
-  font-weight: 700;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-weight: 600;
   font-size: 0.85rem;
-  border: 1.5px solid var(--color-ink);
+  letter-spacing: 0.01em;
+  border: 1px solid var(--color-border-strong);
   background: var(--color-surface);
   color: var(--color-ink);
-  box-shadow: 4px 4px 0 var(--color-shadow);
-  transform: translate(0, 0);
-  transition: transform 0.35s var(--ease-spring),
-              box-shadow 0.35s var(--ease-spring);
+  transition: background-color var(--dur-fast) var(--ease-out-expo),
+              border-color var(--dur-fast) var(--ease-out-expo),
+              color var(--dur-fast) var(--ease-out-expo),
+              transform var(--dur-fast) var(--ease-out-expo);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
 }
-.btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--color-shadow); }
+
+.btn:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-accent);
+  color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
 .btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: 2px 2px 0 var(--color-shadow);
-  transition-duration: 0.12s;
+  transform: translateY(0);
 }
 
 .btn-accent {
   background: var(--color-accent);
   color: var(--color-on-accent);
   border-color: var(--color-accent);
+  font-weight: 700;
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
+}
+
+.btn-sm {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.78rem;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: var(--radius-pill);
-  font-size: 0.72rem;
-  font-weight: 700;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
   letter-spacing: 0.02em;
-  background: var(--color-surface-strong);
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+
+.tag:hover {
+  border-color: var(--color-border-strong);
   color: var(--color-text);
 }
 
-.tag svg { flex-shrink: 0; }
+.tag svg {
+  flex-shrink: 0;
+}
 
 .card {
   background: var(--color-surface);
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: 6px 6px 0 var(--color-shadow);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px -2px var(--color-shadow);
+  transition: border-color var(--dur-fast) var(--ease-out-expo),
+              background-color var(--dur-fast) var(--ease-out-expo);
+}
+
+.card:hover {
+  border-color: var(--color-border-strong);
 }
 
 .section-split {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1rem, 2.5vw, 2rem);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
   align-items: start;
 }
 
-.section-followup { margin-top: clamp(2rem, 5vw, 3.5rem); }
-.section-last { border-bottom: 0; }
+.section-followup {
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+}
 
-@media (max-width: 760px) {
-  .section-split { grid-template-columns: minmax(0, 1fr); }
+.section-last {
+  border-bottom: 0;
+}
+
+@media (max-width: 860px) {
+  .section-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
