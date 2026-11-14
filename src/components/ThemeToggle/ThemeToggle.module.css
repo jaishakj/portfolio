@@ -13,4 +13,14 @@
 
 .icon {
   display: flex;
+  animation: icon-appear 180ms var(--ease-out-expo);
+}
+
+@keyframes icon-appear {
+  from { opacity: 0.65; transform: rotate(-18deg) scale(0.9); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon { animation: none; }
 }

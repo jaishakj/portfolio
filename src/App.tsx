@@ -13,7 +13,7 @@ import { Contact } from './components/Contact/Contact';
 import { Footer } from './components/Footer/Footer';
 import { CustomCursor } from './components/CustomCursor/CustomCursor';
 import { ResumePage } from './components/ResumePage/ResumePage';
-import { StretchyFooter } from './components/StretchyFooter/StretchyFooter';
+import { StretchyFooter } from './components/StretchyFooter';
 import { useLenis } from './hooks/useLenis';
 
 const STRETCHY_FOOTER_COLORS = [

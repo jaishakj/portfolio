@@ -5,6 +5,8 @@
   height: 100vh;
   pointer-events: none;
   z-index: 9996;
+  opacity: 0;
+  transition: opacity 120ms ease;
 }
 
 .dot {
@@ -18,6 +20,8 @@
   pointer-events: none;
   z-index: 9998;
   will-change: transform;
+  opacity: 0;
+  transition: opacity 120ms ease;
 }
 
 .ring {
@@ -32,7 +36,8 @@
   pointer-events: none;
   z-index: 9997;
   will-change: transform;
-  transition: width 0.25s var(--ease-out-expo), height 0.25s var(--ease-out-expo);
+  opacity: 0;
+  transition: opacity 120ms ease, width 0.25s var(--ease-out-expo), height 0.25s var(--ease-out-expo);
 }
 
 .ringHover {
