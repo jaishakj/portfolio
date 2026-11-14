@@ -88,6 +88,7 @@
 @media (max-width: 900px) {
   .grid { grid-template-columns: minmax(0, 1fr) minmax(190px, .55fr); gap: 2rem; }
   .right { max-width: 250px; }
+  .mascot { transform: scale(.88); }
   .title { font-size: clamp(2.9rem, 7vw, 5.3rem); }
 }
 @media (max-width: 720px) {

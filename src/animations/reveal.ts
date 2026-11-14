@@ -11,28 +11,32 @@ type RevealOptions = {
 };
 
 /**
- * Applies one coherent reveal to an element: rise + fade, triggered once
- * as it enters the viewport. Returns the ScrollTrigger instance so callers
- * can clean it up on unmount.
+ * Adds a small rise as progressive enhancement. Content stays visible if
+ * ScrollTrigger or the animation system is unavailable.
  */
-export function revealOnScroll(el: Element, opts: RevealOptions = {}): ScrollTrigger {
+export function revealOnScroll(el: Element, opts: RevealOptions = {}): { kill: () => void } {
   const { y = 28, duration = 0.8, delay = 0, ease = 'expo.out' } = opts;
 
-  gsap.set(el, { y, opacity: 0 });
-
-  const tween = gsap.to(el, {
+  const tween = gsap.fromTo(el, { y }, {
     y: 0,
-    opacity: 1,
     duration,
     delay,
     ease,
     paused: true,
+    immediateRender: false,
   });
 
-  return ScrollTrigger.create({
+  const trigger = ScrollTrigger.create({
     trigger: el,
     start: 'top 88%',
     once: true,
     onEnter: () => tween.play(),
   });
+
+  return {
+    kill() {
+      trigger.kill();
+      tween.kill();
+    },
+  };
 }

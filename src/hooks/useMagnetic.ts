@@ -17,17 +17,21 @@ export function useMagnetic<T extends HTMLElement>({ strength = 14 }: Options = 
     const el = ref.current;
     if (!el || !isFinePointer || reducedMotion) return;
 
+    const moveX = gsap.quickTo(el, 'x', { duration: 0.4, ease: 'power3.out' });
+    const moveY = gsap.quickTo(el, 'y', { duration: 0.4, ease: 'power3.out' });
+
     const handleMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
       const dx = e.clientX - (rect.left + rect.width / 2);
       const dy = e.clientY - (rect.top + rect.height / 2);
       const clampedX = Math.max(-strength, Math.min(strength, dx * 0.3));
       const clampedY = Math.max(-strength, Math.min(strength, dy * 0.3));
-      gsap.to(el, { x: clampedX, y: clampedY, duration: 0.4, ease: 'power3.out' });
+      moveX(clampedX);
+      moveY(clampedY);
     };
 
     const handleLeave = () => {
-      gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)' });
+      gsap.to(el, { x: 0, y: 0, duration: 0.6, ease: 'elastic.out(1, 0.5)', overwrite: 'auto' });
     };
 
     el.addEventListener('mousemove', handleMove);
@@ -35,6 +39,8 @@ export function useMagnetic<T extends HTMLElement>({ strength = 14 }: Options = 
     return () => {
       el.removeEventListener('mousemove', handleMove);
       el.removeEventListener('mouseleave', handleLeave);
+      gsap.killTweensOf(el);
+      gsap.set(el, { clearProps: 'transform' });
     };
   }, [isFinePointer, reducedMotion, strength]);
 

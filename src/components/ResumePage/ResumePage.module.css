@@ -2,7 +2,7 @@
   position: relative;
   z-index: 1;
   min-height: 100svh;
-  padding: calc(var(--nav-h) + 4.5rem) var(--edge-pad) 3rem;
+  padding: calc(var(--nav-h) + 4.5rem + env(safe-area-inset-top)) max(var(--edge-pad), env(safe-area-inset-right)) calc(3rem + env(safe-area-inset-bottom)) max(var(--edge-pad), env(safe-area-inset-left));
   isolation: isolate;
 }
 

@@ -562,13 +562,14 @@ export function createStretchyFooter(
 
   const onReduce = () => {
     reduce = mqReduce.matches
+    root.style.overscrollBehaviorY = reduce ? prevOverscroll : "none"
     if (reduce) release()
   }
 
   const target: HTMLElement | Window = scroller
   const prevOverscroll = root.style.overscrollBehaviorY
   // The browser's own rubber band would fight ours.
-  root.style.overscrollBehaviorY = "none"
+  if (!reduce) root.style.overscrollBehaviorY = "none"
   target.addEventListener("wheel", onWheel as EventListener, { passive: false })
   target.addEventListener("touchstart", onTouchStart as EventListener, {
     passive: true,

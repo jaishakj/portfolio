@@ -15,7 +15,6 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.6;
-  overflow-x: hidden;
   transition: background-color var(--dur-base) var(--ease-out-expo),
               color var(--dur-base) var(--ease-out-expo);
 }
@@ -50,7 +49,11 @@ ul { list-style: none; }
 .container {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding-inline: var(--edge-pad);
+  padding-inline: max(var(--edge-pad), env(safe-area-inset-left)) max(var(--edge-pad), env(safe-area-inset-right));
+}
+
+@supports (padding: max(0px)) {
+  .container { padding-left: max(var(--edge-pad), env(safe-area-inset-left)); padding-right: max(var(--edge-pad), env(safe-area-inset-right)); }
 }
 
 .section {

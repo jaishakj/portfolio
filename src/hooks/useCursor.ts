@@ -19,11 +19,12 @@ export function useCursor(ribbonRef: RefObject<HTMLCanvasElement | null>) {
   useEffect(() => {
     if (!enabled) return;
 
-    let mouseX = -100;
-    let mouseY = -100;
-    let ringX = -100;
-    let ringY = -100;
+    let mouseX = 0;
+    let mouseY = 0;
+    let ringX = 0;
+    let ringY = 0;
     let raf = 0;
+    let hasPointer = false;
     const canvas = ribbonRef.current;
     const ctx = canvas?.getContext('2d') ?? null;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -38,26 +39,40 @@ export function useCursor(ribbonRef: RefObject<HTMLCanvasElement | null>) {
     let hx = 0;
     let hy = 0;
 
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+
     const fit = () => {
       if (!canvas || !ctx) return;
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (hasPointer) schedule();
     };
 
-    const tint = (_t: number, alpha: number) => `rgba(215,25,33, ${alpha})`;
+    const tint = (alpha: number) => `rgba(215,25,33, ${alpha})`;
 
     const handleMove = (e: PointerEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      mx = e.clientX;
-      my = e.clientY;
+      mouseX = mx = e.clientX;
+      mouseY = my = e.clientY;
+      if (!hasPointer) {
+        hasPointer = true;
+        ringX = hx = mouseX;
+        ringY = hy = mouseY;
+        pts.length = 0;
+      }
       if (dotRef.current) {
+        dotRef.current.style.opacity = '1';
         dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
       }
+      if (ringRef.current) ringRef.current.style.opacity = '1';
+      if (canvas) canvas.style.opacity = '1';
+      schedule();
     };
 
-    const loop = () => {
+    function loop() {
+      raf = 0;
       ringX += (mouseX - ringX) * 0.16;
       ringY += (mouseY - ringY) * 0.16;
       if (ringRef.current) {
@@ -71,46 +86,54 @@ export function useCursor(ribbonRef: RefObject<HTMLCanvasElement | null>) {
         if (pts.length > MAX) pts.shift();
 
         ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-        if (pts.length < 4) {
-          raf = requestAnimationFrame(loop);
-          return;
+        if (pts.length >= 4) {
+          const left: Array<[number, number]> = [];
+          const right: Array<[number, number]> = [];
+          for (let i = 1; i < pts.length; i++) {
+            const a = pts[i - 1]!;
+            const b = pts[i]!;
+            const dx = b.x - a.x;
+            const dy = b.y - a.y;
+            const d = Math.hypot(dx, dy) || 1;
+            const nx = -dy / d;
+            const ny = dx / d;
+            const t = i / (pts.length - 1);
+            const w = Math.sin(t * Math.PI) * WIDTH * 0.5 + t * WIDTH * 0.18;
+            left.push([b.x + nx * w, b.y + ny * w]);
+            right.push([b.x - nx * w, b.y - ny * w]);
+          }
+
+          ctx.beginPath();
+          ctx.moveTo(left[0]![0], left[0]![1]);
+          for (let i = 1; i < left.length; i++) ctx.lineTo(left[i]![0], left[i]![1]);
+          for (let i = right.length - 1; i >= 0; i--) ctx.lineTo(right[i]![0], right[i]![1]);
+          ctx.closePath();
+          const gradient = ctx.createLinearGradient(
+            pts[0]!.x,
+            pts[0]!.y,
+            pts[pts.length - 1]!.x,
+            pts[pts.length - 1]!.y
+          );
+          gradient.addColorStop(0, tint(ALPHA));
+          gradient.addColorStop(1, tint(ALPHA));
+          ctx.fillStyle = gradient;
+          ctx.fill();
         }
-
-        const left: Array<[number, number]> = [];
-        const right: Array<[number, number]> = [];
-        for (let i = 1; i < pts.length; i++) {
-          const a = pts[i - 1];
-          const b = pts[i];
-          const dx = b.x - a.x;
-          const dy = b.y - a.y;
-          const d = Math.hypot(dx, dy) || 1;
-          const nx = -dy / d;
-          const ny = dx / d;
-          const t = i / (pts.length - 1);
-          const w = Math.sin(t * Math.PI) * WIDTH * 0.5 + t * WIDTH * 0.18;
-          left.push([b.x + nx * w, b.y + ny * w]);
-          right.push([b.x - nx * w, b.y - ny * w]);
-        }
-
-        ctx.beginPath();
-        ctx.moveTo(left[0][0], left[0][1]);
-        for (let i = 1; i < left.length; i++) ctx.lineTo(left[i][0], left[i][1]);
-        for (let i = right.length - 1; i >= 0; i--) ctx.lineTo(right[i][0], right[i][1]);
-        ctx.closePath();
-
-        const gradient = ctx.createLinearGradient(
-          pts[0].x,
-          pts[0].y,
-          pts[pts.length - 1].x,
-          pts[pts.length - 1].y
-        );
-        gradient.addColorStop(0, tint(0, ALPHA));
-        gradient.addColorStop(1, tint(1, ALPHA));
-        ctx.fillStyle = gradient;
-        ctx.fill();
       }
 
-      raf = requestAnimationFrame(loop);
+      const settled = Math.abs(mouseX - ringX) < 0.05 && Math.abs(mouseY - ringY) < 0.05
+        && Math.abs(mx - hx) < 0.05 && Math.abs(my - hy) < 0.05;
+      if (!settled) schedule();
+    }
+
+    const handleLeaveWindow = () => {
+      hasPointer = false;
+      pts.length = 0;
+      if (ctx && canvas) ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      if (dotRef.current) dotRef.current.style.opacity = '0';
+      if (ringRef.current) ringRef.current.style.opacity = '0';
+      if (canvas) canvas.style.opacity = '0';
+      setHovering(false);
     };
 
     const handleEnter = (e: Event) => {
@@ -123,18 +146,21 @@ export function useCursor(ribbonRef: RefObject<HTMLCanvasElement | null>) {
     fit();
     window.addEventListener('resize', fit);
     window.addEventListener('pointermove', handleMove, { passive: true });
+    document.documentElement.addEventListener('pointerleave', handleLeaveWindow);
+    window.addEventListener('blur', handleLeaveWindow);
     document.addEventListener('mouseover', handleEnter);
     document.addEventListener('mouseout', handleLeave);
-    raf = requestAnimationFrame(loop);
 
     return () => {
       window.removeEventListener('resize', fit);
       window.removeEventListener('pointermove', handleMove);
+      document.documentElement.removeEventListener('pointerleave', handleLeaveWindow);
+      window.removeEventListener('blur', handleLeaveWindow);
       document.removeEventListener('mouseover', handleEnter);
       document.removeEventListener('mouseout', handleLeave);
-      cancelAnimationFrame(raf);
+      if (raf) cancelAnimationFrame(raf);
     };
-  }, [enabled]);
+  }, [enabled, ribbonRef]);
 
   return { dotRef, ringRef, enabled, hovering };
 }

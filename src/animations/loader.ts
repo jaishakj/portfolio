@@ -59,6 +59,7 @@ export function buildLogoTimeline(opts: {
   onDone: () => void;
 }) {
   const { svgEl, onLand, onDone } = opts;
+  const target = document.querySelector<HTMLElement>('[data-navbar-logo-target]');
   const paths = Array.from(svgEl.querySelectorAll('path'));
   const lengths = paths.map((p) => p.getTotalLength());
 
@@ -90,38 +91,32 @@ export function buildLogoTimeline(opts: {
     '+=0.1'
   );
 
-  // measure the real navbar target, then fly/shrink onto it
-  tl.call(
-    () => {
-      const target = document.querySelector('[data-navbar-logo-target]');
-      if (!target) {
-        onLand();
-        onDone();
-        return;
-      }
+  if (!target) {
+    tl.call(() => {
+      onLand();
+      onDone();
+    }, [], '+=0.3');
+    return tl;
+  }
 
-      const from = svgEl.getBoundingClientRect();
-      const to = target.getBoundingClientRect();
-
-      const scale = to.width / from.width;
-      const dx = to.left + to.width / 2 - (from.left + from.width / 2);
-      const dy = to.top + to.height / 2 - (from.top + from.height / 2);
-
-      gsap.to(svgEl, {
-        x: dx,
-        y: dy,
-        scale,
-        duration: 0.7,
-        ease: 'power3.inOut',
-        onComplete: () => {
-          onLand();
-          onDone();
-        },
-      });
+  // Measure the live navbar slot once and keep the flight on this timeline
+  // so killing the timeline also cancels the animation in Strict Mode.
+  const from = svgEl.getBoundingClientRect();
+  const to = target.getBoundingClientRect();
+  const scale = from.width > 0 ? to.width / from.width : 1;
+  const dx = to.left + to.width / 2 - (from.left + from.width / 2);
+  const dy = to.top + to.height / 2 - (from.top + from.height / 2);
+  tl.to(svgEl, {
+    x: dx,
+    y: dy,
+    scale,
+    duration: 0.7,
+    ease: 'power3.inOut',
+    onComplete: () => {
+      onLand();
+      onDone();
     },
-    undefined,
-    '+=0.3'
-  );
+  }, '+=0.3');
 
   return tl;
 }

@@ -36,7 +36,6 @@ export function useLenis() {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
 
     // Web fonts (Anton, Axera Round) swap in after ScrollTrigger
     // has already measured everything against the fallback-font layout.
@@ -44,9 +43,13 @@ export function useLenis() {
     // enough to throw trigger positions off — a refresh once fonts settle
     // corrects them instead of leaving reveals stuck at their pre-fonts
     // (wrong) positions.
-    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    let disposed = false;
+    document.fonts?.ready.then(() => {
+      if (!disposed) ScrollTrigger.refresh();
+    });
 
     return () => {
+      disposed = true;
       gsap.ticker.remove(tick);
       lenis.destroy();
     };

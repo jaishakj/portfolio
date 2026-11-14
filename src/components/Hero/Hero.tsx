@@ -13,6 +13,7 @@ const TICK_ON = '/assets/switch-on.mp3';
 const TICK_OFF = '/assets/switch-off.mp3';
 
 export function Hero() {
+  const rootRef = useRef<HTMLElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const imageRef = useRef<HTMLDivElement | null>(null);
   const tickOnRef = useRef<HTMLAudioElement | null>(null);
@@ -44,22 +45,25 @@ export function Hero() {
 
   useEffect(() => {
     if (reducedMotion || !titleRef.current) return;
-    gsap.fromTo(
-      titleRef.current.querySelectorAll('span'),
-      { y: 40, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.9, stagger: 0.12, ease: 'expo.out', delay: 0.15 }
-    );
-    if (imageRef.current) {
+    const context = gsap.context(() => {
       gsap.fromTo(
-        imageRef.current,
-        { opacity: 0, scale: 0.97 },
-        { opacity: 1, scale: 1, duration: 1, ease: 'expo.out', delay: 0.3 }
+        titleRef.current!.querySelectorAll('span'),
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, stagger: 0.12, ease: 'expo.out', delay: 0.15, immediateRender: false }
       );
-    }
+      if (imageRef.current) {
+        gsap.fromTo(
+          imageRef.current,
+          { opacity: 0, scale: 0.97 },
+          { opacity: 1, scale: 1, duration: 1, ease: 'expo.out', delay: 0.3, immediateRender: false }
+        );
+      }
+    }, rootRef);
+    return () => context.revert();
   }, [reducedMotion]);
 
   return (
-    <section id="home" className={styles.hero}>
+    <section ref={rootRef} id="home" className={styles.hero}>
       <div className="container">
         <div className={styles.grid}>
           <div className={styles.left}>

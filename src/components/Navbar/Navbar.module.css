@@ -6,7 +6,7 @@
   z-index: 1000;
   display: flex;
   justify-content: center;
-  padding: var(--space-4) var(--edge-pad) 0;
+  padding: calc(var(--space-4) + env(safe-area-inset-top)) max(var(--edge-pad), env(safe-area-inset-right)) 0 max(var(--edge-pad), env(safe-area-inset-left));
 }
 
 .nav {
@@ -235,7 +235,7 @@
     position: fixed;
     left: var(--edge-pad);
     right: var(--edge-pad);
-    top: calc(var(--nav-h) + var(--space-4) + 10px);
+    top: calc(var(--nav-h) + var(--space-4) + env(safe-area-inset-top) + 10px);
     width: auto;
     min-width: 0;
     transform: translateY(-6px) scale(0.99);

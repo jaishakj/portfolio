@@ -27,6 +27,7 @@ export function Loader({ onDone, onLogoLanded }: Props) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const textRef = useRef<HTMLDivElement | null>(null);
   const logoRef = useRef<SVGSVGElement | null>(null);
+  const finishTweenRef = useRef<gsap.core.Tween | null>(null);
   const [word, setWord] = useState(greetings[0]);
   const [phase, setPhase] = useState<Phase>('greeting');
   const [visible, setVisible] = useState(true);
@@ -38,7 +39,8 @@ export function Loader({ onDone, onLogoLanded }: Props) {
       onDone();
       return;
     }
-    gsap.to(rootRef.current, {
+    finishTweenRef.current?.kill();
+    finishTweenRef.current = gsap.to(rootRef.current, {
       opacity: 0,
       duration: 0.4,
       ease: 'power2.out',
@@ -73,7 +75,11 @@ export function Loader({ onDone, onLogoLanded }: Props) {
       onLand: onLogoLanded,
       onDone: finish,
     });
-    return () => { tl.kill(); };
+    return () => {
+      tl.kill();
+      finishTweenRef.current?.kill();
+      finishTweenRef.current = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, reducedMotion]);
 
