@@ -19,11 +19,10 @@ export function Projects() {
   return (
     <div className={styles.wrapper}>
       {/* Category filter bar */}
-      <div className={styles.filterBar} role="tablist" aria-label="Project filter categories">
+      <div className={styles.filterBar} role="group" aria-label="Filter projects by category">
         <button
           type="button"
-          role="tab"
-          aria-selected={filter === 'ALL'}
+          aria-pressed={filter === 'ALL'}
           className={`${styles.filterBtn} ${filter === 'ALL' ? styles.filterBtnActive : ''}`}
           onClick={() => setFilter('ALL')}
         >
@@ -31,8 +30,7 @@ export function Projects() {
         </button>
         <button
           type="button"
-          role="tab"
-          aria-selected={filter === 'AI'}
+          aria-pressed={filter === 'AI'}
           className={`${styles.filterBtn} ${filter === 'AI' ? styles.filterBtnActive : ''}`}
           onClick={() => setFilter('AI')}
         >
@@ -40,8 +38,7 @@ export function Projects() {
         </button>
         <button
           type="button"
-          role="tab"
-          aria-selected={filter === 'SIM'}
+          aria-pressed={filter === 'SIM'}
           className={`${styles.filterBtn} ${filter === 'SIM' ? styles.filterBtnActive : ''}`}
           onClick={() => setFilter('SIM')}
         >
@@ -49,14 +46,17 @@ export function Projects() {
         </button>
         <button
           type="button"
-          role="tab"
-          aria-selected={filter === 'SYSTEMS'}
+          aria-pressed={filter === 'SYSTEMS'}
           className={`${styles.filterBtn} ${filter === 'SYSTEMS' ? styles.filterBtnActive : ''}`}
           onClick={() => setFilter('SYSTEMS')}
         >
           SYSTEMS &amp; FULL-STACK <span className={styles.filterCount}>[04]</span>
         </button>
       </div>
+
+      <p className={styles.filterStatus} role="status" aria-atomic="true">
+        Showing {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'}.
+      </p>
 
       {/* Projects layout grid */}
       <div className={styles.grid}>
